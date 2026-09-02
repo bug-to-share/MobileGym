@@ -186,6 +186,16 @@ tmp/
 
 # Ignore debug logs and run result logs
 logs/
+!logs/mobilegym/
+!logs/mobilegym/mobilegym-qwen3-vl-4b-train/
+!logs/mobilegym/mobilegym-qwen3-vl-4b-train/run_20260901_041451/
+!logs/mobilegym/mobilegym-qwen3-vl-4b-train/run_20260901_041451/README.md
+!logs/mobilegym/mobilegym-qwen3-vl-4b-train/run_20260901_041451/*/
+!logs/mobilegym/mobilegym-qwen3-vl-4b-train/run_20260901_041451/*/results.jsonl
+!logs/mobilegym/mobilegym-qwen3-vl-4b-train/run_20260901_041451/*/summary.json
+!logs/mobilegym/mobilegym-qwen3-vl-4b-train/run_20260901_041451/*/meta.json
+!logs/mobilegym/mobilegym-qwen3-vl-4b-train/run_20260901_041451/*/console.log
+!logs/mobilegym/mobilegym-qwen3-vl-4b-train/run_20260901_041451/terminal.log
 rllm/*.json
 
 # Ignore the big datasets

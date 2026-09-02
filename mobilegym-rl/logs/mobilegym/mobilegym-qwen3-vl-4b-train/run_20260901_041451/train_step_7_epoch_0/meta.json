@@ -1,0 +1,18 @@
+{
+  "start_time": "2026-09-01T07:45:03.906716",
+  "agent": "generic_v2",
+  "model_name": "Qwen/Qwen3-VL-4B-Instruct",
+  "repeat_n": 8,
+  "save_trajectory": true,
+  "coord_space": "norm_0_1000",
+  "has_pil": true,
+  "env_url": "https://localhost:4180",
+  "env_pool_size": 96,
+  "env_isolation": "pages",
+  "judge_mode": "auto",
+  "eval_mode": "grounded",
+  "run_name": "run_20260901_041451",
+  "mode": "train",
+  "training_step": 7,
+  "epoch": 0
+}

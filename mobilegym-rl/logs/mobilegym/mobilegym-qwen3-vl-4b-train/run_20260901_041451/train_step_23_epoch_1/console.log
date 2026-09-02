@@ -1,0 +1,401 @@
+14:22:41 | INFO | bench_env.env.mobile_gym | [W94] reset: skipped (fresh page from start)
+14:22:41 | INFO | bench_env.monitor | vLLM usage during this run:
+  Prompt tokens: -85,945,871.0
+  Generation tokens: -2,419,109.0
+  Requests completed: -16,463.0
+  Prefix cache hits (tokens): -41,770,640.0
+  Prefix cache queries (tokens): -85,945,871.0
+  Total e2e latency (s): -103,653.0
+  Total TTFT (s): -32,708.1
+  Total queue time (s): -0.2
+14:22:41 | INFO | bench_env.monitor | Monitor stopped (/workspace/MobileGym/mobilegym/mobilegym-rl/logs/mobilegym/mobilegym-qwen3-vl-4b-train/run_20260901_041451/val_step_22_epoch_1/monitor.csv)
+14:22:41 | INFO | bench_env.monitor | Monitor: writing to /workspace/MobileGym/mobilegym/mobilegym-rl/logs/mobilegym/mobilegym-qwen3-vl-4b-train/run_20260901_041451/train_step_23_epoch_1/monitor.csv (interval=10.0s, gpus=4, vllm=auto-discover, vllm_host=192.168.1.126)
+14:22:41 | INFO | bench_env.env.mobile_gym | [W61] reset: skipped (fresh page from start)
+14:22:41 | INFO | bench_env.env.mobile_gym | [W77] reset: skipped (fresh page from start)
+14:22:41 | INFO | bench_env.env.mobile_gym | [W57] reset: skipped (fresh page from start)
+14:22:41 | INFO | bench_env.env.mobile_gym | [W34] reset: skipped (fresh page from start)
+14:22:41 | INFO | bench_env.env.mobile_gym | [W54] reset: skipped (fresh page from start)
+14:22:41 | INFO | bench_env.env.mobile_gym | [W42] reset: skipped (fresh page from start)
+14:22:41 | INFO | bench_env.env.mobile_gym | [W11] reset: skipped (fresh page from start)
+14:22:41 | INFO | bench_env.env.mobile_gym | [W10] reset: skipped (fresh page from start)
+14:22:41 | INFO | bench_env.env.mobile_gym | [W92] reset: skipped (fresh page from start)
+14:22:41 | INFO | bench_env.env.mobile_gym | [W37] reset: skipped (fresh page from start)
+14:22:41 | INFO | bench_env.env.mobile_gym | [W23] reset: skipped (fresh page from start)
+14:22:41 | INFO | bench_env.env.mobile_gym | [W88] reset: skipped (fresh page from start)
+14:22:41 | INFO | bench_env.env.mobile_gym | [W27] reset: skipped (fresh page from start)
+14:22:41 | INFO | bench_env.env.mobile_gym | [W14] reset: skipped (fresh page from start)
+14:22:41 | INFO | bench_env.env.mobile_gym | [W75] reset: skipped (fresh page from start)
+14:22:41 | INFO | bench_env.env.mobile_gym | [W95] reset: skipped (fresh page from start)
+14:22:41 | INFO | bench_env.monitor | Monitor: discovered vLLM on ports [39493, 40389, 40497, 43589] (host=192.168.1.126)
+14:22:41 | INFO | bench_env.env.mobile_gym | [W21] reset: skipped (fresh page from start)
+14:22:41 | INFO | bench_env.env.mobile_gym | [W29] reset: skipped (fresh page from start)
+14:22:41 | INFO | bench_env.env.mobile_gym | [W20] reset: skipped (fresh page from start)
+14:22:42 | INFO | bench_env.env.mobile_gym | [W41] reset: skipped (fresh page from start)
+14:22:42 | INFO | bench_env.env.mobile_gym | [W53] reset: skipped (fresh page from start)
+14:22:42 | INFO | bench_env.env.mobile_gym | [W63] reset: skipped (fresh page from start)
+14:22:42 | INFO | bench_env.env.mobile_gym | [W40] reset: skipped (fresh page from start)
+14:22:42 | INFO | bench_env.env.mobile_gym | [W64] reset: skipped (fresh page from start)
+14:22:42 | INFO | bench_env.env.mobile_gym | [W70] reset: skipped (fresh page from start)
+14:22:42 | INFO | bench_env.env.mobile_gym | [W58] reset: skipped (fresh page from start)
+14:22:42 | INFO | bench_env.env.mobile_gym | [W78] reset: skipped (fresh page from start)
+14:22:42 | INFO | bench_env.env.mobile_gym | [W67] reset: skipped (fresh page from start)
+14:22:42 | INFO | bench_env.env.mobile_gym | [W68] reset: skipped (fresh page from start)
+14:22:42 | INFO | bench_env.env.mobile_gym | [W66] reset: skipped (fresh page from start)
+14:22:42 | INFO | bench_env.env.mobile_gym | [W79] reset: skipped (fresh page from start)
+14:22:42 | INFO | bench_env.env.mobile_gym | [W45] reset: skipped (fresh page from start)
+14:22:42 | INFO | bench_env.env.mobile_gym | [W28] reset: skipped (fresh page from start)
+14:22:42 | INFO | bench_env.env.mobile_gym | [W2] reset: skipped (fresh page from start)
+14:22:42 | INFO | bench_env.env.mobile_gym | [W86] reset: skipped (fresh page from start)
+14:22:42 | INFO | bench_env.env.mobile_gym | [W18] reset: skipped (fresh page from start)
+14:22:42 | INFO | bench_env.env.mobile_gym | [W93] reset: skipped (fresh page from start)
+14:22:42 | INFO | bench_env.env.mobile_gym | [W89] reset: skipped (fresh page from start)
+14:22:42 | INFO | bench_env.env.mobile_gym | [W9] reset: skipped (fresh page from start)
+14:22:42 | INFO | bench_env.env.mobile_gym | [W33] reset: skipped (fresh page from start)
+14:22:42 | INFO | bench_env.env.mobile_gym | [W35] reset: skipped (fresh page from start)
+14:22:42 | INFO | bench_env.env.mobile_gym | [W90] reset: skipped (fresh page from start)
+14:22:42 | INFO | bench_env.env.mobile_gym | [W36] reset: skipped (fresh page from start)
+14:22:42 | INFO | bench_env.env.mobile_gym | [W13] reset: skipped (fresh page from start)
+14:22:42 | INFO | bench_env.env.mobile_gym | [W25] reset: skipped (fresh page from start)
+14:22:42 | INFO | bench_env.env.mobile_gym | [W85] reset: skipped (fresh page from start)
+14:22:42 | INFO | bench_env.env.mobile_gym | [W47] reset: skipped (fresh page from start)
+14:22:43 | INFO | bench_env.env.mobile_gym | [W1] reset: skipped (fresh page from start)
+14:22:43 | INFO | bench_env.env.mobile_gym | [W31] reset: skipped (fresh page from start)
+14:22:43 | INFO | bench_env.env.mobile_gym | [W59] reset: skipped (fresh page from start)
+14:22:43 | INFO | bench_env.env.mobile_gym | [W84] reset: skipped (fresh page from start)
+14:22:43 | INFO | bench_env.env.mobile_gym | [W32] reset: skipped (fresh page from start)
+14:22:43 | INFO | bench_env.env.mobile_gym | [W38] reset: skipped (fresh page from start)
+14:22:43 | INFO | bench_env.env.mobile_gym | [W62] reset: skipped (fresh page from start)
+14:22:43 | INFO | bench_env.env.mobile_gym | [W60] reset: skipped (fresh page from start)
+14:22:43 | INFO | bench_env.env.mobile_gym | [W76] reset: skipped (fresh page from start)
+14:22:43 | INFO | bench_env.env.mobile_gym | [W48] reset: skipped (fresh page from start)
+14:22:43 | INFO | bench_env.env.mobile_gym | [W80] reset: skipped (fresh page from start)
+14:22:43 | INFO | bench_env.env.mobile_gym | [W30] reset: skipped (fresh page from start)
+14:22:43 | INFO | bench_env.env.mobile_gym | [W7] reset: skipped (fresh page from start)
+14:22:43 | INFO | bench_env.env.mobile_gym | [W24] reset: skipped (fresh page from start)
+14:22:43 | INFO | bench_env.env.mobile_gym | [W91] reset: skipped (fresh page from start)
+14:22:43 | INFO | bench_env.env.mobile_gym | [W39] reset: skipped (fresh page from start)
+14:22:43 | INFO | bench_env.env.mobile_gym | [W26] reset: skipped (fresh page from start)
+14:22:43 | INFO | bench_env.env.mobile_gym | [W8] reset: skipped (fresh page from start)
+14:22:43 | INFO | bench_env.env.mobile_gym | [W69] reset: skipped (fresh page from start)
+14:22:43 | INFO | bench_env.env.mobile_gym | [W46] reset: skipped (fresh page from start)
+14:22:43 | INFO | bench_env.env.mobile_gym | [W16] reset: skipped (fresh page from start)
+14:22:43 | INFO | bench_env.env.mobile_gym | [W87] reset: skipped (fresh page from start)
+14:22:43 | INFO | bench_env.env.mobile_gym | [W5] reset: skipped (fresh page from start)
+14:22:43 | INFO | bench_env.env.mobile_gym | [W52] reset: skipped (fresh page from start)
+14:22:43 | INFO | bench_env.env.mobile_gym | [W81] reset: skipped (fresh page from start)
+14:22:43 | INFO | bench_env.env.mobile_gym | [W0] reset: skipped (fresh page from start)
+14:22:43 | INFO | bench_env.env.mobile_gym | [W74] reset: skipped (fresh page from start)
+14:22:43 | INFO | bench_env.env.mobile_gym | [W15] reset: skipped (fresh page from start)
+14:22:44 | INFO | bench_env.env.mobile_gym | [W22] reset: skipped (fresh page from start)
+14:22:44 | INFO | bench_env.env.mobile_gym | [W56] reset: skipped (fresh page from start)
+14:22:44 | INFO | bench_env.env.mobile_gym | [W49] reset: skipped (fresh page from start)
+14:22:44 | INFO | bench_env.env.mobile_gym | [W44] reset: skipped (fresh page from start)
+14:22:44 | INFO | bench_env.env.mobile_gym | [W43] reset: skipped (fresh page from start)
+14:22:44 | INFO | bench_env.env.mobile_gym | [W83] reset: skipped (fresh page from start)
+14:22:44 | INFO | bench_env.env.mobile_gym | [W72] reset: skipped (fresh page from start)
+14:22:44 | INFO | bench_env.env.mobile_gym | [W55] reset: skipped (fresh page from start)
+14:22:44 | INFO | bench_env.env.mobile_gym | [W19] reset: skipped (fresh page from start)
+14:22:44 | INFO | bench_env.env.mobile_gym | [W71] reset: skipped (fresh page from start)
+14:22:44 | INFO | bench_env.env.mobile_gym | [W17] reset: skipped (fresh page from start)
+14:22:44 | INFO | bench_env.env.mobile_gym | [W82] reset: skipped (fresh page from start)
+14:22:44 | INFO | bench_env.env.mobile_gym | [W6] reset: skipped (fresh page from start)
+14:22:44 | INFO | bench_env.env.mobile_gym | [W65] reset: skipped (fresh page from start)
+14:22:44 | INFO | bench_env.env.mobile_gym | [W3] reset: skipped (fresh page from start)
+14:22:44 | INFO | bench_env.env.mobile_gym | [W73] reset: skipped (fresh page from start)
+14:22:44 | INFO | bench_env.env.mobile_gym | [W50] reset: skipped (fresh page from start)
+14:22:44 | INFO | bench_env.env.mobile_gym | [W12] reset: skipped (fresh page from start)
+14:22:44 | INFO | bench_env.env.mobile_gym | [W4] reset: skipped (fresh page from start)
+14:22:48 | INFO | bench_env.env.mobile_gym | [W34] OPEN_APP: 'wechat_reading' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W92] OPEN_APP: 'alipay' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W41] OPEN_APP: 'calendar' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W53] OPEN_APP: 'reddit' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W63] OPEN_APP: 'wechat' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W94] OPEN_APP: 'alipay' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W68] OPEN_APP: 'wechat' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W95] OPEN_APP: 'reddit' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W84] OPEN_APP: 'reddit' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W35] OPEN_APP: 'reddit' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W70] OPEN_APP: 'calendar' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W59] OPEN_APP: 'wechat' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W27] OPEN_APP: 'calendar' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W9] OPEN_APP: 'weather' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W86] OPEN_APP: 'bilibili' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W57] OPEN_APP: 'x' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W67] OPEN_APP: 'weather' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W42] OPEN_APP: 'weather' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W20] OPEN_APP: 'tencent_meeting' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W40] OPEN_APP: 'wechat' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W22] OPEN_APP: 'alipay' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W21] OPEN_APP: 'alipay' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W75] OPEN_APP: 'calendar' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W58] OPEN_APP: 'wechat_reading' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W26] OPEN_APP: 'wechat' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W62] OPEN_APP: 'tencent_meeting' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W25] OPEN_APP: 'bilibili' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W89] OPEN_APP: 'bilibili' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W72] OPEN_APP: 'x' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W54] OPEN_APP: 'bilibili' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W23] OPEN_APP: 'bilibili' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W90] OPEN_APP: 'calendar' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W30] OPEN_APP: 'wechat' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W44] OPEN_APP: 'x' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W91] OPEN_APP: 'calendar' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W60] OPEN_APP: 'x' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W28] OPEN_APP: 'alipay' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W29] OPEN_APP: 'wechat' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W47] OPEN_APP: 'bilibili' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W2] OPEN_APP: 'calendar' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W85] OPEN_APP: 'x' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W52] OPEN_APP: 'reddit' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W38] OPEN_APP: 'bilibili' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W10] OPEN_APP: 'wechat' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W61] OPEN_APP: 'bilibili' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W93] OPEN_APP: 'tencent_meeting' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W78] OPEN_APP: 'wechat' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W64] OPEN_APP: 'alipay' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W32] OPEN_APP: 'wechat_reading' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W31] OPEN_APP: 'bilibili' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W77] OPEN_APP: 'bilibili' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W37] OPEN_APP: 'weather' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W56] OPEN_APP: 'tencent_meeting' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W88] OPEN_APP: 'weather' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W45] OPEN_APP: 'wechat_reading' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W0] OPEN_APP: 'bilibili' opened OK
+14:22:48 | INFO | bench_env.env.mobile_gym | [W24] OPEN_APP: 'reddit' opened OK
+14:22:49 | INFO | bench_env.env.mobile_gym | [W51] reset: skipped (fresh page from start)
+14:22:49 | INFO | bench_env.env.mobile_gym | [W46] OPEN_APP: 'tencent_meeting' opened OK
+14:22:49 | INFO | bench_env.env.mobile_gym | [W15] OPEN_APP: 'wechat_reading' opened OK
+14:22:49 | INFO | bench_env.env.mobile_gym | [W8] OPEN_APP: 'wechat_reading' opened OK
+14:22:49 | INFO | bench_env.env.mobile_gym | [W13] OPEN_APP: 'bilibili' opened OK
+14:22:49 | INFO | bench_env.env.mobile_gym | [W36] OPEN_APP: 'wechat_reading' opened OK
+14:22:49 | INFO | bench_env.env.mobile_gym | [W55] OPEN_APP: 'tencent_meeting' opened OK
+14:22:49 | INFO | bench_env.env.mobile_gym | [W11] OPEN_APP: 'bilibili' opened OK
+14:22:49 | INFO | bench_env.env.mobile_gym | [W1] OPEN_APP: 'alipay' opened OK
+14:22:49 | INFO | bench_env.env.mobile_gym | [W33] OPEN_APP: 'bilibili' opened OK
+14:22:49 | INFO | bench_env.env.mobile_gym | [W87] OPEN_APP: 'wechat_reading' opened OK
+14:22:49 | INFO | bench_env.env.mobile_gym | [W43] OPEN_APP: 'wechat' opened OK
+14:22:49 | INFO | bench_env.env.mobile_gym | [W12] OPEN_APP: 'reddit' opened OK
+14:22:49 | INFO | bench_env.env.mobile_gym | [W4] OPEN_APP: 'tencent_meeting' opened OK
+14:22:49 | INFO | bench_env.env.mobile_gym | [W49] OPEN_APP: 'alipay' opened OK
+14:22:49 | INFO | bench_env.env.mobile_gym | [W17] OPEN_APP: 'wechat' opened OK
+14:22:49 | INFO | bench_env.env.mobile_gym | [W81] OPEN_APP: 'bilibili' opened OK
+14:22:49 | INFO | bench_env.env.mobile_gym | [W65] OPEN_APP: 'x' opened OK
+14:22:49 | INFO | bench_env.env.mobile_gym | [W74] OPEN_APP: 'reddit' opened OK
+14:22:49 | INFO | bench_env.env.mobile_gym | [W69] OPEN_APP: 'tencent_meeting' opened OK
+14:22:49 | INFO | bench_env.env.mobile_gym | [W19] OPEN_APP: 'calendar' opened OK
+14:22:49 | INFO | bench_env.env.mobile_gym | [W16] OPEN_APP: 'x' opened OK
+14:22:49 | INFO | bench_env.env.mobile_gym | [W48] OPEN_APP: 'x' opened OK
+14:22:49 | INFO | bench_env.env.mobile_gym | [W71] OPEN_APP: 'wechat' opened OK
+14:22:49 | INFO | bench_env.env.mobile_gym | [W39] OPEN_APP: 'wechat' opened OK
+14:22:49 | INFO | bench_env.env.mobile_gym | [W5] OPEN_APP: 'weather' opened OK
+14:22:49 | INFO | bench_env.env.mobile_gym | [W80] OPEN_APP: 'weather' opened OK
+14:22:49 | INFO | bench_env.env.mobile_gym | [W50] OPEN_APP: 'wechat' opened OK
+14:22:49 | INFO | bench_env.env.mobile_gym | [W7] OPEN_APP: 'weather' opened OK
+14:22:49 | INFO | bench_env.env.mobile_gym | [W73] OPEN_APP: 'wechat' opened OK
+14:22:49 | INFO | bench_env.env.mobile_gym | [W82] OPEN_APP: 'wechat' opened OK
+14:22:50 | INFO | bench_env.task.base | [wechat.SetFriendChatOnly] setup: reset=1.83s { wait_ready=1.83s { SIM=1.72s SIM_FS=0.03s OS=0.04s waitForData=0.03s } } | warm=3.96s | prepare=0.00s | sample=0.25s | post_sample=0.00s | init_obs=1.21s { screenshot=0.59s route=0.39s state=0.23s }
+14:22:50 | INFO | bench_env.runner.base | Instruction: 把微信联系人李娜的权限改成仅聊天
+14:22:50 | INFO | bench_env.task.base | [reddit.Reddit_SendChatMessage] setup: reset=2.84s { wait_ready=2.84s { SIM=2.74s SIM_FS=0.03s OS=0.04s waitForData=0.03s } } | warm=3.96s | prepare=0.00s | sample=0.21s | post_sample=0.00s | init_obs=1.27s { screenshot=0.63s route=0.40s state=0.24s }
+14:22:50 | INFO | bench_env.runner.base | Instruction: 在 Reddit 聊天里，给用户 Intelligent_Drama_46 发送消息 hello from bench
+14:22:50 | INFO | bench_env.task.base | [alipay.DisableAllNotifications] setup: reset=3.24s { wait_ready=3.24s { SIM=3.14s SIM_FS=0.04s OS=0.04s waitForData=0.03s } } | warm=3.96s | prepare=0.00s | sample=0.24s | post_sample=0.00s | init_obs=1.27s { screenshot=0.63s route=0.41s state=0.23s }
+14:22:50 | INFO | bench_env.runner.base | Instruction: 关闭支付宝的所有新消息提醒
+14:22:50 | INFO | bench_env.task.base | [wechat.SetSignature] setup: reset=1.32s { wait_ready=1.32s { SIM=1.22s SIM_FS=0.03s OS=0.04s waitForData=0.03s } } | warm=3.97s | prepare=0.00s | sample=0.30s | post_sample=0.00s | init_obs=1.19s { screenshot=0.55s route=0.40s state=0.24s }
+14:22:50 | INFO | bench_env.runner.base | Instruction: 把微信里的个性签名改成在路上
+14:22:50 | INFO | bench_env.task.base | [alipay.DisableAllNotifications] setup: reset=2.98s { wait_ready=2.98s { SIM=2.87s SIM_FS=0.03s OS=0.04s waitForData=0.03s } } | warm=3.98s | prepare=0.00s | sample=0.28s | post_sample=0.00s | init_obs=1.23s { screenshot=0.57s route=0.40s state=0.26s }
+14:22:50 | INFO | bench_env.runner.base | Instruction: 关闭支付宝的所有新消息提醒
+14:22:50 | INFO | bench_env.task.base | [wechat.SetFriendChatOnly] setup: reset=2.81s { wait_ready=2.81s { SIM=2.70s SIM_FS=0.03s OS=0.04s waitForData=0.03s } } | warm=3.96s | prepare=0.00s | sample=0.28s | post_sample=0.00s | init_obs=1.28s { screenshot=0.59s route=0.41s state=0.28s }
+14:22:50 | INFO | bench_env.runner.base | Instruction: 把微信联系人李娜的权限改成仅聊天
+14:22:50 | INFO | bench_env.task.base | [bilibili.ViewProfileStatTask] setup: reset=2.38s { wait_ready=2.38s { SIM=2.26s SIM_FS=0.04s OS=0.04s waitForData=0.03s } } | warm=3.96s | prepare=0.00s | sample=0.29s | post_sample=0.00s | init_obs=1.28s { screenshot=0.60s route=0.41s state=0.27s }
+14:22:50 | INFO | bench_env.task.base | [reddit.Reddit_SendChatMessage] setup: reset=3.01s { wait_ready=3.01s { SIM=2.90s SIM_FS=0.03s OS=0.04s waitForData=0.03s } } | warm=3.97s | prepare=0.00s | sample=0.27s | post_sample=0.00s | init_obs=1.32s { screenshot=0.67s route=0.40s state=0.25s }
+14:22:50 | INFO | bench_env.runner.base | Instruction: 在 Reddit 聊天里，给用户 Intelligent_Drama_46 发送消息 hello from bench
+14:22:50 | INFO | bench_env.task.base | [alipay.DisableAllNotifications] setup: reset=3.67s { wait_ready=3.67s { SIM=3.57s SIM_FS=0.03s OS=0.03s waitForData=0.04s } } | warm=3.98s | prepare=0.00s | sample=0.33s | post_sample=0.00s | init_obs=1.28s { screenshot=0.62s route=0.39s state=0.27s }
+14:22:50 | INFO | bench_env.runner.base | Instruction: 关闭支付宝的所有新消息提醒
+14:22:50 | INFO | bench_env.task.base | [wechat.SetFriendChatOnly] setup: reset=2.57s { wait_ready=2.57s { SIM=2.47s SIM_FS=0.03s OS=0.03s waitForData=0.03s } } | warm=3.97s | prepare=0.00s | sample=0.40s | post_sample=0.00s | init_obs=1.23s { screenshot=0.63s route=0.34s state=0.27s }
+14:22:50 | INFO | bench_env.runner.base | Instruction: 把微信联系人李娜的权限改成仅聊天
+14:22:50 | INFO | bench_env.task.base | [bilibili.ViewProfileStatTask] setup: reset=3.18s { wait_ready=3.18s { SIM=3.07s SIM_FS=0.04s OS=0.04s waitForData=0.03s } } | warm=4.00s | prepare=0.00s | sample=0.34s | post_sample=0.00s | init_obs=1.28s { screenshot=0.68s route=0.33s state=0.26s }
+14:22:50 | INFO | bench_env.task.base | [x.SearchMultipleKeywordsAndInteract] setup: reset=0.79s { wait_ready=0.79s { SIM=0.69s SIM_FS=0.03s OS=0.04s waitForData=0.03s } } | warm=3.99s | prepare=0.00s | sample=0.40s | post_sample=0.00s | init_obs=1.24s { screenshot=0.72s route=0.28s state=0.25s }
+14:22:50 | INFO | bench_env.runner.base | Instruction: 我想先在X搜「Tesla」，给一条相关推文点赞，再搜「Travel」，把一条相关推文收藏起来
+14:22:50 | INFO | bench_env.task.base | [bilibili.ViewProfileStatTask] setup: reset=2.02s { wait_ready=2.02s { SIM=1.91s SIM_FS=0.03s OS=0.05s waitForData=0.03s } } | warm=3.97s | prepare=0.00s | sample=0.37s | post_sample=0.00s | init_obs=1.31s { screenshot=0.75s route=0.29s state=0.27s }
+14:22:50 | INFO | bench_env.task.base | [alipay.DisableAllNotifications] setup: reset=0.90s { wait_ready=0.90s { SIM=0.79s SIM_FS=0.03s OS=0.04s waitForData=0.03s } } | warm=3.96s | prepare=0.00s | sample=0.34s | post_sample=0.00s | init_obs=1.35s { screenshot=0.77s route=0.30s state=0.28s }
+14:22:50 | INFO | bench_env.runner.base | Instruction: 关闭支付宝的所有新消息提醒
+14:22:50 | INFO | bench_env.task.base | [wechat.SetFriendChatOnly] setup: reset=2.96s { wait_ready=2.96s { SIM=2.84s SIM_FS=0.03s OS=0.05s waitForData=0.04s } } | warm=4.00s | prepare=0.00s | sample=0.38s | post_sample=0.00s | init_obs=1.29s { screenshot=0.71s route=0.29s state=0.30s }
+14:22:50 | INFO | bench_env.runner.base | Instruction: 把微信联系人李娜的权限改成仅聊天
+14:22:50 | INFO | bench_env.task.base | [alipay.DisableAllNotifications] setup: reset=2.44s { wait_ready=2.44s { SIM=2.33s SIM_FS=0.03s OS=0.04s waitForData=0.03s } } | warm=4.01s | prepare=0.00s | sample=0.41s | post_sample=0.00s | init_obs=1.28s { screenshot=0.69s route=0.28s state=0.31s }
+14:22:50 | INFO | bench_env.runner.base | Instruction: 关闭支付宝的所有新消息提醒
+14:22:50 | INFO | bench_env.task.base | [tencent_meeting.JoinMeetingAndRename] setup: reset=1.67s { wait_ready=1.67s { SIM=1.56s SIM_FS=0.03s OS=0.04s waitForData=0.04s } } | warm=3.97s | prepare=0.00s | sample=0.34s | post_sample=0.00s | init_obs=1.39s { screenshot=0.79s route=0.28s state=0.33s }
+14:22:50 | INFO | bench_env.runner.base | Instruction: 加入李四的技术方案评审会议，把昵称改成小明-北京，麦克风静音
+14:22:50 | INFO | bench_env.task.base | [bilibili.SubscribeTask] setup: reset=3.39s { wait_ready=3.38s { SIM=3.28s SIM_FS=0.03s OS=0.04s waitForData=0.03s } } | warm=4.00s | prepare=0.00s | sample=0.38s | post_sample=0.00s | init_obs=1.37s { screenshot=0.76s route=0.27s state=0.34s }
+14:22:50 | INFO | bench_env.runner.base | Instruction: 在B站关注UP主'_拾光记录者_'。
+14:22:50 | INFO | bench_env.task.base | [reddit.Reddit_SendChatMessage] setup: reset=1.78s { wait_ready=1.78s { SIM=1.67s SIM_FS=0.03s OS=0.04s waitForData=0.03s } } | warm=3.96s | prepare=0.00s | sample=0.55s | post_sample=0.00s | init_obs=1.24s { screenshot=0.63s route=0.25s state=0.35s }
+14:22:50 | INFO | bench_env.runner.base | Instruction: 在 Reddit 聊天里，给用户 Intelligent_Drama_46 发送消息 hello from bench
+14:22:50 | INFO | bench_env.task.base | [x.SearchMultipleKeywordsAndInteract] setup: reset=1.63s { wait_ready=1.63s { SIM=1.52s SIM_FS=0.03s OS=0.04s waitForData=0.03s } } | warm=4.00s | prepare=0.00s | sample=0.50s | post_sample=0.00s | init_obs=1.27s { screenshot=0.67s route=0.23s state=0.37s }
+14:22:50 | INFO | bench_env.runner.base | Instruction: 我想先在X搜「Tesla」，给一条相关推文点赞，再搜「Travel」，把一条相关推文收藏起来
+14:22:50 | INFO | bench_env.task.base | [x.SearchMultipleKeywordsAndInteract] setup: reset=1.99s { wait_ready=1.99s { SIM=1.87s SIM_FS=0.04s OS=0.05s waitForData=0.03s } } | warm=4.00s | prepare=0.00s | sample=0.53s | post_sample=0.00s | init_obs=1.25s { screenshot=0.62s route=0.24s state=0.39s }
+14:22:50 | INFO | bench_env.runner.base | Instruction: 我想先在X搜「Tesla」，给一条相关推文点赞，再搜「Travel」，把一条相关推文收藏起来
+14:22:50 | INFO | bench_env.task.base | [wechat.SetSignature] setup: reset=1.50s { wait_ready=1.50s { SIM=1.39s SIM_FS=0.03s OS=0.04s waitForData=0.04s } } | warm=3.99s | prepare=0.00s | sample=0.48s | post_sample=0.00s | init_obs=1.33s { screenshot=0.67s route=0.25s state=0.41s }
+14:22:50 | INFO | bench_env.runner.base | Instruction: 把微信里的个性签名改成在路上
+14:22:50 | INFO | bench_env.task.base | [x.SearchMultipleKeywordsAndInteract] setup: reset=3.44s { wait_ready=3.44s { SIM=3.35s SIM_FS=0.03s OS=0.03s waitForData=0.03s } } | warm=3.99s | prepare=0.00s | sample=0.49s | post_sample=0.00s | init_obs=1.37s { screenshot=0.71s route=0.24s state=0.42s }
+14:22:50 | INFO | bench_env.runner.base | Instruction: 我想先在X搜「Tesla」，给一条相关推文点赞，再搜「Travel」，把一条相关推文收藏起来
+14:22:50 | INFO | bench_env.task.base | [wechat.SetSignature] setup: reset=3.29s { wait_ready=3.28s { SIM=3.17s SIM_FS=0.03s OS=0.05s waitForData=0.03s } } | warm=4.04s | prepare=0.00s | sample=0.59s | post_sample=0.00s | init_obs=1.23s { screenshot=0.56s route=0.23s state=0.44s }
+14:22:50 | INFO | bench_env.runner.base | Instruction: 把微信里的个性签名改成在路上
+14:22:50 | INFO | bench_env.task.base | [bilibili.ViewProfileStatTask] setup: reset=3.59s { wait_ready=3.59s { SIM=3.47s SIM_FS=0.03s OS=0.05s waitForData=0.03s } } | warm=4.04s | prepare=0.00s | sample=0.56s | post_sample=0.00s | init_obs=1.27s { screenshot=0.59s route=0.23s state=0.46s }
+14:22:50 | INFO | bench_env.task.base | [bilibili.SubscribeTask] setup: reset=1.70s { wait_ready=1.70s { SIM=1.60s SIM_FS=0.03s OS=0.04s waitForData=0.03s } } | warm=4.02s | prepare=0.00s | sample=0.56s | post_sample=0.00s | init_obs=1.30s { screenshot=0.61s route=0.22s state=0.47s }
+14:22:50 | INFO | bench_env.runner.base | Instruction: 在B站关注UP主'_拾光记录者_'。
+14:22:50 | INFO | bench_env.task.base | [reddit.Reddit_SendChatMessage] setup: reset=2.16s { wait_ready=2.16s { SIM=2.05s SIM_FS=0.03s OS=0.04s waitForData=0.03s } } | warm=3.96s | prepare=0.00s | sample=0.53s | post_sample=0.00s | init_obs=1.42s { screenshot=0.65s route=0.25s state=0.51s }
+14:22:50 | INFO | bench_env.runner.base | Instruction: 在 Reddit 聊天里，给用户 Intelligent_Drama_46 发送消息 hello from bench
+14:22:50 | INFO | bench_env.task.base | [tencent_meeting.JoinMeetingAndRename] setup: reset=2.92s { wait_ready=2.92s { SIM=2.81s SIM_FS=0.04s OS=0.05s waitForData=0.03s } } | warm=3.97s | prepare=0.00s | sample=0.56s | post_sample=0.00s | init_obs=1.41s { screenshot=0.64s route=0.23s state=0.53s }
+14:22:50 | INFO | bench_env.runner.base | Instruction: 加入李四的技术方案评审会议，把昵称改成小明-北京，麦克风静音
+14:22:50 | INFO | bench_env.task.base | [x.SearchMultipleKeywordsAndInteract] setup: reset=0.70s { wait_ready=0.70s { SIM=0.59s SIM_FS=0.03s OS=0.05s waitForData=0.03s } } | warm=3.97s | prepare=0.00s | sample=0.35s | post_sample=0.00s | init_obs=1.62s { screenshot=0.76s route=0.28s state=0.57s }
+14:22:50 | INFO | bench_env.runner.base | Instruction: 我想先在X搜「Tesla」，给一条相关推文点赞，再搜「Travel」，把一条相关推文收藏起来
+14:22:50 | INFO | bench_env.task.base | [wechat.SetSignature] setup: reset=2.77s { wait_ready=2.77s { SIM=2.67s SIM_FS=0.03s OS=0.04s waitForData=0.03s } } | warm=3.98s | prepare=0.00s | sample=0.41s | post_sample=0.00s | init_obs=1.59s { screenshot=0.74s route=0.27s state=0.59s }
+14:22:50 | INFO | bench_env.runner.base | Instruction: 把微信里的个性签名改成在路上
+14:22:50 | INFO | bench_env.task.base | [bilibili.SubscribeTask] setup: reset=1.94s { wait_ready=1.94s { SIM=1.83s SIM_FS=0.03s OS=0.04s waitForData=0.03s } } | warm=4.00s | prepare=0.00s | sample=0.44s | post_sample=0.00s | init_obs=1.54s { screenshot=0.67s route=0.27s state=0.60s }
+14:22:50 | INFO | bench_env.runner.base | Instruction: 在B站关注UP主'_拾光记录者_'。
+14:22:50 | INFO | bench_env.task.base | [bilibili.SubscribeTask] setup: reset=2.27s { wait_ready=2.27s { SIM=2.16s SIM_FS=0.03s OS=0.04s waitForData=0.03s } } | warm=3.98s | prepare=0.00s | sample=0.59s | post_sample=0.00s | init_obs=1.43s { screenshot=0.66s route=0.21s state=0.57s }
+14:22:50 | INFO | bench_env.runner.base | Instruction: 在B站关注UP主'_拾光记录者_'。
+14:22:50 | INFO | bench_env.runner.base | Instruction: 我B站现在有多少粉丝？ 然后打开 答题卡 APP 在里面回答问题并提交
+14:22:50 | INFO | bench_env.task.base | [tencent_meeting.JoinMeetingAndRename] setup: reset=2.31s { wait_ready=2.31s { SIM=2.20s SIM_FS=0.03s OS=0.05s waitForData=0.03s } } | warm=4.10s | prepare=0.00s | sample=0.57s | post_sample=0.00s | init_obs=1.37s { screenshot=0.59s route=0.25s state=0.53s }
+14:22:50 | INFO | bench_env.runner.base | Instruction: 加入李四的技术方案评审会议，把昵称改成小明-北京，麦克风静音
+14:22:50 | INFO | bench_env.task.base | [wechat_reading.EditProfileName] setup: reset=2.67s { wait_ready=2.67s { SIM=2.57s SIM_FS=0.03s OS=0.03s waitForData=0.03s } } | warm=3.99s | prepare=0.00s | sample=0.27s | post_sample=0.51s | init_obs=1.31s { screenshot=0.54s route=0.22s state=0.54s }
+14:22:50 | INFO | bench_env.runner.base | Instruction: 把微信读书的昵称改成读书人K
+14:22:50 | INFO | bench_env.task.base | [crossapp_commerce.FinancialReportToNotes] setup: reset=2.54s { wait_ready=2.54s { SIM=2.44s SIM_FS=0.03s OS=0.04s waitForData=0.03s } } | warm=4.01s | prepare=0.00s | sample=0.59s | post_sample=0.00s | init_obs=1.48s { screenshot=0.69s route=0.23s state=0.56s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 帮我查一下支付宝的余额和最近一笔消费，记到笔记里。
+14:22:51 | INFO | bench_env.task.base | [crossapp_commerce.FinancialReportToNotes] setup: reset=0.46s { wait_ready=0.46s { SIM=0.35s SIM_FS=0.04s OS=0.04s waitForData=0.03s } } | warm=3.99s | prepare=0.00s | sample=0.60s | post_sample=0.00s | init_obs=1.49s { screenshot=0.70s route=0.22s state=0.58s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 帮我查一下支付宝的余额和最近一笔消费，记到笔记里。
+14:22:51 | INFO | bench_env.task.base | [alipay.DisableAllNotifications] setup: reset=2.74s { wait_ready=2.74s { SIM=2.64s SIM_FS=0.03s OS=0.03s waitForData=0.03s } } | warm=4.12s | prepare=0.00s | sample=0.60s | post_sample=0.00s | init_obs=1.41s { screenshot=0.56s route=0.26s state=0.59s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 关闭支付宝的所有新消息提醒
+14:22:51 | INFO | bench_env.task.base | [bilibili.SubscribeTask] setup: reset=1.87s { wait_ready=1.87s { SIM=1.75s SIM_FS=0.03s OS=0.04s waitForData=0.04s } } | warm=4.10s | prepare=0.00s | sample=0.60s | post_sample=0.00s | init_obs=1.42s { screenshot=0.58s route=0.23s state=0.61s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 在B站关注UP主'_拾光记录者_'。
+14:22:51 | INFO | bench_env.task.base | [reddit.Reddit_SendChatMessage] setup: reset=1.09s { wait_ready=1.09s { SIM=0.98s SIM_FS=0.03s OS=0.04s waitForData=0.03s } } | warm=4.01s | prepare=0.00s | sample=0.55s | post_sample=0.00s | init_obs=1.59s { screenshot=0.74s route=0.22s state=0.64s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 在 Reddit 聊天里，给用户 Intelligent_Drama_46 发送消息 hello from bench
+14:22:51 | INFO | bench_env.task.base | [bilibili.ViewProfileStatTask] setup: reset=3.50s { wait_ready=3.49s { SIM=3.39s SIM_FS=0.03s OS=0.03s waitForData=0.03s } } | warm=4.25s | prepare=0.00s | sample=0.54s | post_sample=0.00s | init_obs=1.42s { screenshot=0.55s route=0.22s state=0.65s }
+14:22:51 | INFO | bench_env.task.base | [crossapp_commerce.FinancialReportToNotes] setup: reset=0.75s { wait_ready=0.75s { SIM=0.63s SIM_FS=0.04s OS=0.05s waitForData=0.03s } } | warm=3.98s | prepare=0.00s | sample=0.55s | post_sample=0.00s | init_obs=1.63s { screenshot=0.72s route=0.25s state=0.67s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 帮我查一下支付宝的余额和最近一笔消费，记到笔记里。
+14:22:51 | INFO | bench_env.task.base | [wechat.SetFriendChatOnly] setup: reset=2.63s { wait_ready=2.63s { SIM=2.54s SIM_FS=0.03s OS=0.03s waitForData=0.03s } } | warm=4.12s | prepare=0.00s | sample=0.59s | post_sample=0.00s | init_obs=1.51s { screenshot=0.62s route=0.22s state=0.67s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 把微信联系人李娜的权限改成仅聊天
+14:22:51 | INFO | bench_env.task.base | [tencent_meeting.JoinMeetingAndRename] setup: reset=0.87s { wait_ready=0.87s { SIM=0.76s SIM_FS=0.03s OS=0.04s waitForData=0.03s } } | warm=4.28s | prepare=0.00s | sample=0.52s | post_sample=0.00s | init_obs=1.41s { screenshot=0.51s route=0.22s state=0.69s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 加入李四的技术方案评审会议，把昵称改成小明-北京，麦克风静音
+14:22:51 | INFO | bench_env.task.base | [crossapp_commerce.FinancialReportToNotes] setup: reset=3.08s { wait_ready=3.08s { SIM=2.98s SIM_FS=0.03s OS=0.04s waitForData=0.03s } } | warm=4.05s | prepare=0.00s | sample=0.59s | post_sample=0.00s | init_obs=1.61s { screenshot=0.68s route=0.22s state=0.71s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 帮我查一下支付宝的余额和最近一笔消费，记到笔记里。
+14:22:51 | INFO | bench_env.task.base | [crossapp_commerce.FinancialReportToNotes] setup: reset=1.61s { wait_ready=1.61s { SIM=1.50s SIM_FS=0.03s OS=0.05s waitForData=0.03s } } | warm=4.04s | prepare=0.00s | sample=0.58s | post_sample=0.00s | init_obs=1.62s { screenshot=0.66s route=0.23s state=0.73s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 帮我查一下支付宝的余额和最近一笔消费，记到笔记里。
+14:22:51 | INFO | bench_env.task.base | [crossapp_commerce.FinancialReportToNotes] setup: reset=2.52s { wait_ready=2.52s { SIM=2.40s SIM_FS=0.04s OS=0.05s waitForData=0.03s } } | warm=4.10s | prepare=0.00s | sample=0.63s | post_sample=0.00s | init_obs=1.54s { screenshot=0.58s route=0.22s state=0.74s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 帮我查一下支付宝的余额和最近一笔消费，记到笔记里。
+14:22:51 | INFO | bench_env.task.base | [crossapp_commerce.FinancialReportToNotes] setup: reset=2.35s { wait_ready=2.35s { SIM=2.23s SIM_FS=0.03s OS=0.05s waitForData=0.03s } } | warm=4.03s | prepare=0.00s | sample=0.62s | post_sample=0.00s | init_obs=1.64s { screenshot=0.67s route=0.21s state=0.75s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 帮我查一下支付宝的余额和最近一笔消费，记到笔记里。
+14:22:51 | INFO | bench_env.task.base | [wechat_reading.EditProfileName] setup: reset=3.42s { wait_ready=3.42s { SIM=3.31s SIM_FS=0.03s OS=0.03s waitForData=0.04s } } | warm=3.96s | prepare=0.00s | sample=0.23s | post_sample=0.57s | init_obs=1.56s { screenshot=0.60s route=0.23s state=0.73s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 把微信读书的昵称改成读书人K
+14:22:51 | INFO | bench_env.task.base | [bilibili.SubscribeTask] setup: reset=1.01s { wait_ready=1.01s { SIM=0.91s SIM_FS=0.03s OS=0.04s waitForData=0.03s } } | warm=4.28s | prepare=0.00s | sample=0.50s | post_sample=0.00s | init_obs=1.53s { screenshot=0.55s route=0.24s state=0.74s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 在B站关注UP主'_拾光记录者_'。
+14:22:51 | INFO | bench_env.runner.base | Instruction: 我B站现在有多少粉丝？ 然后打开 答题卡 APP 在里面回答问题并提交
+14:22:51 | INFO | bench_env.task.base | [tencent_meeting.JoinMeetingAndRename] setup: reset=1.22s { wait_ready=1.22s { SIM=1.12s SIM_FS=0.03s OS=0.04s waitForData=0.03s } } | warm=4.40s | prepare=0.00s | sample=0.44s | post_sample=0.00s | init_obs=1.50s { screenshot=0.52s route=0.23s state=0.76s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 加入李四的技术方案评审会议，把昵称改成小明-北京，麦克风静音
+14:22:51 | INFO | bench_env.task.base | [alipay.DisableAllNotifications] setup: reset=1.91s { wait_ready=1.91s { SIM=1.79s SIM_FS=0.04s OS=0.05s waitForData=0.03s } } | warm=4.42s | prepare=0.00s | sample=0.44s | post_sample=0.00s | init_obs=1.49s { screenshot=0.49s route=0.23s state=0.77s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 关闭支付宝的所有新消息提醒
+14:22:51 | INFO | bench_env.task.base | [reddit.Reddit_SendChatMessage] setup: reset=0.36s { wait_ready=0.36s { SIM=0.25s SIM_FS=0.03s OS=0.05s waitForData=0.03s } } | warm=4.41s | prepare=0.00s | sample=0.50s | post_sample=0.00s | init_obs=1.45s { screenshot=0.45s route=0.22s state=0.79s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 在 Reddit 聊天里，给用户 Intelligent_Drama_46 发送消息 hello from bench
+14:22:51 | INFO | bench_env.task.base | [bilibili.ViewProfileStatTask] setup: reset=3.33s { wait_ready=3.33s { SIM=3.20s SIM_FS=0.04s OS=0.06s waitForData=0.03s } } | warm=4.42s | prepare=0.00s | sample=0.45s | post_sample=0.00s | init_obs=1.51s { screenshot=0.49s route=0.22s state=0.80s }
+14:22:51 | INFO | bench_env.task.base | [alipay.DisableAllNotifications] setup: reset=0.84s { wait_ready=0.84s { SIM=0.72s SIM_FS=0.04s OS=0.04s waitForData=0.03s } } | warm=4.42s | prepare=0.00s | sample=0.49s | post_sample=0.00s | init_obs=1.49s { screenshot=0.46s route=0.22s state=0.81s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 关闭支付宝的所有新消息提醒
+14:22:51 | INFO | bench_env.task.base | [bilibili.ViewProfileStatTask] setup: reset=2.05s { wait_ready=2.05s { SIM=1.94s SIM_FS=0.03s OS=0.04s waitForData=0.04s } } | warm=4.43s | prepare=0.00s | sample=0.48s | post_sample=0.00s | init_obs=1.52s { screenshot=0.46s route=0.23s state=0.82s }
+14:22:51 | INFO | bench_env.task.base | [reddit.Reddit_SendChatMessage] setup: reset=1.44s { wait_ready=1.44s { SIM=1.32s SIM_FS=0.04s OS=0.05s waitForData=0.03s } } | warm=4.30s | prepare=0.00s | sample=0.50s | post_sample=0.00s | init_obs=1.61s { screenshot=0.56s route=0.22s state=0.82s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 在 Reddit 聊天里，给用户 Intelligent_Drama_46 发送消息 hello from bench
+14:22:51 | INFO | bench_env.task.base | [tencent_meeting.JoinMeetingAndRename] setup: reset=0.33s { wait_ready=0.33s { SIM=0.22s SIM_FS=0.03s OS=0.05s waitForData=0.03s } } | warm=4.41s | prepare=0.00s | sample=0.54s | post_sample=0.00s | init_obs=1.48s { screenshot=0.42s route=0.22s state=0.84s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 加入李四的技术方案评审会议，把昵称改成小明-北京，麦克风静音
+14:22:51 | INFO | bench_env.task.base | [crossapp_commerce.FinancialReportToNotes] setup: reset=0.53s { wait_ready=0.53s { SIM=0.41s SIM_FS=0.03s OS=0.05s waitForData=0.03s } } | warm=4.09s | prepare=0.00s | sample=0.63s | post_sample=0.00s | init_obs=1.72s { screenshot=0.62s route=0.23s state=0.87s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 帮我查一下支付宝的余额和最近一笔消费，记到笔记里。
+14:22:51 | INFO | bench_env.task.base | [wechat.SetFriendChatOnly] setup: reset=0.59s { wait_ready=0.59s { SIM=0.47s SIM_FS=0.04s OS=0.05s waitForData=0.03s } } | warm=4.41s | prepare=0.00s | sample=0.52s | post_sample=0.00s | init_obs=1.52s { screenshot=0.44s route=0.22s state=0.87s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 把微信联系人李娜的权限改成仅聊天
+14:22:51 | INFO | bench_env.task.base | [wechat.SetSignature] setup: reset=0.78s { wait_ready=0.78s { SIM=0.66s SIM_FS=0.05s OS=0.05s waitForData=0.03s } } | warm=4.40s | prepare=0.00s | sample=0.51s | post_sample=0.00s | init_obs=1.55s { screenshot=0.46s route=0.22s state=0.87s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 把微信里的个性签名改成在路上
+14:22:51 | INFO | bench_env.task.base | [bilibili.ViewProfileStatTask] setup: reset=2.21s { wait_ready=2.21s { SIM=2.09s SIM_FS=0.04s OS=0.05s waitForData=0.03s } } | warm=4.42s | prepare=0.00s | sample=0.46s | post_sample=0.00s | init_obs=1.61s { screenshot=0.50s route=0.23s state=0.88s }
+14:22:51 | INFO | bench_env.task.base | [tencent_meeting.JoinMeetingAndRename] setup: reset=0.67s { wait_ready=0.67s { SIM=0.56s SIM_FS=0.03s OS=0.05s waitForData=0.03s } } | warm=4.42s | prepare=0.00s | sample=0.57s | post_sample=0.00s | init_obs=1.51s { screenshot=0.40s route=0.22s state=0.89s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 加入李四的技术方案评审会议，把昵称改成小明-北京，麦克风静音
+14:22:51 | INFO | bench_env.runner.base | Instruction: 我B站现在有多少粉丝？ 然后打开 答题卡 APP 在里面回答问题并提交
+14:22:51 | INFO | bench_env.task.base | [wechat.SetFriendChatOnly] setup: reset=0.62s { wait_ready=0.62s { SIM=0.50s SIM_FS=0.04s OS=0.05s waitForData=0.03s } } | warm=4.43s | prepare=0.00s | sample=0.59s | post_sample=0.00s | init_obs=1.50s { screenshot=0.36s route=0.25s state=0.90s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 把微信联系人李娜的权限改成仅聊天
+14:22:51 | INFO | bench_env.task.base | [wechat.SetSignature] setup: reset=0.43s { wait_ready=0.43s { SIM=0.28s SIM_FS=0.05s OS=0.05s waitForData=0.05s } } | warm=4.40s | prepare=0.00s | sample=0.60s | post_sample=0.00s | init_obs=1.51s { screenshot=0.36s route=0.32s state=0.83s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 把微信里的个性签名改成在路上
+14:22:51 | INFO | bench_env.runner.base | Instruction: 我B站现在有多少粉丝？ 然后打开 答题卡 APP 在里面回答问题并提交
+14:22:51 | INFO | bench_env.task.base | [bilibili.SubscribeTask] setup: reset=1.07s { wait_ready=1.07s { SIM=0.94s SIM_FS=0.04s OS=0.05s waitForData=0.03s } } | warm=4.42s | prepare=0.00s | sample=0.53s | post_sample=0.00s | init_obs=1.65s { screenshot=0.47s route=0.55s state=0.63s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 在B站关注UP主'_拾光记录者_'。
+14:22:51 | INFO | bench_env.task.base | [x.SearchMultipleKeywordsAndInteract] setup: reset=0.50s { wait_ready=0.49s { SIM=0.38s SIM_FS=0.04s OS=0.05s waitForData=0.03s } } | warm=4.42s | prepare=0.00s | sample=0.54s | post_sample=0.00s | init_obs=1.67s { screenshot=0.51s route=0.53s state=0.62s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 我想先在X搜「Tesla」，给一条相关推文点赞，再搜「Travel」，把一条相关推文收藏起来
+14:22:51 | INFO | bench_env.task.base | [wechat_reading.EditProfileName] setup: reset=1.74s { wait_ready=1.74s { SIM=1.64s SIM_FS=0.03s OS=0.04s waitForData=0.03s } } | warm=4.11s | prepare=0.00s | sample=0.58s | post_sample=0.46s | init_obs=1.53s { screenshot=0.38s route=0.51s state=0.64s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 把微信读书的昵称改成读书人K
+14:22:51 | INFO | bench_env.task.base | [x.SearchMultipleKeywordsAndInteract] setup: reset=1.59s { wait_ready=1.59s { SIM=1.46s SIM_FS=0.03s OS=0.07s waitForData=0.03s } } | warm=4.43s | prepare=0.00s | sample=0.57s | post_sample=0.00s | init_obs=1.66s { screenshot=0.49s route=0.51s state=0.66s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 我想先在X搜「Tesla」，给一条相关推文点赞，再搜「Travel」，把一条相关推文收藏起来
+14:22:51 | INFO | bench_env.task.base | [calendar.CompareScheduleDensity] setup: reset=3.07s { wait_ready=3.07s { SIM=2.94s SIM_FS=0.03s OS=0.06s waitForData=0.03s } } | warm=3.97s | prepare=0.79s | sample=0.43s | post_sample=0.00s | init_obs=1.51s { screenshot=0.34s route=0.52s state=0.65s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 我B站现在有多少粉丝？ 然后打开 答题卡 APP 在里面回答问题并提交
+14:22:51 | INFO | bench_env.task.base | [wechat.SetFriendChatOnly] setup: reset=1.39s { wait_ready=1.39s { SIM=1.26s SIM_FS=0.04s OS=0.06s waitForData=0.03s } } | warm=4.43s | prepare=0.00s | sample=0.61s | post_sample=0.00s | init_obs=1.65s { screenshot=0.50s route=0.67s state=0.49s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 把微信联系人李娜的权限改成仅聊天
+14:22:51 | INFO | bench_env.task.base | [wechat_reading.EditProfileName] setup: reset=2.48s { wait_ready=2.48s { SIM=2.37s SIM_FS=0.03s OS=0.04s waitForData=0.04s } } | warm=4.28s | prepare=0.00s | sample=0.51s | post_sample=0.40s | init_obs=1.54s { screenshot=0.39s route=0.70s state=0.44s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 把微信读书的昵称改成读书人K
+14:22:51 | INFO | bench_env.task.base | [calendar.CompareScheduleDensity] setup: reset=3.12s { wait_ready=3.12s { SIM=3.01s SIM_FS=0.03s OS=0.04s waitForData=0.03s } } | warm=3.97s | prepare=0.79s | sample=0.43s | post_sample=0.00s | init_obs=1.57s { screenshot=0.39s route=0.72s state=0.46s }
+14:22:51 | INFO | bench_env.task.base | [calendar.CompareScheduleDensity] setup: reset=2.72s { wait_ready=2.72s { SIM=2.60s SIM_FS=0.03s OS=0.05s waitForData=0.03s } } | warm=3.96s | prepare=0.79s | sample=0.46s | post_sample=0.00s | init_obs=1.55s { screenshot=0.36s route=0.72s state=0.47s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 我B站现在有多少粉丝？ 然后打开 答题卡 APP 在里面回答问题并提交
+14:22:51 | INFO | bench_env.runner.base | Instruction: 我B站现在有多少粉丝？ 然后打开 答题卡 APP 在里面回答问题并提交
+14:22:51 | INFO | bench_env.task.base | [weather.WeekendTempRange3City] setup: reset=3.35s { wait_ready=3.35s { SIM=3.24s SIM_FS=0.03s OS=0.05s waitForData=0.03s } } | warm=3.98s | prepare=0.00s | sample=0.70s | post_sample=0.00s | init_obs=2.13s { screenshot=0.93s route=0.70s state=0.51s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 我B站现在有多少粉丝？ 然后打开 答题卡 APP 在里面回答问题并提交
+14:22:51 | INFO | bench_env.task.base | [calendar.CompareScheduleDensity] setup: reset=2.12s { wait_ready=2.12s { SIM=2.01s SIM_FS=0.03s OS=0.04s waitForData=0.03s } } | warm=3.99s | prepare=0.83s | sample=0.42s | post_sample=0.00s | init_obs=1.58s { screenshot=0.52s route=0.80s state=0.27s }
+14:22:51 | INFO | bench_env.task.base | [wechat_reading.EditProfileName] setup: reset=1.30s { wait_ready=1.30s { SIM=1.19s SIM_FS=0.04s OS=0.05s waitForData=0.03s } } | warm=4.42s | prepare=0.00s | sample=0.45s | post_sample=0.39s | init_obs=1.58s { screenshot=0.71s route=0.64s state=0.24s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 把微信读书的昵称改成读书人K
+14:22:51 | INFO | bench_env.task.base | [calendar.CompareScheduleDensity] setup: reset=1.40s { wait_ready=1.40s { SIM=1.29s SIM_FS=0.03s OS=0.04s waitForData=0.03s } } | warm=4.00s | prepare=0.83s | sample=0.43s | post_sample=0.00s | init_obs=1.60s { screenshot=0.70s route=0.65s state=0.25s }
+14:22:51 | INFO | bench_env.task.base | [calendar.CompareScheduleDensity] setup: reset=2.42s { wait_ready=2.41s { SIM=2.30s SIM_FS=0.03s OS=0.05s waitForData=0.04s } } | warm=4.00s | prepare=0.82s | sample=0.45s | post_sample=0.00s | init_obs=1.59s { screenshot=0.66s route=0.66s state=0.26s }
+14:22:51 | INFO | bench_env.task.base | [wechat_reading.EditProfileName] setup: reset=2.08s { wait_ready=2.08s { SIM=1.97s SIM_FS=0.03s OS=0.04s waitForData=0.03s } } | warm=4.43s | prepare=0.00s | sample=0.53s | post_sample=0.35s | init_obs=1.57s { screenshot=0.69s route=0.61s state=0.27s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 把微信读书的昵称改成读书人K
+14:22:51 | INFO | bench_env.task.base | [wechat_reading.EditProfileName] setup: reset=0.94s { wait_ready=0.94s { SIM=0.83s SIM_FS=0.03s OS=0.04s waitForData=0.03s } } | warm=4.42s | prepare=0.00s | sample=0.43s | post_sample=0.40s | init_obs=1.63s { screenshot=0.73s route=0.62s state=0.29s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 把微信读书的昵称改成读书人K
+14:22:51 | INFO | bench_env.task.base | [wechat_reading.EditProfileName] setup: reset=1.17s { wait_ready=1.17s { SIM=1.05s SIM_FS=0.04s OS=0.05s waitForData=0.03s } } | warm=4.42s | prepare=0.00s | sample=0.56s | post_sample=0.34s | init_obs=1.57s { screenshot=0.69s route=0.59s state=0.30s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 把微信读书的昵称改成读书人K
+14:22:51 | INFO | bench_env.task.base | [x.SearchMultipleKeywordsAndInteract] setup: reset=1.21s { wait_ready=1.21s { SIM=1.08s SIM_FS=0.03s OS=0.06s waitForData=0.03s } } | warm=4.43s | prepare=0.00s | sample=0.62s | post_sample=0.00s | init_obs=1.84s { screenshot=0.94s route=0.61s state=0.28s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 我想先在X搜「Tesla」，给一条相关推文点赞，再搜「Travel」，把一条相关推文收藏起来
+14:22:51 | INFO | bench_env.task.base | [wechat.SetSignature] setup: reset=0.59s { wait_ready=0.59s { SIM=0.44s SIM_FS=0.06s OS=0.05s waitForData=0.05s } } | warm=4.90s | prepare=0.00s | sample=0.40s | post_sample=0.00s | init_obs=1.58s { screenshot=0.67s route=0.61s state=0.30s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 把微信里的个性签名改成在路上
+14:22:51 | INFO | bench_env.runner.base | Instruction: 10月1号和9月4号哪天安排更多 然后打开 答题卡 APP 在里面回答问题并提交
+14:22:51 | INFO | bench_env.runner.base | Instruction: 10月1号和9月4号哪天安排更多 然后打开 答题卡 APP 在里面回答问题并提交
+14:22:51 | INFO | bench_env.task.base | [weather.WeekendTempRange3City] setup: reset=2.61s { wait_ready=2.61s { SIM=2.50s SIM_FS=0.04s OS=0.05s waitForData=0.03s } } | warm=3.97s | prepare=0.00s | sample=0.78s | post_sample=0.00s | init_obs=2.22s { screenshot=0.99s route=0.84s state=0.39s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 10月1号和9月4号哪天安排更多 然后打开 答题卡 APP 在里面回答问题并提交
+14:22:51 | INFO | bench_env.env.mobile_gym | [W51] OPEN_APP: 'bilibili' opened OK
+14:22:51 | INFO | bench_env.runner.base | Instruction: 周末想出去玩，帮我看看杭州、上海、深圳周末哪个城市温差小 然后打开 答题卡 APP 在里面回答问题并提交
+14:22:51 | INFO | bench_env.runner.base | Instruction: 10月1号和9月4号哪天安排更多 然后打开 答题卡 APP 在里面回答问题并提交
+14:22:51 | INFO | bench_env.task.base | [reddit.Reddit_SendChatMessage] setup: reset=0.98s { wait_ready=0.98s { SIM=0.87s SIM_FS=0.04s OS=0.04s waitForData=0.03s } } | warm=4.44s | prepare=0.00s | sample=0.60s | post_sample=0.00s | init_obs=1.96s { screenshot=1.48s route=0.26s state=0.22s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 在 Reddit 聊天里，给用户 Intelligent_Drama_46 发送消息 hello from bench
+14:22:51 | INFO | bench_env.task.base | [wechat.SetSignature] setup: reset=0.47s { wait_ready=0.47s { SIM=0.31s SIM_FS=0.03s OS=0.08s waitForData=0.05s } } | warm=4.89s | prepare=0.00s | sample=0.37s | post_sample=0.00s | init_obs=1.70s { screenshot=1.22s route=0.26s state=0.23s }
+14:22:51 | INFO | bench_env.runner.base | Instruction: 把微信里的个性签名改成在路上
+14:22:51 | INFO | bench_env.task.base | [calendar.CompareScheduleDensity] setup: reset=0.66s { wait_ready=0.66s { SIM=0.53s SIM_FS=0.04s OS=0.05s waitForData=0.03s } } | warm=4.43s | prepare=0.90s | sample=0.26s | post_sample=0.00s | init_obs=1.44s { screenshot=0.96s route=0.24s state=0.24s }
+14:22:51 | INFO | bench_env.task.base | [calendar.CompareScheduleDensity] setup: reset=2.87s { wait_ready=2.87s { SIM=2.77s SIM_FS=0.03s OS=0.04s waitForData=0.03s } } | warm=3.96s | prepare=0.82s | sample=0.46s | post_sample=0.00s | init_obs=1.85s { screenshot=1.36s route=0.23s state=0.25s }
+14:22:51 | INFO | bench_env.task.base | [tencent_meeting.JoinMeetingAndRename] setup: reset=1.26s { wait_ready=1.26s { SIM=1.15s SIM_FS=0.04s OS=0.05s waitForData=0.03s } } | warm=4.44s | prepare=0.00s | sample=0.58s | post_sample=0.00s | init_obs=2.04s { screenshot=1.56s route=0.23s state=0.25s }
+14:22:52 | INFO | bench_env.runner.base | Instruction: 加入李四的技术方案评审会议，把昵称改成小明-北京，麦克风静音
+14:22:52 | INFO | bench_env.runner.base | Instruction: 10月1号和9月4号哪天安排更多 然后打开 答题卡 APP 在里面回答问题并提交
+14:22:52 | INFO | bench_env.runner.base | Instruction: 10月1号和9月4号哪天安排更多 然后打开 答题卡 APP 在里面回答问题并提交
+14:22:52 | INFO | bench_env.task.base | [weather.WeekendTempRange3City] setup: reset=2.23s { wait_ready=2.23s { SIM=2.12s SIM_FS=0.03s OS=0.04s waitForData=0.03s } } | warm=3.96s | prepare=0.00s | sample=0.76s | post_sample=0.00s | init_obs=2.38s { screenshot=1.35s route=0.63s state=0.40s }
+14:22:52 | INFO | bench_env.task.base | [weather.WeekendTempRange3City] setup: reset=3.21s { wait_ready=3.21s { SIM=3.10s SIM_FS=0.03s OS=0.04s waitForData=0.03s } } | warm=4.28s | prepare=0.00s | sample=0.56s | post_sample=0.00s | init_obs=2.28s { screenshot=1.19s route=0.61s state=0.48s }
+14:22:52 | INFO | bench_env.runner.base | Instruction: 周末想出去玩，帮我看看杭州、上海、深圳周末哪个城市温差小 然后打开 答题卡 APP 在里面回答问题并提交
+14:22:52 | INFO | bench_env.runner.base | Instruction: 10月1号和9月4号哪天安排更多 然后打开 答题卡 APP 在里面回答问题并提交
+14:22:52 | INFO | bench_env.task.base | [weather.WeekendTempRange3City] setup: reset=1.48s { wait_ready=1.48s { SIM=1.35s SIM_FS=0.04s OS=0.05s waitForData=0.03s } } | warm=4.43s | prepare=0.00s | sample=0.70s | post_sample=0.00s | init_obs=1.98s { screenshot=1.43s route=0.24s state=0.31s }
+14:22:52 | INFO | bench_env.runner.base | Instruction: 10月1号和9月4号哪天安排更多 然后打开 答题卡 APP 在里面回答问题并提交
+14:22:52 | INFO | bench_env.task.base | [weather.WeekendTempRange3City] setup: reset=1.56s { wait_ready=1.56s { SIM=1.42s SIM_FS=0.03s OS=0.07s waitForData=0.03s } } | warm=4.43s | prepare=0.00s | sample=0.68s | post_sample=0.00s | init_obs=2.02s { screenshot=1.50s route=0.25s state=0.27s }
+14:22:52 | INFO | bench_env.task.base | [weather.WeekendTempRange3City] setup: reset=3.15s { wait_ready=3.15s { SIM=3.04s SIM_FS=0.03s OS=0.04s waitForData=0.03s } } | warm=4.30s | prepare=0.00s | sample=0.81s | post_sample=0.00s | init_obs=2.07s { screenshot=1.51s route=0.31s state=0.25s }
+14:22:52 | INFO | bench_env.runner.base | Instruction: 周末想出去玩，帮我看看杭州、上海、深圳周末哪个城市温差小 然后打开 答题卡 APP 在里面回答问题并提交
+14:22:52 | INFO | bench_env.task.base | [weather.WeekendTempRange3City] setup: reset=1.13s { wait_ready=1.13s { SIM=1.02s SIM_FS=0.04s OS=0.04s waitForData=0.03s } } | warm=4.45s | prepare=0.00s | sample=0.67s | post_sample=0.00s | init_obs=2.05s { screenshot=1.58s route=0.24s state=0.24s }
+14:22:52 | INFO | bench_env.runner.base | Instruction: 周末想出去玩，帮我看看杭州、上海、深圳周末哪个城市温差小 然后打开 答题卡 APP 在里面回答问题并提交
+14:22:52 | INFO | bench_env.runner.base | Instruction: 周末想出去玩，帮我看看杭州、上海、深圳周末哪个城市温差小 然后打开 答题卡 APP 在里面回答问题并提交
+14:22:52 | INFO | bench_env.runner.base | Instruction: 周末想出去玩，帮我看看杭州、上海、深圳周末哪个城市温差小 然后打开 答题卡 APP 在里面回答问题并提交
+14:22:52 | INFO | bench_env.runner.base | Instruction: 周末想出去玩，帮我看看杭州、上海、深圳周末哪个城市温差小 然后打开 答题卡 APP 在里面回答问题并提交
+14:22:52 | INFO | bench_env.runner.base | Instruction: 周末想出去玩，帮我看看杭州、上海、深圳周末哪个城市温差小 然后打开 答题卡 APP 在里面回答问题并提交
+14:22:52 | INFO | bench_env.task.base | [bilibili.SubscribeTask] setup: reset=1.52s { wait_ready=1.52s { SIM=0.55s SIM_FS=0.49s OS=0.25s waitForData=0.23s } } | warm=1.67s | prepare=0.00s | sample=0.04s | post_sample=0.00s | init_obs=0.27s { screenshot=0.20s route=0.00s state=0.07s }
+14:22:52 | INFO | bench_env.runner.base | Instruction: 在B站关注UP主'_拾光记录者_'。
+14:22:55 | INFO | bench_env.env.mobile_gym | [W3] OPEN_APP: 'alipay' opened OK
+14:23:00 | INFO | bench_env.env.mobile_gym | [W7] OPEN_APP: 'answer_sheet' opened OK
+14:23:00 | INFO | bench_env.env.mobile_gym | [W91] OPEN_APP: 'answer_sheet' opened OK
+14:23:00 | INFO | bench_env.env.mobile_gym | [W2] OPEN_APP: 'answer_sheet' opened OK
+14:23:12 | INFO | bench_env.env.mobile_gym | [W19] OPEN_APP: 'answer_sheet' opened OK
+14:23:32 | INFO | bench_env.runner.base | [calendar.CompareScheduleDensity] profile: reset=1.40s { wait_ready=1.40s { SIM=1.29s SIM_FS=0.03s OS=0.04s waitForData=0.03s } } | warm=4.00s | prepare=0.83s | sample=0.43s | post_sample=0.00s | init_obs=1.60s { screenshot=0.70s route=0.65s state=0.25s } | infer=7.50s { queue=0.00s exec=7.29s } | record=0.04s | action=0.71s | delay=0.81s | obs=0.13s { screenshot=0.12s route=0.00s } | infer=8.00s { queue=0.00s exec=7.49s } | record=0.04s | action=2.39s | delay=0.45s | obs=0.21s { screenshot=0.18s route=0.03s } | infer=7.69s { queue=0.01s exec=7.30s } | record=0.04s | action=2.02s | delay=0.53s | obs=1.08s { screenshot=0.91s route=0.17s } | infer=6.37s { queue=0.01s exec=6.16s } | record=0.04s | action=2.64s { screenshot=0.61s route=2.03s } | eval=0.02s (steps=4 runtime=40.7s)
+14:23:33 | INFO | bench_env.runner.base | [calendar.CompareScheduleDensity] profile: reset=2.42s { wait_ready=2.41s { SIM=2.30s SIM_FS=0.03s OS=0.05s waitForData=0.04s } } | warm=4.00s | prepare=0.82s | sample=0.45s | post_sample=0.00s | init_obs=1.59s { screenshot=0.66s route=0.66s state=0.26s } | infer=7.45s { queue=0.00s exec=6.75s } | record=0.05s | action=0.78s | delay=0.43s | obs=0.79s { screenshot=0.79s route=0.00s } | infer=8.78s { queue=0.00s exec=8.08s } | record=0.05s | action=1.35s | delay=0.46s | obs=0.18s { screenshot=0.15s route=0.03s } | infer=8.87s { queue=0.01s exec=8.35s } | record=0.05s | action=0.97s | delay=1.03s | obs=1.00s { screenshot=0.35s route=0.65s } | infer=6.64s { queue=0.00s exec=6.52s } | record=0.04s | action=1.96s { screenshot=1.78s route=0.19s } | eval=0.03s (steps=4 runtime=40.9s)
+14:23:33 | INFO | bench_env.runner.base | [weather.WeekendTempRange3City] profile: reset=1.48s { wait_ready=1.48s { SIM=1.35s SIM_FS=0.04s OS=0.05s waitForData=0.03s } } | warm=4.43s | prepare=0.00s | sample=0.70s | post_sample=0.00s | init_obs=1.98s { screenshot=1.43s route=0.24s state=0.31s } | infer=6.07s { queue=0.00s exec=4.98s } | record=0.04s | action=1.88s | delay=0.59s | obs=0.31s { screenshot=0.23s route=0.08s } | infer=8.17s { queue=0.00s exec=7.67s } | record=0.04s | action=2.41s | delay=0.44s | obs=0.13s { screenshot=0.13s route=0.00s } | infer=7.76s { queue=0.00s exec=7.39s } | record=0.04s | action=2.03s | delay=0.80s | obs=1.07s { screenshot=0.77s route=0.30s } | infer=7.91s { queue=0.15s exec=7.43s } | record=0.04s | action=1.28s { screenshot=1.01s route=0.27s } | eval=0.02s (steps=4 runtime=41.0s)
+14:23:40 | INFO | bench_env.runner.base | [bilibili.SubscribeTask] profile: reset=1.07s { wait_ready=1.07s { SIM=0.94s SIM_FS=0.04s OS=0.05s waitForData=0.03s } } | warm=4.42s | prepare=0.00s | sample=0.53s | post_sample=0.00s | init_obs=1.65s { screenshot=0.47s route=0.55s state=0.63s } | infer=4.04s { queue=0.00s exec=4.01s } | record=0.05s | action=3.94s | delay=0.62s | obs=0.19s { screenshot=0.18s route=0.01s } | infer=7.17s { queue=0.00s exec=7.17s } | record=0.03s | action=0.97s | delay=0.97s | obs=2.26s { screenshot=2.11s route=0.15s } | infer=7.28s { queue=0.05s exec=7.19s } | record=0.04s | action=2.84s | delay=0.54s | obs=1.15s { screenshot=0.99s route=0.16s } | infer=6.21s { queue=0.00s exec=6.08s } | record=0.04s | action=0.76s | delay=0.86s | obs=1.53s { screenshot=1.29s route=0.24s } | infer=6.69s { queue=0.03s exec=6.65s } | record=0.04s | action=0.16s { screenshot=0.15s route=0.00s } | eval=0.02s (steps=5 runtime=48.4s)
+14:23:43 | INFO | bench_env.runner.base | [bilibili.SubscribeTask] profile: reset=1.01s { wait_ready=1.01s { SIM=0.91s SIM_FS=0.03s OS=0.04s waitForData=0.03s } } | warm=4.28s | prepare=0.00s | sample=0.50s | post_sample=0.00s | init_obs=1.53s { screenshot=0.55s route=0.24s state=0.74s } | infer=4.99s { queue=0.00s exec=4.79s } | record=0.04s | action=3.38s | delay=0.59s | obs=0.17s { screenshot=0.17s route=0.00s } | infer=7.26s { queue=0.00s exec=7.22s } | record=0.04s | action=3.77s | delay=0.63s | obs=0.23s { screenshot=0.19s route=0.04s } | infer=6.99s { queue=0.00s exec=6.85s } | record=0.05s | action=2.60s | delay=0.48s | obs=1.10s { screenshot=0.53s route=0.57s } | infer=6.39s { queue=0.00s exec=6.22s } | record=0.05s | action=0.67s | delay=0.49s | obs=1.80s { screenshot=1.61s route=0.19s } | infer=7.12s { queue=0.00s exec=7.07s } | record=0.04s | action=2.77s { screenshot=0.85s route=1.92s } | eval=0.01s (steps=5 runtime=51.6s)
+14:23:43 | INFO | bench_env.runner.base | [bilibili.SubscribeTask] profile: reset=1.70s { wait_ready=1.70s { SIM=1.60s SIM_FS=0.03s OS=0.04s waitForData=0.03s } } | warm=4.02s | prepare=0.00s | sample=0.56s | post_sample=0.00s | init_obs=1.30s { screenshot=0.61s route=0.22s state=0.47s } | infer=5.73s { queue=0.00s exec=5.58s } | record=0.05s | action=3.12s | delay=0.84s | obs=0.57s { screenshot=0.56s route=0.01s } | infer=8.51s { queue=0.00s exec=7.95s } | record=0.05s | action=2.04s | delay=0.74s | obs=0.96s { screenshot=0.96s route=0.00s } | infer=7.71s { queue=0.00s exec=7.25s } | record=0.05s | action=1.05s | delay=1.05s | obs=1.29s { screenshot=1.27s route=0.02s } | infer=6.39s { queue=0.00s exec=6.25s } | record=0.06s | action=1.74s | delay=0.85s | obs=0.19s { screenshot=0.17s route=0.02s } | infer=7.24s { queue=0.00s exec=7.21s } | record=0.05s | action=2.12s { screenshot=1.82s route=0.31s } | eval=0.02s (steps=5 runtime=52.4s)
+14:23:43 | INFO | bench_env.runner.base | [bilibili.SubscribeTask] profile: reset=3.39s { wait_ready=3.38s { SIM=3.28s SIM_FS=0.03s OS=0.04s waitForData=0.03s } } | warm=4.00s | prepare=0.00s | sample=0.38s | post_sample=0.00s | init_obs=1.37s { screenshot=0.76s route=0.27s state=0.34s } | infer=5.74s { queue=0.00s exec=5.65s } | record=0.05s | action=3.23s | delay=0.42s | obs=0.18s { screenshot=0.18s route=0.00s } | infer=7.47s { queue=0.00s exec=7.44s } | record=0.04s | action=3.70s | delay=0.68s | obs=0.24s { screenshot=0.20s route=0.04s } | infer=7.47s { queue=0.02s exec=7.14s } | record=0.04s | action=2.12s | delay=0.78s | obs=1.07s { screenshot=0.77s route=0.30s } | infer=7.68s { queue=0.18s exec=7.24s } | record=0.05s | action=1.22s | delay=0.83s | obs=0.30s { screenshot=0.29s route=0.01s } | infer=6.93s { queue=0.00s exec=6.89s } | record=0.04s | action=2.27s { screenshot=1.95s route=0.31s } | eval=0.02s (steps=5 runtime=52.5s)
+14:23:43 | INFO | bench_env.runner.base | [bilibili.SubscribeTask] profile: reset=1.87s { wait_ready=1.87s { SIM=1.75s SIM_FS=0.03s OS=0.04s waitForData=0.04s } } | warm=4.10s | prepare=0.00s | sample=0.60s | post_sample=0.00s | init_obs=1.42s { screenshot=0.58s route=0.23s state=0.61s } | infer=6.17s { queue=0.00s exec=5.61s } | record=0.05s | action=2.51s | delay=0.87s | obs=0.40s { screenshot=0.37s route=0.03s } | infer=7.47s { queue=0.02s exec=7.11s } | record=0.04s | action=2.98s | delay=0.75s | obs=0.44s { screenshot=0.36s route=0.08s } | infer=7.38s { queue=0.00s exec=7.26s } | record=0.04s | action=1.89s | delay=0.65s | obs=1.13s { screenshot=0.83s route=0.30s } | infer=8.23s { queue=0.03s exec=7.84s } | record=0.05s | action=0.76s | delay=0.64s | obs=0.22s { screenshot=0.21s route=0.00s } | infer=7.53s { queue=0.00s exec=7.37s } | record=0.05s | action=1.90s { screenshot=1.60s route=0.29s } | eval=0.02s (steps=5 runtime=52.1s)

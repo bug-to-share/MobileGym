@@ -72,6 +72,15 @@ docs/archive
 
 # --- Vendored rLLM training stack (mobilegym-rl/) ---
 mobilegym-rl/logs/
+!mobilegym-rl/logs/mobilegym/
+!mobilegym-rl/logs/mobilegym/mobilegym-qwen3-vl-4b-train/
+!mobilegym-rl/logs/mobilegym/mobilegym-qwen3-vl-4b-train/run_20260901_041451/
+!mobilegym-rl/logs/mobilegym/mobilegym-qwen3-vl-4b-train/run_20260901_041451/*/
+!mobilegym-rl/logs/mobilegym/mobilegym-qwen3-vl-4b-train/run_20260901_041451/*/results.jsonl
+!mobilegym-rl/logs/mobilegym/mobilegym-qwen3-vl-4b-train/run_20260901_041451/*/summary.json
+!mobilegym-rl/logs/mobilegym/mobilegym-qwen3-vl-4b-train/run_20260901_041451/*/meta.json
+!mobilegym-rl/logs/mobilegym/mobilegym-qwen3-vl-4b-train/run_20260901_041451/*/console.log
+!mobilegym-rl/logs/mobilegym/mobilegym-qwen3-vl-4b-train/run_20260901_041451/terminal.log
 mobilegym-rl/checkpoints
 mobilegym-rl/swanlog/
 mobilegym-rl/outputs/
@@ -80,6 +89,12 @@ mobilegym-rl/.rllm_local/
 mobilegym-rl/.pytest_cache/
 mobilegym-rl/**/*.egg-info/
 mobilegym-rl/tensorboard_log/
+!mobilegym-rl/tensorboard_log/mobilegym/
+!mobilegym-rl/tensorboard_log/mobilegym/mobilegym-qwen3-vl-4b-train/
+!mobilegym-rl/tensorboard_log/mobilegym/mobilegym-qwen3-vl-4b-train/*.tfevents.*
+!mobilegym-rl/tensorboard_log/mobilegym/
+!mobilegym-rl/tensorboard_log/mobilegym/mobilegym-qwen3-vl-4b-train/
+!mobilegym-rl/tensorboard_log/mobilegym/mobilegym-qwen3-vl-4b-train/*.tfevents.*
 mobilegym-rl/core
 core
 .downloads/
