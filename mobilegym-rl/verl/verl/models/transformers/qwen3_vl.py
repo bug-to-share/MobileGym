@@ -143,11 +143,42 @@ def _get_input_embeds(
     image_grid_thw: Optional[torch.LongTensor] = None,
     video_grid_thw: Optional[torch.LongTensor] = None,
 ):
+    def _unpack_visual_output(visual_output):
+        """Normalize Qwen3-VL vision outputs across Transformers versions.
+
+        Transformers <= 4.x returned ``(image_embeds, deepstack_embeds)``
+        from ``model.visual``.  Transformers 5.x returns a
+        ``BaseModelOutputWithDeepstackFeatures`` whose merged image features
+        are in ``pooler_output`` and whose auxiliary features are in
+        ``deepstack_features``.  Keep accepting the tuple form so this patch
+        remains usable with both APIs.
+        """
+        if hasattr(visual_output, "pooler_output"):
+            image_embeds = visual_output.pooler_output
+            deepstack_embeds = getattr(visual_output, "deepstack_features", None)
+            if image_embeds is None:
+                # Be defensive for model variants that expose only the final
+                # hidden state in the structured output.
+                image_embeds = visual_output.last_hidden_state
+            return image_embeds, deepstack_embeds
+
+        if isinstance(visual_output, (tuple, list)):
+            if len(visual_output) < 2:
+                raise ValueError(
+                    "Unexpected Qwen3-VL visual output: expected at least "
+                    f"2 values, got {len(visual_output)}"
+                )
+            return visual_output[0], visual_output[1]
+
+        raise TypeError(f"Unsupported Qwen3-VL visual output type: {type(visual_output)!r}")
+
     inputs_embeds = model.get_input_embeddings()(input_ids)
     image_mask, video_mask = None, None
     if pixel_values is not None:
         pixel_values = pixel_values.type(model.visual.dtype)
-        image_embeds, deepstack_image_embeds = model.visual(pixel_values, grid_thw=image_grid_thw)
+        image_embeds, deepstack_image_embeds = _unpack_visual_output(
+            model.visual(pixel_values, grid_thw=image_grid_thw)
+        )
         n_image_tokens = (input_ids == model.config.image_token_id).sum().item()
         n_image_features = image_embeds.shape[0]
         if n_image_tokens != n_image_features:
@@ -165,7 +196,9 @@ def _get_input_embeds(
 
     if pixel_values_videos is not None:
         pixel_values_videos = pixel_values_videos.type(model.visual.dtype)
-        video_embeds, deepstack_video_embeds = model.visual(pixel_values_videos, grid_thw=video_grid_thw)
+        video_embeds, deepstack_video_embeds = _unpack_visual_output(
+            model.visual(pixel_values_videos, grid_thw=video_grid_thw)
+        )
         n_video_tokens = (input_ids == model.config.video_token_id).sum().item()
         n_video_features = video_embeds.shape[0]
         if n_video_tokens != n_video_features:
@@ -210,7 +243,9 @@ def _get_input_embeds(
         patch_dim = config.in_channels * config.temporal_patch_size * config.patch_size**2
         pixel_values = torch.zeros((16, patch_dim), dtype=inputs_embeds.dtype, device=inputs_embeds.device)
         image_grid_thw = torch.tensor([[1, 4, 4]], dtype=torch.long, device=inputs_embeds.device)
-        image_embeds, dummy_deepstack_image_embeds = model.visual(pixel_values, grid_thw=image_grid_thw)
+        image_embeds, dummy_deepstack_image_embeds = _unpack_visual_output(
+            model.visual(pixel_values, grid_thw=image_grid_thw)
+        )
         inputs_embeds += 0.0 * image_embeds.mean()
         for emb in dummy_deepstack_image_embeds or []:
             inputs_embeds += 0.0 * emb.mean()

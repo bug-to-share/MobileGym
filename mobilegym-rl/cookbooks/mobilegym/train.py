@@ -24,12 +24,12 @@ from omegaconf import DictConfig
 try:
     from .bootstrap import patch_verl_set_loss_fn
     from . import mobilegym_flow
-    from .evaluator import mobilegym_evaluator
+    from .evaluator import RewardConfig, configure_reward, mobilegym_evaluator
     from .mobilegym_flow import RuntimeConfig, load_mobilegym_dataset
 except ImportError:
     from bootstrap import patch_verl_set_loss_fn
     import mobilegym_flow
-    from evaluator import mobilegym_evaluator
+    from evaluator import RewardConfig, configure_reward, mobilegym_evaluator
     from mobilegym_flow import RuntimeConfig, load_mobilegym_dataset
 from rllm.data import DatasetRegistry
 from rllm.experimental.unified_trainer import AgentTrainer
@@ -106,9 +106,21 @@ def _build_runtime_config(config: DictConfig, pool_size: int) -> RuntimeConfig:
         agent_model_args=agent_model_args,
         agent_val_model_args=agent_val_model_args,
         max_steps=int(config.get("max_steps", defaults.max_steps)),
+        max_steps_cap=_optional_config_value(config, "max_steps_cap", int),
         judge_mode=str(config.get("judge_mode", defaults.judge_mode)),
         eval_mode=str(config.get("eval_mode", defaults.eval_mode)),
         loop_detect=int(config.get("loop_detect", defaults.loop_detect)),
+        reward_clean_penalty=float(config.get("reward_clean_penalty", defaults.reward_clean_penalty)),
+        reward_abort_penalty=float(config.get("reward_abort_penalty", defaults.reward_abort_penalty)),
+        reward_overdue_penalty=float(config.get("reward_overdue_penalty", defaults.reward_overdue_penalty)),
+        reward_premature_penalty=float(config.get("reward_premature_penalty", defaults.reward_premature_penalty)),
+        reward_format_error=float(config.get("reward_format_error", defaults.reward_format_error)),
+        reward_repetitive_loop=float(config.get("reward_repetitive_loop", defaults.reward_repetitive_loop)),
+        reward_max_steps=float(config.get("reward_max_steps", defaults.reward_max_steps)),
+        reward_infra_error=float(config.get("reward_infra_error", defaults.reward_infra_error)),
+        reward_repeated_action=float(config.get("reward_repeated_action", defaults.reward_repeated_action)),
+        reward_no_state_change=float(config.get("reward_no_state_change", defaults.reward_no_state_change)),
+        reward_max_behavior_penalties=int(config.get("reward_max_behavior_penalties", defaults.reward_max_behavior_penalties)),
         run_name=run_name,
         runs_dir=str(
             config.get(
@@ -131,6 +143,21 @@ def main(config: DictConfig):
     cfg = _build_runtime_config(config, pool_size)
     cfg.to_env_vars()
     mobilegym_flow.set_config(cfg)
+    configure_reward(
+        RewardConfig(
+            clean_penalty=cfg.reward_clean_penalty,
+            abort_penalty=cfg.reward_abort_penalty,
+            overdue_penalty=cfg.reward_overdue_penalty,
+            premature_penalty=cfg.reward_premature_penalty,
+            format_error_reward=cfg.reward_format_error,
+            repetitive_loop_reward=cfg.reward_repetitive_loop,
+            max_steps_reward=cfg.reward_max_steps,
+            infra_error_reward=cfg.reward_infra_error,
+            repeated_action_penalty=cfg.reward_repeated_action,
+            no_state_change_penalty=cfg.reward_no_state_change,
+            max_behavior_penalties=cfg.reward_max_behavior_penalties,
+        )
+    )
 
     suite = _normalize_optional_str(config.get("suite", None))
     task_split = _normalize_optional_str(config.get("split", "train"))

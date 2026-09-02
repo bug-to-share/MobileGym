@@ -79,3 +79,8 @@ mobilegym-rl/eval_results/
 mobilegym-rl/.rllm_local/
 mobilegym-rl/.pytest_cache/
 mobilegym-rl/**/*.egg-info/
+mobilegym-rl/tensorboard_log/
+mobilegym-rl/core
+core
+.downloads/
+tools_env_pool_probe.py

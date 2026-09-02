@@ -332,8 +332,12 @@ def main():
     args = parser.parse_args()
 
     print(f"[api_gateway] API gateway on :{args.port} (workers={args.workers})")
+    # The launcher executes this file directly, so ``api_gateway`` is the
+    # importable module name in the worker subprocesses.  Using this short
+    # import string preserves uvicorn's multi-worker mode without colliding
+    # with an unrelated installed top-level ``scripts`` package.
     uvicorn.run(
-        "scripts.server.api_gateway:app",
+        "api_gateway:app",
         host="127.0.0.1",
         port=args.port,
         workers=args.workers,

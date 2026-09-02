@@ -141,7 +141,19 @@ echo $! > "$PIDFILE_API"
 
 # 2. Start Nginx
 echo "[start] Nginx on :${PORT} (workers=8)"
-"$NGINX_BIN" -c "$NGINX_DIR/nginx.run.conf"
+if ! "$NGINX_BIN" -t -c "$NGINX_DIR/nginx.run.conf"; then
+    echo "[error] Nginx configuration check failed; gateway was not started." >&2
+    exit 1
+fi
+if ! "$NGINX_BIN" -c "$NGINX_DIR/nginx.run.conf"; then
+    echo "[error] Nginx failed to start; gateway is unavailable." >&2
+    exit 1
+fi
+
+if ! (command -v curl >/dev/null 2>&1 && curl -skf --max-time 3 "https://127.0.0.1:${PORT}/" >/dev/null); then
+    echo "[error] Gateway health check failed on https://127.0.0.1:${PORT}/" >&2
+    exit 1
+fi
 
 sleep 0.5
 echo ""

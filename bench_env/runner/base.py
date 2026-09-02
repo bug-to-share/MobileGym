@@ -251,6 +251,9 @@ class Controller:
         episode = None
         obs = initial_obs
         _recent_fps: deque[str] = deque(maxlen=loop_threshold if loop_threshold > 0 else None)
+        repeated_action_count = 0
+        no_state_change_count = 0
+        previous_fp: str | None = None
 
         try:
             # task.description includes grounded suffix (via task_name set in setup)
@@ -319,7 +322,14 @@ class Controller:
                             truncated, stop_reason = True, "REPETITIVE_LOOP"
                             break
 
+                    current_fp = _action_fingerprint(action)
+                    if previous_fp == current_fp:
+                        repeated_action_count += 1
+                    previous_fp = current_fp
+
                 try:
+                    before_route = dict(getattr(obs, "route", {}) or {})
+                    before_state = getattr(obs, "state", {}) or {}
                     result = await env.step(action)
                 except (ValueError, TypeError) as e:
                     # Model output format error (e.g. invalid point coordinates)
@@ -328,6 +338,14 @@ class Controller:
                     done, stop_reason = True, "FORMAT_ERROR"
                     break
                 obs, done, stop_reason = result.observation, result.done, result.stop_reason
+                if action.action_type not in {ActionType.WAIT, ActionType.INFO, ActionType.NOOP}:
+                    try:
+                        after_route = dict(getattr(obs, "route", {}) or {})
+                        after_state = getattr(obs, "state", {}) or {}
+                        if json.dumps({"route": before_route, "state": before_state}, sort_keys=True, default=str) == json.dumps({"route": after_route, "state": after_state}, sort_keys=True, default=str):
+                            no_state_change_count += 1
+                    except Exception:
+                        pass
 
                 # INFO 处理
                 if action.is_info and not done:
@@ -353,6 +371,8 @@ class Controller:
                 stopwatch_total_s=stopwatch_total_s,
                 stopwatch_flat=stopwatch_flat,
                 stopwatch_tree=stopwatch_tree,
+                repeated_action_count=repeated_action_count,
+                no_state_change_count=no_state_change_count,
             )
             # Re-fetch final state with retry for reliable judging
             try:
@@ -378,6 +398,8 @@ class Controller:
                 stopwatch_total_s=stopwatch_total_s,
                 stopwatch_flat=stopwatch_flat,
                 stopwatch_tree=stopwatch_tree,
+                repeated_action_count=repeated_action_count,
+                no_state_change_count=no_state_change_count,
             )
             return exec_result, None, None, episode, task
         finally:
@@ -438,6 +460,8 @@ class ExecutionResult:
     stopwatch_total_s: float = 0.0
     stopwatch_flat: dict[str, float] = field(default_factory=dict)
     stopwatch_tree: list[dict[str, Any]] = field(default_factory=list)
+    repeated_action_count: int = 0
+    no_state_change_count: int = 0
 
 
 @dataclass
@@ -550,6 +574,8 @@ class EpisodeResult:
             "stopwatch_total_s": self.execution.stopwatch_total_s,
             "stopwatch_flat": self.execution.stopwatch_flat,
             "stopwatch_tree": self.execution.stopwatch_tree,
+            "repeated_action_count": self.execution.repeated_action_count,
+            "no_state_change_count": self.execution.no_state_change_count,
         }
         d: dict[str, Any] = {
             "id": self.task_id,

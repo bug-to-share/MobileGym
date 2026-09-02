@@ -64,10 +64,29 @@ class RuntimeConfig:
     agent_model_args: dict[str, Any] = field(default_factory=dict)
     agent_val_model_args: dict[str, Any] = field(default_factory=dict)
 
+    # Default/task-derived interaction budget. ``max_steps_cap`` is an
+    # optional global upper bound used to truncate long-tail tasks without
+    # changing their difficulty-specific budgets.
     max_steps: int = 30
+    max_steps_cap: int | None = None
     judge_mode: str = "auto"
     eval_mode: str = "grounded"
     loop_detect: int = 8
+
+    # P1 reward coefficients.  Defaults preserve the previous reward
+    # semantics; experiments can override them from Hydra/shell without
+    # editing evaluator.py.
+    reward_clean_penalty: float = 0.8
+    reward_abort_penalty: float = 0.5
+    reward_overdue_penalty: float = 0.5
+    reward_premature_penalty: float = 0.8
+    reward_format_error: float = 0.0
+    reward_repetitive_loop: float = 1.0
+    reward_max_steps: float = 1.0
+    reward_infra_error: float = 0.0
+    reward_repeated_action: float = 0.95
+    reward_no_state_change: float = 0.95
+    reward_max_behavior_penalties: int = 8
 
     run_name: str = ""
     runs_dir: str = "logs/mobilegym/runs"
@@ -325,6 +344,19 @@ class WorkerState:
                     "mode": mode,
                     "training_step": step,
                     "epoch": epoch,
+                    "reward_config": {
+                        "clean_penalty": cfg.reward_clean_penalty,
+                        "abort_penalty": cfg.reward_abort_penalty,
+                        "overdue_penalty": cfg.reward_overdue_penalty,
+                        "premature_penalty": cfg.reward_premature_penalty,
+                        "format_error_reward": cfg.reward_format_error,
+                        "repetitive_loop_reward": cfg.reward_repetitive_loop,
+                        "max_steps_reward": cfg.reward_max_steps,
+                        "infra_error_reward": cfg.reward_infra_error,
+                        "repeated_action_penalty": cfg.reward_repeated_action,
+                        "no_state_change_penalty": cfg.reward_no_state_change,
+                        "max_behavior_penalties": cfg.reward_max_behavior_penalties,
+                    },
                 },
                 repeat_n=_RECORDER_REPEAT_HINT,
             )
@@ -472,6 +504,8 @@ def _resolve_max_steps(task) -> int:
     steps = DIFFICULTY_MAX_STEPS.get(getattr(task, "difficulty", None), cfg.max_steps)
     if cfg.eval_mode == "grounded" and getattr(task, "answer_fields", None):
         steps += 10
+    if cfg.max_steps_cap is not None and cfg.max_steps_cap > 0:
+        steps = min(steps, cfg.max_steps_cap)
     return steps
 
 
@@ -502,11 +536,15 @@ def _episode_from_runner_result(task_data: dict, result, trajectory_dir: Path | 
     false_complete = bool(getattr(result, "false_complete", False))
 
     issues = getattr(result, "goal_mismatches", []) or []
+    trace = getattr(execution, "trace", []) if execution is not None else []
+    repeated_action_count = int(getattr(execution, "repeated_action_count", 0) or 0)
+    no_state_change_count = int(getattr(execution, "no_state_change_count", 0) or 0)
 
     artifacts = {
         "task_id": result.task_id,
         "task_name": result.task_name,
         "suite": result.suite,
+        "trial_id": int(getattr(result, "trial_id", 0) or 0),
         "progress": float(getattr(result, "progress", 0.0) or 0.0),
         "goal_success": bool(getattr(result, "goal_success", False)) and not bool(error),
         "success": bool(getattr(result, "success", False)) and not bool(error),
@@ -515,15 +553,22 @@ def _episode_from_runner_result(task_data: dict, result, trajectory_dir: Path | 
         "steps": int(getattr(result, "steps", 0) or 0),
         "finished": bool(getattr(execution, "finished", False)) and not bool(error),
         "stop_reason": getattr(execution, "stop_reason", None),
+        "truncated": bool(getattr(execution, "truncated", False)),
+        "error": str(error) if error else None,
+        "repeated_action_count": repeated_action_count,
+        "no_state_change_count": no_state_change_count,
         "false_complete": false_complete,
         "overdue_termination": bool(getattr(result, "overdue_termination", False)),
         "goal_checks": list(issues),
+        # Keep the complete judge output available to rLLM evaluators.  The
+        # current JudgeResult.issues list contains every check (passed and
+        # failed), despite its historical name.
+        "judge_issues": list(issues),
+        "judge_warnings": list(getattr(result.judge, "warnings", []) or []),
+        "judge_error": getattr(result.judge, "judge_error", None) if result.judge else None,
         "trajectory_dir": str(trajectory_dir) if trajectory_dir is not None else None,
         "run_dir": str(_state.run_dir) if _state.run_dir is not None else None,
     }
-    if error:
-        artifacts["error"] = str(error)
-
     return Episode(
         task=task_data,
         trajectories=[Trajectory(name="agent", steps=[])],
