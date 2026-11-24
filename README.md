@@ -16,6 +16,8 @@
 
 **English** | [中文](README_zh.md)
 
+**Online RL experiments and portfolio** · [Setup and results](portfolio/README.md) · [Download the interactive HTML](portfolio/index.html)
+
 https://github.com/user-attachments/assets/73bad0c9-7f55-42a2-8e4e-30149b4dfb33
 
 <p align="center">

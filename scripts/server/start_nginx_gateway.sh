@@ -128,6 +128,9 @@ render_nginx_config
 PYTHON_BIN="${PYTHON_BIN:-$(find_bin python python3)}"
 API_WORKERS=${API_WORKERS:-8}
 echo "[start] API gateway on :${API_PORT} (workers=${API_WORKERS})"
+# Uvicorn worker processes import ``scripts.server.api_gateway`` by module
+# name, so explicitly expose this repository root to every worker.
+export PYTHONPATH="$ROOT_DIR${PYTHONPATH:+:$PYTHONPATH}"
 # setsid 在 Linux 上给 API gateway 起独立进程组，便于 stop 时 kill -- "-$pid" 一次清理 uvicorn 全家。
 # macOS 默认没有 setsid，退回 nohup（同样能脱离终端 SIGHUP）；stop_servers 里的 `|| kill "$pid"` 会兜底。
 if command -v setsid >/dev/null 2>&1; then

@@ -1,0 +1,16 @@
+experiment,event_files,primary_run_training_updates,primary_validation_points,primary_peak_pass_at_1,primary_peak_step,primary_last_pass_at_1,primary_last_step,primary_resume_steps,limitations
+mobilegym-qwen3-vl-4b-train,5,31,3,0.2265625,10,0.1953125,30,[],正式训练run缺step0；同目录unknown的9.375%不能拼入。最高22.65625%为58/256。
+mobilegym-qwen3-vl-4b-train-FALSE-COMPLETE-ZERO,2,36,12,0.21875,12,0.140625,33,[],step0为23/256；同run step12/18均56/256。step0原始257行有一题重复失败；唯一ID+prompt一致，但缺完整初态快照。
+mobilegym-qwen3-vl-4b-train-GRPO-MINIBSZ96,2,42,14,0.2109375,21,0.15625,39,[12],同run从step12恢复；基线相同256ID但76条题目文本不同；42个完成训练step，末次验证step39。
+mobilegym-qwen3-vl-4b-train-RESULT-ONLY-GRPO,2,30,10,0.20703125,15,0.03515625,30,[],step24/27/30基础设施错误127/176/199个任务；末次3.515625%不可作为算法真实退化。另有独立早期1步run，不与主run混合。
+mobilegym-qwen3-vl-4b-train-SAMPLE,4,23,7,0.21875,12,0.15234375,21,[],sample_n=4/seed43/KL off；验证256实例仅89个base task，与N1验证集不同。
+mobilegym-qwen3-vl-4b-train-SAMPLE-DAPO,1,0,0,,,,,[],事件仅88字节，无标量训练或验证结果。
+mobilegym-qwen3-vl-4b-train-SAMPLE-N1-DYNAMIC,2,3,1,0.08203125,3,0.08203125,3,[],短跑3步，仅step3验证；不能作为充分算法对照。
+mobilegym-qwen3-vl-4b-train-SAMPLE-N1-DYNAMIC-FALSE_COMPLETE_ZERO,3,12,4,0.1640625,9,0.1640625,9,[],短跑12步，末次验证step9；另有仅step0启动记录。
+mobilegym-qwen3-vl-4b-train-SAMPLE-REJECTION,1,0,0,,,,,[],事件仅88字节，无标量训练或验证结果。
+mobilegym-qwen3-vl-4b-train-SAMPLE-SMOKE-TINY-NOREF,3,1,0,,,,,[],三条独立smoke run各1个更新，总计3次更新；无验证，不能拼成连续3步训练。
+mobilegym-qwen3-vl-4b-train-SAMPLE-SMOKE128-NOREF,1,0,0,,,,,[],事件仅88字节，无标量训练或验证结果。
+mobilegym-qwen3-vl-8b-train,4,0,1,0.0859375,0,0.0859375,0,[],两条已匹配run均只有step0验证8.203125%/8.59375%，无训练更新；表中主run取较晚验证。
+mobilegym-result-only-dapo-minibsz96,3,37,12,0.20703125,24,0.1640625,36,[30],同run从step30恢复，删去旧分支step31验证；初计划50步，续训90步，实际完成37步。
+mobilegym-result-only-grpo-minibsz96-RERUN,1,3,0,,,,,[],仅完成3步；TB无验证标量，但step3原始257行/256唯一任务去重28成功=10.9375%；缺summary.json，未并入TB曲线。
+mobilegym-result-only-grpo-minibsz96-RERUN-NOVAL,1,25,0,,,,,[],test_freq=0且val_before_train=false；25个训练step、checkpoint至24；没有验证，不能判断泛化。

@@ -1,0 +1,2542 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="MobileGym 多模态 GUI Agent 后训练项目：实验复盘、个人贡献、简历项目经历、30 个面试问答、论文研究与 12 个延伸问答。">
+<meta name="color-scheme" content="light">
+<title>MobileGym · 多模态 Agent 后训练项目</title>
+<style>
+:root{--paper:#f5f4ef;--surface:#fffefa;--ink:#172c2b;--muted:#5d6d68;--line:#d9dfd7;--teal:#195b4f;--pale:#e7eee7;--accent:#b34d27;--amber-bg:#f7eee3;--font:Inter,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:34px}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.75 var(--font);-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}button,input,select{font:inherit}button,a,input,select,summary{-webkit-tap-highlight-color:transparent}button{cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #b34d27;outline-offset:4px}button:disabled{cursor:default}::selection{background:#c4d9cc}h1,h2,h3,p{margin:0}h1,h2,h3{line-height:1.35}button{color:inherit}small{font-size:12px}strong{font-weight:650}code{font:0.88em "SFMono-Regular",Consolas,monospace;overflow-wrap:anywhere;background:#eaf0e9;padding:2px 5px;border-radius:3px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#edf1eb;padding:18px;font-size:12px;line-height:1.8;border-radius:8px}pre code{padding:0}p+ p{margin-top:12px}[hidden]{display:none!important}.mono{font-family:"SFMono-Regular",Consolas,monospace;font-variant-numeric:tabular-nums}.eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:650;color:var(--teal)}.muted{color:var(--muted)}.skip-link{position:fixed;top:-100px;left:20px;z-index:100;background:var(--ink);color:white;padding:12px}.skip-link:focus{top:10px}
+.sidebar{position:fixed;inset:0 auto 0 0;width:226px;border-right:1px solid var(--line);padding:36px 25px 26px;display:flex;flex-direction:column;background:var(--paper);z-index:10}.brand{display:flex;gap:12px;align-items:center}.brand-symbol{width:40px;height:40px;background:var(--teal);color:#fffefa;border-radius:11px;display:grid;place-items:center;font-size:16px;font-weight:650;letter-spacing:-1px}.brand-text{font-weight:700;font-size:19px;letter-spacing:-.6px}.brand-text small{display:block;font-weight:400;font-size:10px;letter-spacing:.08em;color:var(--muted);margin-top:-4px}.nav-label{margin:52px 12px 13px;font-size:10px;color:var(--muted);letter-spacing:.16em}.nav{display:grid;gap:7px}.nav a{display:flex;align-items:center;gap:14px;padding:10px 12px;border-radius:6px;color:var(--muted);font-size:13px}.nav a span{font-family:Consolas,monospace;color:#71847a;font-size:11px}.nav a:hover{background:#eceee6}.nav a.active{background:var(--teal);color:#fffefa}.nav a.active span{color:#cadbd1}.side-footer{margin-top:auto;padding:24px 10px 0}.side-footer p{font-size:11px;color:var(--muted)}.side-footer .status{font-size:12px;color:var(--teal);display:flex;gap:7px;align-items:center;margin-bottom:5px}.status:before{content:"";width:6px;height:6px;background:var(--teal);border-radius:100%}.side-footer a{display:block;font-size:12px;border-top:1px solid var(--line);margin-top:18px;padding-top:15px}.mobile-header{display:none}.main{margin-left:226px}.wrap{max-width:1250px;margin:auto;padding:0 58px}.topbar{height:81px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:20px}.topbar .breadcrumb{font-size:11px;letter-spacing:.12em;color:var(--muted)}.topbar .breadcrumb span{color:var(--ink)}.topbar .date{font-size:11px;color:var(--muted)}.hero{padding:61px 0 40px;display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:45px}.hero h1{font-size:clamp(34px,3.6vw,53px);font-weight:650;line-height:1.25;letter-spacing:-1.8px;margin:19px 0 23px}.hero h1 em{color:var(--teal);font-style:normal}.hero .lead{max-width:510px;color:var(--muted);font-size:14px;line-height:1.9}.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin:23px 0}.tag{font-size:10px;letter-spacing:.04em;padding:3px 8px;border:1px solid var(--line);border-radius:4px;color:var(--muted)}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:27px}.btn{display:inline-flex;justify-content:center;align-items:center;gap:16px;padding:11px 17px;min-height:44px;background:transparent;border:1px solid var(--line);border-radius:6px;font-size:12px;font-weight:550;line-height:1.5}.btn:hover{border-color:var(--teal);background:var(--pale)}.btn-primary{background:var(--teal);color:white;border-color:var(--teal)}.btn-primary:hover{background:#124439;color:white}.btn .arrow{font-size:18px;line-height:1}.hero-result{padding:30px 30px 23px;background:var(--teal);color:#fffefa;border-radius:14px;position:relative;overflow:hidden}.hero-result .kicker{font-size:11px;color:#d1e0d7;letter-spacing:.1em;display:flex;justify-content:space-between;align-items:center}.hero-result .kicker i{font-style:normal;font-size:10px;border:1px solid #5b8b7a;border-radius:30px;padding:3px 8px;letter-spacing:0}.hero-number{font-size:clamp(50px,5.4vw,78px);font-weight:550;letter-spacing:-5px;line-height:1.18;margin:23px 0 1px;font-variant-numeric:tabular-nums}.hero-number span{font-size:32px;letter-spacing:-1px;margin-left:3px}.hero-result .submetric{font-size:12px;color:#cbded2}.result-change{display:flex;gap:12px;align-items:center;margin:25px 0 20px;padding:16px 0;border-top:1px solid #4a796a;border-bottom:1px solid #4a796a}.change-chip{padding:3px 7px;background:#e1ecca;color:#234f39;border-radius:4px;font-size:12px;white-space:nowrap}.result-change small{font-size:11px;color:#d5e2da}.hero-result .caveat{font-size:11px;line-height:1.8;color:#d5e2da}.stats{display:grid;grid-template-columns:repeat(4,1fr);margin:0 0 14px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:23px 0}.stat{padding:0 24px;border-right:1px solid var(--line)}.stat:first-child{padding-left:0}.stat:last-child{border:0}.stat .stat-value{font-size:27px;font-weight:550;letter-spacing:-1px;font-variant-numeric:tabular-nums}.stat .stat-value span{font-size:12px;letter-spacing:0;margin-left:7px;color:var(--muted)}.stat p{font-size:11px;color:var(--muted);margin-top:3px}.section{padding:62px 0;border-bottom:1px solid var(--line);scroll-margin-top:24px}.section-head{display:flex;justify-content:space-between;gap:24px;align-items:flex-end;margin-bottom:29px}.section-head h2{font-size:29px;font-weight:600;letter-spacing:-.7px;margin-top:9px}.section-head p{font-size:12px;color:var(--muted);max-width:380px;line-height:1.9}.section-number{color:var(--accent);margin-right:9px}.pipeline{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;position:relative;margin-top:25px}.pipe{background:var(--surface);border:1px solid var(--line);padding:20px 15px 18px;min-width:0;position:relative}.pipe:not(:last-child):after{content:"→";position:absolute;right:-10px;top:50%;color:var(--teal);background:var(--paper);z-index:1;font-size:16px;line-height:1}.pipe:first-child{border-radius:8px 0 0 8px}.pipe:last-child{border-radius:0 8px 8px 0}.pipe .pipe-icon{font:12px Consolas,monospace;color:var(--teal);margin-bottom:20px}.pipe h3{font-size:13px;font-weight:600;margin-bottom:7px}.pipe p{font-size:11px;color:var(--muted);line-height:1.8}.loop-note{display:flex;justify-content:space-between;gap:20px;margin:15px 0 0;font-size:11px;color:var(--muted)}.loop-note strong{color:var(--teal)}.feature-row{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:27px}.plain-feature{border-left:2px solid #b4cbbc;padding-left:15px}.plain-feature h3{font-size:13px;margin-bottom:7px}.plain-feature p{font-size:12px;color:var(--muted)}.charts{display:grid;grid-template-columns:1.15fr .85fr;gap:20px;margin-bottom:26px}.chart-card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:23px}.chart-head{display:flex;justify-content:space-between;gap:15px;align-items:start}.chart-head h3{font-size:14px;font-weight:600}.chart-head p{font-size:11px;color:var(--muted);margin-top:5px}.chart-label{font-size:10px;background:var(--pale);color:var(--teal);padding:3px 7px;border-radius:4px;white-space:nowrap}.plot{display:flex;gap:13px;height:231px;margin-top:28px;padding-bottom:42px;position:relative}.y-axis{display:flex;flex-direction:column;justify-content:space-between;width:28px;text-align:right;font-size:10px;color:var(--muted);position:relative;top:-7px}.columns{flex:1;display:grid;grid-template-columns:repeat(4,1fr);gap:18px;border-bottom:1px solid #c1cdc2;background:repeating-linear-gradient(to top,transparent 0,transparent calc(20% - 1px),#edf0e9 calc(20% - 1px),#edf0e9 20%);align-items:end}.column{height:100%;position:relative;display:flex;align-items:end;justify-content:center}.bar{width:72%;max-width:54px;background:#b7c7b9;border-radius:4px 4px 0 0;position:relative;height:calc(var(--v)*1%)}.bar.peak{background:var(--teal)}.bar-label{position:absolute;top:-27px;left:50%;transform:translateX(-50%);font-size:12px;font-weight:650;white-space:nowrap}.bar-step{position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%);font-size:10px;color:var(--muted);text-align:center;white-space:nowrap;line-height:1.6}.bar-step b{font-weight:500;color:var(--ink)}.chart-foot{font-size:11px;color:var(--muted);border-top:1px solid var(--line);padding-top:13px;line-height:1.8}.breakdown{margin-top:24px;display:grid;gap:17px}.breakdown-row .label{display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px}.breakdown-row .label small{font-size:10px;color:var(--muted);margin-left:6px}.track{height:7px;background:#edf0e9;border-radius:5px;overflow:hidden}.track i{display:block;height:100%;background:var(--teal);width:calc(var(--v)*1%);border-radius:5px}.track i.low{background:var(--accent)}.breakdown .divider{border-top:1px dashed var(--line);margin:2px 0}.breakdown-caption{font-size:10px;color:var(--muted);margin:13px 0}.table-heading{display:flex;align-items:center;justify-content:space-between;gap:18px;margin:29px 0 12px}.table-heading h3{font-size:15px}.table-heading span{font-size:11px;color:var(--muted)}.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:9px;background:var(--surface)}table{border-collapse:collapse;width:100%;min-width:700px;text-align:left;font-size:12px}thead{font-size:10px;color:var(--muted);letter-spacing:.04em;background:#edf0e8}th,td{padding:16px 17px;border-bottom:1px solid var(--line);vertical-align:middle}thead th{font-weight:500}tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}tbody th{width:33%;font-weight:500}tbody td{font-variant-numeric:tabular-nums}td small{display:block;color:var(--muted);font-size:10px;margin-top:2px}.run-name{display:block;font-size:12px}.run-meta{display:block;font-size:10px;color:var(--muted);margin-top:4px}.run-note{max-width:170px;font-size:10px;color:var(--muted)}.focus-row{background:#edf3ea}.focus-row .run-name{color:var(--teal);font-weight:650}.error-note{display:block;font-style:normal;font-size:10px;color:var(--accent);margin-top:3px}.table-note{font-size:11px;color:var(--muted);line-height:1.9;margin-top:12px}.insights{display:grid;grid-template-columns:repeat(3,1fr);gap:23px;margin-top:28px}.insight{border-top:2px solid var(--line);padding-top:15px}.insight .index{font:10px Consolas,monospace;color:var(--accent)}.insight h3{font-size:13px;margin:9px 0}.insight p{font-size:11px;color:var(--muted);line-height:1.9}.contributions{display:grid;grid-template-columns:1fr 1fr;gap:18px}.contribution{display:grid;grid-template-columns:32px 1fr;gap:14px;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:25px}.contribution .icon{width:32px;height:32px;background:var(--pale);border-radius:6px;color:var(--teal);font:14px Consolas,monospace;display:grid;place-items:center}.contribution h3{font-size:15px;margin:4px 0 10px}.contribution p{font-size:12px;color:var(--muted);line-height:1.9}.contribution .mini-tag{display:inline-block;font-size:10px;color:var(--teal);margin-top:15px}.boundary{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:20px;background:#eaece3;padding:21px 25px;border-radius:8px}.boundary h3{font-size:12px;margin-bottom:7px}.boundary p{font-size:11px;color:var(--muted)}.resume-card{background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden}.resume-toolbar{display:flex;justify-content:space-between;gap:16px;align-items:center;border-bottom:1px solid var(--line);padding:14px 24px;background:#f1f3ec}.tabs{display:flex;gap:6px;flex-wrap:wrap}.tab{background:transparent;border:0;padding:7px 12px;border-radius:5px;font-size:12px;color:var(--muted);min-height:36px}.tab[aria-pressed=true]{background:var(--teal);color:white}.resume-content{padding:30px 34px;font-size:13px;line-height:1.9}.resume-content>p:first-child{font-size:17px;line-height:1.8}.resume-content ul{padding-left:19px;margin:22px 0 0}.resume-content li{padding-left:5px;margin-bottom:14px}.resume-content li:last-child{margin-bottom:0}.resume-content strong{color:var(--teal)}.resume-foot{border-top:1px solid var(--line);padding:16px 26px;font-size:11px;color:var(--muted);background:#f8f8f2}.pitch{margin-top:20px;padding:0 3px}.pitch summary{cursor:pointer;list-style:none;font-size:12px;font-weight:550;padding:13px 0}.pitch summary:after{content:"＋";float:right;color:var(--teal)}.pitch[open] summary:after{content:"−"}.pitch blockquote{margin:5px 0 0;padding:16px 22px;border-left:2px solid var(--teal);background:#eaf0e6;font-size:13px;color:var(--muted)}.qa-tools{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:18px;flex-wrap:wrap}.search{display:flex;align-items:center;gap:10px;min-width:245px;flex:1;max-width:440px;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:0 14px}.search svg{width:17px;height:17px;flex-shrink:0;color:var(--muted)}.search input{border:0;background:transparent;padding:12px 0;width:100%;min-width:0;color:var(--ink);font-size:13px;outline-offset:0}.qa-controls{display:flex;align-items:center;gap:9px}.qa-controls select{max-width:185px;border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:10px 12px;font-size:12px;min-height:44px}.qa-controls .btn{padding:10px 12px;font-size:11px}.qa-count{font-size:11px;color:var(--muted);margin:11px 0}.qa-list{border-top:1px solid var(--line)}.qa{border-bottom:1px solid var(--line)}.qa summary{list-style:none;display:flex;align-items:center;gap:17px;cursor:pointer;padding:19px 4px;font-size:13px;min-height:64px}.qa summary::-webkit-details-marker,.pitch summary::-webkit-details-marker{display:none}.qa-number{font:11px Consolas,monospace;color:var(--teal);min-width:27px}.qa-title{flex:1;font-weight:500;line-height:1.65}.qa-category{font-size:10px;color:var(--muted)}.qa-plus{font-size:19px;font-weight:400;color:var(--teal);width:18px;text-align:center}.qa[open]{background:#edf1e8}.qa[open] summary{padding-bottom:11px}.qa[open] .qa-plus{transform:rotate(45deg)}.qa-body{padding:0 26px 22px 48px;font-size:12px;line-height:1.95;color:#40554d}.qa-body p{margin:12px 0}.qa-body a{color:var(--teal);text-decoration:underline;text-underline-offset:3px}.qa-body strong{color:var(--ink)}.empty{padding:30px;text-align:center;color:var(--muted);font-size:13px}.roadmap{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.roadmap-card{padding:25px;border:1px solid var(--line);background:var(--surface);border-radius:9px;display:flex;flex-direction:column}.priority{display:flex;justify-content:space-between;align-items:center}.priority b{font:26px Consolas,monospace;font-weight:400;letter-spacing:-1px;color:var(--teal)}.priority span{font-size:10px;color:var(--muted)}.roadmap-card h3{font-size:17px;margin:20px 0 13px}.roadmap-card p{font-size:12px;color:var(--muted);line-height:1.9}.roadmap-card ul{padding-left:16px;font-size:11px;color:var(--muted);line-height:2.1;margin:18px 0 23px}.roadmap-card .deliverable{margin-top:auto;padding-top:15px;border-top:1px solid var(--line);font-size:11px;line-height:1.8;color:var(--teal)}.research-question{background:var(--teal);color:#fffefa;border-radius:10px;padding:28px 32px;margin-top:22px;display:grid;grid-template-columns:1fr auto;gap:30px;align-items:center}.research-question .eyebrow{color:#c9ddce}.research-question h3{font-size:19px;line-height:1.65;margin-top:8px;max-width:680px}.research-question p{font-size:11px;color:#d3e0d5;margin-top:12px;line-height:1.9}.research-question .hypothesis{font:13px Consolas,monospace;color:#e8e9c8;border-left:1px solid #668777;padding-left:28px;white-space:nowrap}.source-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.source-link{padding:20px;border:1px solid var(--line);background:var(--surface);border-radius:7px}.source-link:hover{border-color:var(--teal)}.source-link span{font-size:10px;letter-spacing:.1em;color:var(--muted)}.source-link strong{display:flex;justify-content:space-between;font-size:13px;font-weight:550;margin:8px 0}.source-link p{font-size:11px;color:var(--muted)}.full-document{margin-top:24px}.full-document>summary{cursor:pointer;padding:16px 0;font-size:13px;list-style:none;border-top:1px solid var(--line)}.full-document>summary:after{content:"＋";float:right;color:var(--teal)}.full-document[open]>summary:after{content:"−"}.full-document-body{padding:25px;background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow-wrap:anywhere;font-size:13px}.full-document-body h2{font-size:24px;margin:10px 0 20px}.full-document-body h3{font-size:21px;margin:30px 0 16px}.full-document-body h4{font-size:16px;margin:23px 0 12px}.full-document-body p{margin:10px 0}.full-document-body a{color:var(--teal);text-decoration:underline}.full-document-body table{min-width:0;font-size:11px;display:block;overflow-x:auto}.full-document-body th,.full-document-body td{padding:10px}.full-document-body ul,.full-document-body ol{padding-left:22px}.full-document-body li{margin:8px 0}.full-document-body blockquote{margin:16px 0;padding:10px 20px;border-left:2px solid var(--teal);color:var(--muted)}.foot{padding:26px 0 32px;display:flex;justify-content:space-between;gap:20px;color:var(--muted);font-size:10px}.foot a{color:var(--teal)}.toast{position:fixed;bottom:25px;left:calc(50% + 113px);transform:translateX(-50%);background:var(--ink);color:#fff;padding:12px 22px;border-radius:8px;font-size:12px;z-index:30;box-shadow:0 4px 20px #172c2b20;max-width:calc(100vw - 32px);text-align:center}.copy-source{position:fixed;width:1px;height:1px;left:-2000px;top:0;opacity:0}.noscript{padding:14px 20px;background:var(--amber-bg);font-size:12px;color:var(--accent);margin-top:20px}
+.local-source small{display:block;font-size:10px;color:var(--muted);margin:5px 0;overflow-wrap:anywhere}.local-source code{font-size:10px}
+.y-axis{top:0}.y-axis span{position:absolute;right:0;transform:translateY(-50%)}.y-axis span:nth-child(1){top:0}.y-axis span:nth-child(2){top:20%}.y-axis span:nth-child(3){top:40%}.y-axis span:nth-child(4){top:60%}.y-axis span:nth-child(5){top:80%}.y-axis span:nth-child(6){top:100%}
+
+/* Research uses its own classes so it does not enter the 30-question filter. */
+.sidebar{overflow-y:auto}
+#research,.research-list,.research-chapter,.research-body{min-width:0;max-width:100%}
+.research-directions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.research-direction{display:flex;flex-direction:column;min-width:0;padding:24px;border:1px solid var(--line);border-radius:9px;background:var(--surface)}
+.research-direction:hover{border-color:var(--teal);background:var(--pale)}
+.research-direction .eyebrow{font-size:9px;letter-spacing:.1em}
+.research-direction h3{display:flex;justify-content:space-between;gap:12px;font-size:17px;margin:15px 0 10px}
+.research-direction h3 span{color:var(--teal)}
+.research-direction p{font-size:12px;color:var(--muted);line-height:1.9;margin-bottom:20px}
+.research-card-link{margin-top:auto;color:var(--teal);font-size:11px}
+.research-downloads{display:flex;flex-wrap:wrap;gap:8px 22px;margin:20px 0 25px;font-size:11px;color:var(--teal)}
+.research-downloads a{padding:6px 0;text-decoration:underline;text-underline-offset:4px;overflow-wrap:anywhere}
+.research-list{border-top:1px solid var(--line)}
+.research-chapter{border-bottom:1px solid var(--line);scroll-margin-top:32px}
+.research-chapter>summary{display:flex;gap:16px;align-items:center;list-style:none;cursor:pointer;padding:20px 5px;min-height:66px}
+.research-chapter>summary::-webkit-details-marker{display:none}
+.research-number{flex:0 0 35px;font:11px Consolas,monospace;color:var(--teal)}
+.research-chapter-title{flex:1;min-width:0;font-size:14px;font-weight:550;line-height:1.7;overflow-wrap:anywhere}
+.research-plus{flex:0 0 18px;font-size:20px;line-height:1;text-align:center;color:var(--teal)}
+.research-chapter[open]{background:#edf1e8}
+.research-chapter[open]>summary{padding-bottom:14px}
+.research-chapter[open] .research-plus{transform:rotate(45deg)}
+.research-body{padding:0 26px 26px 56px;overflow-wrap:anywhere;font-size:13px;line-height:1.95;color:#40554d}
+.research-body h4{font-size:16px;line-height:1.6;margin:24px 0 13px;color:var(--ink)}
+.research-body h5,.research-body h6{font-size:14px;margin:20px 0 10px;color:var(--ink)}
+.research-body p{margin:12px 0}
+.research-body strong{color:var(--ink)}
+.research-body a{color:var(--teal);text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
+.research-body ul,.research-body ol{padding-left:23px;margin:14px 0}
+.research-body li{margin:8px 0}
+.research-body blockquote{margin:18px 0;padding:9px 19px;border-left:2px solid var(--teal);background:var(--pale)}
+.research-body pre{max-width:100%;overflow-x:auto;font-size:11px}
+.research-body img{max-width:100%;height:auto}
+.research-table-wrap{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;border:1px solid var(--line);border-radius:7px;margin:20px 0;background:var(--surface)}
+.research-body table{min-width:560px;font-size:11px;line-height:1.85}
+.research-body th,.research-body td{padding:12px;vertical-align:top}
+.research-body tbody th{width:auto}
+@media(max-width:950px){.research-chapter{scroll-margin-top:0}}
+@media(max-width:680px){.research-directions{grid-template-columns:1fr;gap:12px}.research-direction{padding:20px}.research-direction h3{margin:11px 0 8px;font-size:16px}.research-direction p{margin-bottom:12px}.research-downloads{gap:2px 16px;margin:16px 0 21px}.research-chapter>summary{gap:11px;padding:18px 0}.research-number{flex-basis:31px;font-size:10px}.research-chapter-title{font-size:12px}.research-body{padding:0 14px 22px;font-size:12px}.research-body h4{font-size:15px}.research-body th,.research-body td{padding:10px}.research-body pre{padding:13px}.research-downloads a{min-height:36px}}
+@media(min-width:1600px){.wrap{padding:0 70px}}
+@media(max-width:1190px){.sidebar{width:190px;padding:30px 16px}.main{margin-left:190px}.wrap{padding:0 32px}.hero{gap:25px}.hero-result{padding:25px}.hero h1{font-size:39px}.hero-number{font-size:64px}.contribution{padding:20px}.chart-card{padding:20px}.columns{gap:12px}.roadmap-card{padding:20px}.research-question{grid-template-columns:1fr}.research-question .hypothesis{border-left:0;border-top:1px solid #668777;padding:15px 0 0}.toast{left:calc(50% + 95px)}}
+@media(max-width:950px){.sidebar{display:none}.main{margin-left:0}.mobile-header{display:flex;position:sticky;top:0;background:var(--paper);border-bottom:1px solid var(--line);z-index:20;padding:12px 25px;align-items:center;justify-content:space-between;gap:20px}.mobile-header .brand-symbol{width:31px;height:31px;border-radius:8px;font-size:13px}.mobile-header .brand-text{font-size:16px}.mobile-nav{border:1px solid var(--line);border-radius:5px;background:var(--surface);padding:7px 9px;font-size:12px;max-width:150px;height:38px}.topbar{height:62px}.wrap{padding:0 30px}.hero{padding-top:40px;gap:30px}.hero h1{font-size:40px}.hero-number{font-size:66px}html{scroll-padding-top:88px}.section{scroll-margin-top:0}.toast{left:50%}}
+@media(max-width:680px){body{font-size:14px}.wrap{padding:0 20px}.mobile-header{padding:11px 20px}.topbar .breadcrumb{font-size:9px;letter-spacing:.05em}.topbar .date{font-size:9px}.hero{grid-template-columns:1fr;gap:28px;padding:34px 0 28px}.hero h1{font-size:41px;letter-spacing:-1.4px}.hero .lead{font-size:13px}.hero-tags{margin:18px 0}.actions{margin-top:21px}.hero-result{padding:25px}.hero-number{font-size:70px;margin-top:15px}.hero-result .caveat{font-size:11px}.result-change{margin:18px 0 15px}.stats{grid-template-columns:repeat(2,1fr);padding:0;margin:0;gap:0}.stat{padding:18px 0!important}.stat:nth-child(odd){padding-right:18px!important}.stat:nth-child(even){padding-left:22px!important;border-right:0}.stat:nth-child(-n+2){border-bottom:1px solid var(--line)}.stat .stat-value{font-size:25px}.section{padding:42px 0}.section-head{display:block;margin-bottom:23px}.section-head h2{font-size:26px}.section-head p{margin-top:13px;font-size:12px}.pipeline{grid-template-columns:1fr;gap:10px}.pipe{display:grid;grid-template-columns:27px 100px 1fr;align-items:center;gap:10px;padding:16px;min-height:70px;border-radius:7px!important}.pipe .pipe-icon{margin:0}.pipe h3{margin:0;font-size:12px}.pipe p{font-size:11px}.pipe:not(:last-child):after{content:"↓";right:50%;top:calc(100% - 2px);line-height:12px}.loop-note{display:block;font-size:11px}.loop-note span{display:block;margin-top:7px}.feature-row{grid-template-columns:1fr;gap:20px}.charts{grid-template-columns:1fr;gap:17px}.chart-card{padding:21px}.plot{height:230px}.columns{gap:18px}.table-heading{display:block}.table-heading span{display:block;margin-top:7px}.table-wrap table{min-width:690px}.insights{grid-template-columns:1fr;gap:18px}.insight{padding-top:14px}.insight h3{margin:6px 0}.insight p{font-size:12px}.contributions{grid-template-columns:1fr;gap:13px}.contribution{padding:22px}.boundary{grid-template-columns:1fr;gap:20px;padding:22px}.resume-toolbar{padding:12px 15px;gap:9px;flex-wrap:wrap}.resume-toolbar .btn{padding:8px 10px;min-height:36px;font-size:11px}.tab{font-size:11px;padding:7px 9px}.resume-content{padding:24px 22px;font-size:12px}.resume-content>p:first-child{font-size:15px}.resume-foot{padding:15px 22px}.qa-tools{gap:12px}.search{min-width:0;max-width:none;flex-basis:100%}.search input{font-size:16px}.qa-controls{width:100%;justify-content:space-between}.qa-controls select{flex:1;max-width:none;font-size:12px}.qa summary{gap:11px;font-size:12px;padding:17px 0}.qa-number{font-size:10px;min-width:25px}.qa-category{display:none}.qa-body{padding:0 15px 18px 16px;font-size:12px}.roadmap{grid-template-columns:1fr;gap:14px}.roadmap-card{padding:24px}.roadmap-card h3{margin:13px 0 10px}.roadmap-card ul{margin:12px 0 18px}.research-question{padding:24px;gap:18px}.research-question h3{font-size:17px}.research-question .hypothesis{white-space:normal;font-size:12px}.source-grid{grid-template-columns:1fr;gap:10px}.source-link{padding:17px 20px}.full-document-body{padding:17px;font-size:12px}.foot{display:block}.foot span{display:block;margin-bottom:9px}.toast{font-size:11px}.topbar{gap:12px}.topbar .breadcrumb{max-width:180px}.hero .actions .btn{font-size:12px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+@media print{body{background:white;font-size:10pt}.sidebar,.mobile-header,.topbar,.actions,.qa-tools,.qa-count,.resume-toolbar,.copy-source,.toast,.full-document,.side-footer,.source-grid,.foot{display:none!important}.main{margin:0}.wrap{padding:0;max-width:none}.hero{padding:15px 0;gap:22px;grid-template-columns:1fr 1fr}.hero h1{font-size:27pt}.hero-number{font-size:49pt}.hero-result{background:white!important;color:var(--ink);border:1px solid var(--line)}.hero-result .kicker,.hero-result .submetric,.hero-result .caveat,.result-change small{color:var(--muted)}.stats{margin-top:15px}.section{padding:22px 0;break-before:auto}.section-head h2{font-size:20pt}.section-head{margin-bottom:18px}.chart-card,.contribution,.roadmap-card,.insight,.resume-card,.qa,.pipe{break-inside:avoid}.charts{grid-template-columns:1fr 1fr}.table-wrap{overflow:visible}table{min-width:0}.qa-body{font-size:9pt}.qa summary{font-size:10pt}.qa-category{font-size:8pt}.roadmap{grid-template-columns:1fr}.research-question{background:white;color:var(--ink);border:1px solid var(--line)}.research-question .eyebrow,.research-question p,.research-question .hypothesis{color:var(--muted)}.source-grid{display:none}#sources{display:none}.research-directions,.research-downloads{display:none}.research-body{padding:0 0 18px;font-size:9pt}.research-table-wrap{overflow:visible}.research-body table{min-width:0;table-layout:fixed}.research-chapter>summary{break-after:avoid}.research-chapter{background:white}a{color:inherit}h2,h3{break-after:avoid}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#overview">跳到主要内容</a>
+<aside class="sidebar" aria-label="项目导航">
+<a class="brand" href="#overview"><span class="brand-symbol">mg.</span><span class="brand-text">MobileGym<small>POST-TRAINING / PROJECT</small></span></a>
+<div class="nav-label">PROJECT EXPLORER</div>
+<nav class="nav">
+<a href="#overview" class="active" aria-current="location"><span>01</span>项目概览</a>
+<a href="#experiments"><span>02</span>实验与发现</a>
+<a href="#contributions"><span>03</span>个人贡献</a>
+<a href="#resume"><span>04</span>简历项目经历</a>
+<a href="#interview"><span>05</span>面试问答</a>
+<a href="#roadmap"><span>06</span>改进路线</a>
+<a href="#sources"><span>07</span>完整材料</a>
+<a href="#research"><span>08</span>论文与延伸思考</a>
+</nav>
+<div class="side-footer"><p class="status">基于本地记录复核</p><p>面向多模态 / 后训练实习</p><p>更新于 2026.11.14</p><a href="#full-report">完整报告 <span aria-hidden="true">↗</span></a></div>
+</aside>
+<header class="mobile-header"><a class="brand" href="#overview"><span class="brand-symbol">mg.</span><span class="brand-text">MobileGym</span></a><select class="mobile-nav" aria-label="跳转章节"><option value="overview">01 项目概览</option><option value="experiments">02 实验与发现</option><option value="contributions">03 个人贡献</option><option value="resume">04 简历项目经历</option><option value="interview">05 面试问答</option><option value="roadmap">06 改进路线</option><option value="sources">07 完整材料</option><option value="research">08 论文与延伸思考</option></select></header>
+<main class="main"><div class="wrap">
+<div class="topbar"><div class="breadcrumb">RESEARCH PORTFOLIO <span aria-hidden="true"> / </span> <span>GUI AGENT</span></div><span class="date mono">EVIDENCE REVIEW · 2026.11.14</span></div>
+<noscript><div class="noscript">核心内容与全部问答可直接阅读。开启 JavaScript 后可使用搜索、筛选与复制功能。</div></noscript>
+<section id="overview" aria-labelledby="hero-title">
+<div class="hero"><div><div class="eyebrow">MULTIMODAL AGENT · ONLINE RL</div><h1 id="hero-title">从看懂界面，<br>到<em>学会完成任务。</em></h1><p class="lead">基于 Qwen3-VL 的纯视觉 GUI Agent 在线强化学习。围绕多步交互、奖励设计与有效样本采样，探索多模态模型的后训练。</p><div class="hero-tags"><span class="tag">Qwen3-VL-4B</span><span class="tag">GRPO</span><span class="tag">rLLM / verl</span><span class="tag">vLLM / FSDP</span></div><div class="actions"><a class="btn btn-primary" href="#experiments">查看实验结果 <span class="arrow" aria-hidden="true">↗</span></a><a class="btn" href="#resume">查看简历描述 <span class="arrow" aria-hidden="true">→</span></a></div></div>
+<div class="hero-result"><div class="kicker">FCZERO · 严格验证峰值 <i>单次训练</i></div><div class="hero-number">21.88<span>%</span></div><p class="submetric">56 / 256 个任务严格成功 · step 12 / 18</p><div class="result-change"><span class="change-chip">+12.89 个百分点</span><small>同一 run：8.98% → 21.88%</small></div><p class="caveat">同一组任务 ID 与题目文本。此值为单次验证峰值，不是多 seed 均值，也不是相对普通 GRPO 的收益；尚无独立最终 holdout，完整初态快照不足。</p></div></div>
+<div class="stats"><div class="stat"><div class="stat-value">15<span>实验目录</span></div><p>35 个 TensorBoard event 文件</p></div><div class="stat"><div class="stat-value">6<span>主要实验</span></div><p>探索性对照，含多变量变化</p></div><div class="stat"><div class="stat-value">160 / 256</div><p>标准训练 / 测试任务划分</p></div><div class="stat"><div class="stat-value">6<span>GPU 配置</span></div><p>96 / 128 个环境槽位配置</p></div></div>
+<div class="section" style="border-bottom:0;padding-bottom:28px"><div class="section-head"><div><div class="eyebrow"><span class="section-number">01</span>THE TRAINING LOOP</div><h2>模型看截图，环境判结果。</h2></div><p>截图与语言是策略输入。内部业务状态用于判分，形成可验证的交互反馈。</p></div>
+<div class="pipeline" aria-label="训练流程：截图与指令传入模型，模型输出动作，环境执行，judge 判分，再更新策略">
+<div class="pipe"><div class="pipe-icon">01 /</div><h3>截图与指令</h3><p>当前截图<br>任务与历史文本</p></div>
+<div class="pipe"><div class="pipe-icon">02 /</div><h3>视觉语言策略</h3><p>Qwen3-VL-4B<br>多步决策</p></div>
+<div class="pipe"><div class="pipe-icon">03 /</div><h3>GUI 动作</h3><p>坐标点击与输入<br>导航与终止</p></div>
+<div class="pipe"><div class="pipe-icon">04 /</div><h3>模拟环境</h3><p>MobileGym 执行<br>返回新截图</p></div>
+<div class="pipe"><div class="pipe-icon">05 /</div><h3>状态判分</h3><p>目标、终止与副作用<br>GRPO 策略更新</p></div>
+</div><div class="loop-note"><span><strong>↩ 反馈闭环</strong> 每任务采样 8 条轨迹，使用组内相对优势更新。</span><span>策略输入不含 DOM 或隐藏业务状态。</span></div>
+<div class="feature-row"><div class="plain-feature"><h3>多模态能力</h3><p>把指令、视觉定位和历史信息映射为可执行操作，分析 grounding、记忆与跨应用决策。</p></div><div class="plain-feature"><h3>后训练能力</h3><p>基于现有训练栈改造奖励与采样，并以逐任务轨迹检查效果、成本和终止行为。</p></div></div>
+</div>
+</section>
+<section class="section" id="experiments" aria-labelledby="experiment-title">
+<div class="section-head"><div><div class="eyebrow"><span class="section-number">02</span>EXPERIMENTS & FINDINGS</div><h2 id="experiment-title">有提升，也有清晰的瓶颈。</h2></div><p>从单次训练的变化开始，再看任务分层与历史实验。历史记录不构成算法排名。</p></div>
+<div class="charts">
+<div class="chart-card"><div class="chart-head"><div><h3>同一 run 的验证快照</h3><p>FCzero · 固定 256 个任务 ID 与题目文本</p></div><span class="chart-label">严格成功率</span></div>
+<div class="plot" role="img" aria-label="FCzero 验证快照：step0 成功率8.98%，23/256；step12和18均21.88%，56/256；step33为14.06%，36/256。图中只列四次验证。">
+<div class="y-axis mono"><span>25%</span><span>20%</span><span>15%</span><span>10%</span><span>5%</span><span>0</span></div><div class="columns">
+<div class="column"><div class="bar" style="--v:35.9375"><span class="bar-label">8.98%</span></div><div class="bar-step"><b>step 0</b><br>23 / 256</div></div>
+<div class="column"><div class="bar peak" style="--v:87.5"><span class="bar-label">21.88%</span></div><div class="bar-step"><b>step 12</b><br>56 / 256</div></div>
+<div class="column"><div class="bar peak" style="--v:87.5"><span class="bar-label">21.88%</span></div><div class="bar-step"><b>step 18</b><br>56 / 256</div></div>
+<div class="column"><div class="bar" style="--v:56.25"><span class="bar-label">14.06%</span></div><div class="bar-step"><b>step 33</b><br>36 / 256</div></div>
+</div></div><p class="chart-foot">仅展示四个已核验快照，非完整曲线。后期成功回落；验证峰值不代表末次成绩。</p></div>
+<div class="chart-card"><div class="chart-head"><div><h3>成功集中在哪些任务？</h3><p>FCzero · step 12 · 不同维度分别分层</p></div></div><div class="breakdown">
+<div class="breakdown-row"><div class="label"><span>单 App <small>50 / 163</small></span><strong>30.67%</strong></div><div class="track"><i style="--v:30.6748466258"></i></div></div>
+<div class="breakdown-row"><div class="label"><span>跨 App <small>6 / 93</small></span><strong>6.45%</strong></div><div class="track"><i class="low" style="--v:6.4516129032"></i></div></div>
+<div class="divider"></div>
+<div class="breakdown-row"><div class="label"><span>L1 难度 <small>19 / 20</small></span><strong>95.00%</strong></div><div class="track"><i style="--v:95"></i></div></div>
+<div class="breakdown-row"><div class="label"><span>L4 难度 <small>1 / 80</small></span><strong>1.25%</strong></div><div class="track"><i class="low" style="--v:1.25"></i></div></div>
+</div><p class="breakdown-caption">全部条形共用 0–100% 标尺；展示选定难度层。</p><p class="chart-foot">训练跨 App 占 11.88%，测试占 36.33%。长链与跨应用是后续优先研究方向。</p></div>
+</div>
+<div class="table-heading"><h3>六组主要探索实验</h3><span>历史记录，不构成算法排名 · 保持实验顺序</span></div>
+<div class="table-wrap" role="region" aria-label="六组主要实验结果，窄屏可横向滚动" tabindex="0"><table><thead><tr><th scope="col">实验 / 配置</th><th scope="col">外层 step</th><th scope="col">验证峰值</th><th scope="col">末次验证</th><th scope="col">解释条件</th></tr></thead><tbody><tr class=""><th scope="row"><span class="run-name">GRPO · progress</span><span class="run-meta">M12 · 原终态进度奖励</span></th><td>31</td><td><strong>22.66%</strong><small>step 10</small></td><td><strong>19.53%</strong><small>step 30</small></td><td class="run-note">缺同 run 的初始验证</td></tr>
+<tr class="caution"><th scope="row"><span class="run-name">Dynamic · progress</span><span class="run-meta">N4 / M12 · 动态补采样；KL 关闭等</span></th><td>23</td><td><strong>21.88%</strong><small>step 12</small></td><td><strong>15.23%</strong><small>step 21</small></td><td class="run-note">256 实例仅覆盖 89 个基础任务</td></tr>
+<tr class="focus-row"><th scope="row"><span class="run-name">GRPO · FCzero</span><span class="run-meta">M12 · 错误 COMPLETE 清零</span></th><td>36</td><td><strong>21.88%</strong><small>step 12 / 18</small></td><td><strong>14.06%</strong><small>step 33</small></td><td class="run-note">单次峰值；非多 seed 均值</td></tr>
+<tr class="caution"><th scope="row"><span class="run-name">GRPO · result</span><span class="run-meta">M96 · 严格成功 0/1 奖励</span></th><td>30</td><td><strong>20.70%</strong><small>step 15</small></td><td><strong>3.52%</strong><em class="error-note">环境故障</em><small>step 30</small></td><td class="run-note">末期环境 ERROR：199/256</td></tr>
+<tr class=""><th scope="row"><span class="run-name">GRPO · progress</span><span class="run-meta">M96 · 更大 PPO mini-batch</span></th><td>42</td><td><strong>21.09%</strong><small>step 21</small></td><td><strong>15.62%</strong><small>step 39</small></td><td class="run-note">含恢复；题目文本存在差异</td></tr>
+<tr class=""><th scope="row"><span class="run-name">Dynamic · result</span><span class="run-meta">M96 · 结果奖励 + 动态补采样</span></th><td>37</td><td><strong>20.70%</strong><small>step 24</small></td><td><strong>16.41%</strong><small>step 36</small></td><td class="run-note">含恢复；候选预算更多</td></tr></tbody></table></div>
+<p class="table-note">M12 / M96 指 PPO mini-batch 配置；N4 指 sample_n=4。不同组的实例、KL、预算等存在变化。普通 progress 的 22.66% 是更高的历史观察值，但缺少同 run 初始验证；不能拼接其他启动分数计算提升。</p>
+<div class="insights"><article class="insight"><span class="index">FINDING / 01</span><h3>有效样本增加，成本也增加</h3><p>动态 progress / result 的候选轨迹量约为普通采样的 2.55 / 2.16 倍，尚未证明单位预算更优。</p></article><article class="insight"><span class="index">FINDING / 02</span><h3>少循环不等于多成功</h3><p>FCzero 的 step 0 → 12 → 33，LOOP 为 152 → 2 → 0，ABORT 为 6 → 63 → 126；需联合分析终止激励。</p></article><article class="insight"><span class="index">FINDING / 03</span><h3>环境故障会污染结论</h3><p>result-only GRPO 末次 199 / 256 个任务为环境 ERROR，3.52% 不能直接解释为算法退化。</p></article></div>
+<details class="pitch"><summary>其他训练记录：重跑、短实验与 8B 尝试</summary><div class="qa-body" style="padding-left:0"><p>另有一条关闭验证的 result-only 重跑，记录 25 个训练 step、checkpoint 至 step 24；没有验证结果，无法判断泛化。9 月 17 日短重跑完成 3 步，逐任务结果去重后为 28 / 256（10.94%）。两条动态采样短实验分别记录 3 / 12 步。</p><p>Qwen3-VL-8B 两次只有初始验证（8.20% / 8.59%），没有完成训练更新。15 个目录还包含 smoke 与启动失败记录，不能当作 15 次完整训练。</p></div></details>
+</section>
+<section class="section" id="contributions" aria-labelledby="contribution-title"><div class="section-head"><div><div class="eyebrow"><span class="section-number">03</span>CONTRIBUTIONS</div><h2 id="contribution-title">从框架使用，到具体改造。</h2></div><p>以下是本地相对上游的实现增量。个人负责范围应结合实际团队分工说明。</p></div>
+<div class="contributions">
+<article class="contribution"><div class="icon" aria-hidden="true">∑</div><div><h3>动态有效组补采样</h3><p>按组内奖励差异筛选，跨 batch 多轮收集；设计上限与 fallback，处理有效组不足的情况。</p><span class="mini-tag">采样逻辑 / 有效信号 / 成本分析</span></div></article>
+<article class="contribution"><div class="icon" aria-hidden="true">r</div><div><h3>严格结果与终止奖励</h3><p>新增 result_only 与错误 COMPLETE 清零分支，分析 reward、严格成功和 ABORT 的关系。</p><span class="mini-tag">奖励对齐 / 失败行为 / 探索实验</span></div></article>
+<article class="contribution"><div class="icon" aria-hidden="true">↻</div><div><h3>任务模板重建</h3><p>贯通 sample_templates 与 template_index 恢复，检查实例覆盖和验证集合变化对比较的影响。</p><span class="mini-tag">任务采样 / 数据一致性 / 复现</span></div></article>
+<article class="contribution"><div class="icon" aria-hidden="true">≋</div><div><h3>交互与训练运行可靠性</h3><p>分 wave 启动环境、等待 readiness、预热首图并清理初始化失败；多轮 rollout 后统一释放推理副本。</p><span class="mini-tag">环境池 / vLLM 生命周期 / 故障诊断</span></div></article>
+</div><div class="boundary"><div><h3>项目基础</h3><p>MobileGym 模拟平台、状态 judge、rLLM / verl 与基础 GRPO 来自上游，个人工作是在其上扩展。</p></div><div><h3>下一步研究</h3><p>当前是规则终态奖励。学习型 PRM、真实逐步信用分配及多 seed 收益验证尚未完成。</p></div></div>
+</section>
+<section class="section" id="resume" aria-labelledby="resume-title"><div class="section-head"><div><div class="eyebrow"><span class="section-number">04</span>RESUME READY</div><h2 id="resume-title">写成一段有依据的项目经历。</h2></div><p>面向多模态算法、VLM 后训练与 GUI Agent 实习。项目时间与个人分工按实际经历补充。</p></div>
+<div class="resume-card"><div class="resume-toolbar"><div class="tabs" aria-label="简历版本"><button class="tab" data-resume="full" aria-pressed="true">完整版本 · 4 条</button><button class="tab" data-resume="compact" aria-pressed="false">精简版本 · 3 条</button></div><button class="btn" id="copy-resume">复制当前版本 <span aria-hidden="true">↗</span></button></div><div class="resume-content" id="resume-full"><p><strong>基于 Qwen3-VL 的多模态 GUI Agent 在线强化学习</strong><br />
+技术栈：Qwen3-VL-4B、GRPO、rLLM、verl、vLLM、FSDP、Playwright、TensorBoard</p>
+<ul>
+<li><strong>多模态后训练：</strong> 基于 MobileGym 扩展截图观察、坐标动作、状态判分与策略更新的在线 RL 流程，在 6 GPU 配置下开展 Qwen3-VL-4B 训练，使用 96/128 个环境槽位收集多步交互轨迹。</li>
+<li><strong>采样与奖励：</strong> 实现按组内奖励差异筛选的动态补采样及回退机制，协调多轮 rollout 的推理副本生命周期；新增严格结果奖励、错误完成清零分支，开展 6 组主要探索性对照。</li>
+<li><strong>实验结果：</strong> 在同一组 256 个验证任务上，单次训练严格成功率由 8.98% 提升至最高 21.88%，增加 12.89 个百分点；结合逐任务结果分析跨应用、长链任务及终止行为瓶颈。</li>
+<li><strong>可靠性与复现：</strong> 完善任务模板重建、环境池分批预热与初始化失败清理；结合 TensorBoard 和原始轨迹复盘采样成本、验证集合变化及浏览器异常对结果的影响。</li>
+</ul></div><div class="resume-content" id="resume-compact" hidden><ul>
+<li>基于 MobileGym、rLLM/verl 开展 Qwen3-VL-4B 纯视觉 GUI Agent 在线强化学习，运行 6 GPU、96/128 环境槽位的截图交互与状态判分流程。</li>
+<li>实现动态有效组补采样与回退，新增严格结果奖励及错误 COMPLETE 清零策略，完成 6 组主要探索性实验，并改进任务模板重建与环境池预热。</li>
+<li>同一组 256 个验证任务上，单次训练成功率从 8.98% 提升至最高 21.88%；通过逐任务分析定位长链、跨应用与终止行为瓶颈，评估动态采样收益与候选开销。</li>
+</ul></div><div class="resume-foot">成果数字保留“同一组 256 个验证任务、单次训练、最高 21.88%”的限定。多 seed、独立最终 holdout 和 PRM 归入后续计划。</div></div>
+<details class="pitch"><summary>60 秒项目介绍 · 适合面试开场</summary><blockquote>
+<p>我做的是基于 Qwen3-VL 的多模态 GUI Agent 后训练。模型只看任务指令、历史文本和当前截图，输出坐标动作，环境根据业务状态判分。我复用了 MobileGym 和 rLLM/verl，主要扩展了按组内奖励差异补采样的机制、两种奖励分支，以及环境初始化和任务模板重建。</p>
+<p>我跑了六组主要探索性实验。其中一次训练，在相同的 256 个验证任务上从 8.98% 提升到最高 21.88%。我也发现有效组变多不一定意味着单位交互预算更好，终止惩罚可能伴随更多 ABORT。下一步会固定评测协议，用等预算、多 seed 对照验证子目标信用分配对跨应用长链任务的帮助。</p>
+</blockquote></details>
+</section>
+<section class="section" id="interview" aria-labelledby="interview-title"><div class="section-head"><div><div class="eyebrow"><span class="section-number">05</span>INTERVIEW PLAYBOOK</div><h2 id="interview-title">30 个问题，把项目讲透。</h2></div><p>从个人贡献，到 GRPO、奖励、训练实现与结果解释。每题包含参考回答和追问准备。</p></div>
+<div class="qa-tools"><label class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><input id="qa-search" type="search" aria-label="搜索面试问题和回答" placeholder="搜索问题、概念或关键词，如 GRPO"></label><div class="qa-controls"><select id="qa-category" aria-label="按主题筛选问题"><option value="all">全部主题</option><option>项目与多模态</option><option>强化学习与奖励</option><option>训练与实现</option><option>结果与实验</option><option>工程与改进</option></select><button class="btn" id="expand-questions">展开当前问题</button></div></div>
+<div class="qa-count" id="qa-count" role="status" aria-live="polite">显示 30 / 30 个问题</div>
+<div class="qa-list" id="qa-list"><details class="qa" data-category="项目与多模态" id="question-01"><summary><span class="qa-number">Q01</span><span class="qa-title">请用一分钟介绍这个项目</span><span class="qa-category">项目与多模态</span><span class="qa-plus" aria-hidden="true">+</span></summary><div class="qa-body"><p><strong>回答：</strong> 我基于 MobileGym 对 Qwen3-VL-4B 做多模态在线强化学习。模型通过截图和语言历史决定 GUI 动作，环境提供可验证奖励。我重点改了动态有效组补采样、严格结果/错误完成奖励，以及环境初始化与模板重建。一次同任务集合的训练从 23/256 成功提升到最高 56/256，同时识别出跨应用长链和终止行为是主要瓶颈。</p>
+<p><strong>追问准备：</strong> 按“任务与难点—个人改造—结果—限制”组织，避免只列工具名；明确这个数字是单次验证峰值。</p></div></details>
+<details class="qa" data-category="项目与多模态" id="question-02"><summary><span class="qa-number">Q02</span><span class="qa-title">开源项目已经有训练栈 你具体做了什么</span><span class="qa-category">项目与多模态</span><span class="qa-plus" aria-hidden="true">+</span></summary><div class="qa-body"><p><strong>回答：</strong> 上游已经提供模拟环境、状态判分和基础 GRPO 训练。我增加了按奖励 range 判断有效组、跨 batch 补采样、达到上限后的回退，以及多轮 rollout 结束后再释放推理副本的调度。奖励方面新增 result_only 和错误 COMPLETE 清零；工程方面贯通模板索引，增加分批初始化、首图预热与失败清理。</p>
+<p><strong>追问准备：</strong> 能打开 unified_trainer、evaluator 和 pool 的改动解释控制流。不要把已有 checkpoint 恢复或 vLLM 本身说成自己实现。</p></div></details>
+<details class="qa" data-category="项目与多模态" id="question-03"><summary><span class="qa-number">Q03</span><span class="qa-title">为什么这是多模态后训练项目</span><span class="qa-category">项目与多模态</span><span class="qa-plus" aria-hidden="true">+</span></summary><div class="qa-body"><p><strong>回答：</strong> 输入同时含截图和文本指令/历史，模型要把视觉元素定位与语言目标映射成动作序列。训练阶段用环境反馈更新预训练 VLM 的行为策略，属于后训练。我的工作主要是交互策略学习、奖励与采样，没有开发新的视觉编码器或重新做多模态预训练。</p>
+<p><strong>追问准备：</strong> 说明 grounding、planning、memory 和 termination 四类错误如何区分；不要把所有失败都归为视觉识别。</p></div></details>
+<details class="qa" data-category="项目与多模态" id="question-04"><summary><span class="qa-number">Q04</span><span class="qa-title">Agent 会不会读取 DOM 或内部状态作弊</span><span class="qa-category">项目与多模态</span><span class="qa-plus" aria-hidden="true">+</span></summary><div class="qa-body"><p><strong>回答：</strong> 当前 generic_v2 构造给模型的输入是任务、历史文本和当前截图，未传入 route、DOM 或业务 state。内部状态用于环境重置与 judge，属于训练监督通道。若以后用状态生成过程标签，也会保持它只用于奖励计算，评测时不把隐藏答案加入 policy 输入。</p>
+<p><strong>追问准备：</strong> 指出 build_messages 与 judge 的边界。环境 Observation 对象有字段，并不代表模型真的收到这些字段。</p></div></details>
+<details class="qa" data-category="项目与多模态" id="question-05"><summary><span class="qa-number">Q05</span><span class="qa-title">训练数据是什么 160 个任务是不是太少</span><span class="qa-category">项目与多模态</span><span class="qa-plus" aria-hidden="true">+</span></summary><div class="qa-body"><p><strong>回答：</strong> 标准划分是 160 个训练任务、256 个测试任务，它们指任务类/模板，任务还能采样参数和指令变体。sample_n=4 那次实际产生 443 条训练数据行，受 sample_max 和参数空间约束，并非简单的 640 条。但增加参数实例不等于增加任务家族和技能覆盖，跨应用任务在训练中的比例仍偏低。</p>
+<p><strong>追问准备：</strong> 任务 ID 不重叠不代表 App 不重叠；历史 test 多次用于开发验证，最终还需要独立 holdout。</p></div></details>
+<details class="qa" data-category="项目与多模态" id="question-06"><summary><span class="qa-number">Q06</span><span class="qa-title">为什么选择 4B 模型 8B 跑过吗</span><span class="qa-category">项目与多模态</span><span class="qa-plus" aria-hidden="true">+</span></summary><div class="qa-body"><p><strong>回答：</strong> 这次主要沿用上游 Qwen3-VL-4B-Instruct 基线，在可用配置下先研究采样和奖励。4B 方便做多组探索，但我没有做严格的模型规模优劣比较。8B 有两次初始验证，没有完成训练更新，其中存在 NCCL 超时，因此不能把它写成完成了 8B RL，也不能断言更大模型不适合。</p>
+<p><strong>追问准备：</strong> GPU 型号、训练总时长和峰值显存只报实际测量；6 GPU 配置本身不足以推断这些数值。</p></div></details>
+<details class="qa" data-category="项目与多模态" id="question-07"><summary><span class="qa-number">Q07</span><span class="qa-title">为什么使用 RL 而不是只做 SFT</span><span class="qa-category">项目与多模态</span><span class="qa-plus" aria-hidden="true">+</span></summary><div class="qa-body"><p><strong>回答：</strong> SFT 学习给定轨迹的动作分布，适合建立格式、grounding 和基本操作能力；在线 RL 可以在交互中探索不同路径，用最终任务反馈优化行为。这个环境可以重置并程序化判分，适合研究 RL。我目前没有完成严格的 SFT-versus-RL 对照，因此不能说 RL 在这个项目中已被证明全面优于 SFT。</p>
+<p><strong>追问准备：</strong> 无成功探索的长任务可先用训练集示范 warm-start，再以相同 RL 预算比较；示范质量和恢复行为覆盖很重要。</p></div></details>
+<details class="qa" data-category="强化学习与奖励" id="question-08"><summary><span class="qa-number">Q08</span><span class="qa-title">GRPO 与 PPO 的区别是什么</span><span class="qa-category">强化学习与奖励</span><span class="qa-plus" aria-hidden="true">+</span></summary><div class="qa-body"><p><strong>回答：</strong> 常见 PPO actor-critic 实现利用价值函数估计优势，并对新旧策略概率比做 clipped surrogate 更新。GRPO 对同任务采样一组输出，用组内奖励均值与尺度构造相对优势，通常省去单独的学习型 value critic。我的实验每任务主要采样 8 条轨迹，使用组内标准化优势，再广播到该轨迹的响应步骤。</p>
+<pre><code class="language-text">A_i ≈ (R_i − mean_group(R)) / (std_group(R) + ε)
+rho = πθ(action | history) / πold(action | history)
+Jclip = E[min(rho*A, clip(rho, 1−ε_low, 1+ε_high)*A)]
+</code></pre>
+<p><strong>追问准备：</strong> 这是核心形式，实际还有 mask、聚合和 KL/熵项。PPO 并非数学上必须有 critic；GRPO 也不等于完全不需要 reference policy。<a href="https://arxiv.org/html/2402.03300v3">GRPO 原文</a>；<a href="https://arxiv.org/pdf/1707.06347">PPO 原文</a></p></div></details>
+<details class="qa" data-category="强化学习与奖励" id="question-09"><summary><span class="qa-number">Q09</span><span class="qa-title">能不能用 DPO 替代 GRPO</span><span class="qa-category">强化学习与奖励</span><span class="qa-plus" aria-hidden="true">+</span></summary><div class="qa-body"><p><strong>回答：</strong> 可以构造偏好优化对照，但两者数据条件不同。标准 DPO 使用同一输入下的 preferred/rejected 响应对，通过策略相对 reference 的概率比优化偏好，不需要先训练独立 reward model。GUI 场景中，不同轨迹会看到不同后续截图，构造同条件、可信的动作或轨迹偏好并不简单。当前我利用可在线判分的环境做 GRPO，没有完成 DPO 实验。</p>
+<p><strong>追问准备：</strong> 可从相同可见前缀的不同动作构造对照，但要控制环境状态与后续采样；不能把“成功轨迹 vs 任意失败轨迹”直接当无偏逐步偏好。<a href="https://arxiv.org/html/2305.18290v3">DPO 原文</a></p></div></details>
+<details class="qa" data-category="强化学习与奖励" id="question-10"><summary><span class="qa-number">Q10</span><span class="qa-title">你的 reward 怎么设计 是否使用 PRM</span><span class="qa-category">强化学习与奖励</span><span class="qa-plus" aria-hidden="true">+</span></summary><div class="qa-body"><p><strong>回答：</strong> 当前 reward 是规则终态奖励。原有 progress 根据最终通过的目标检查比例给分，并处理终止和副作用；我增加严格成功 0/1 和错误 COMPLETE 清零两个分支。没有逐步学习型评分器，所以不能称为 PRM。即使之后每步用状态规则打分，也应先称为可验证过程奖励。</p>
+<p><strong>追问准备：</strong> 能区分 reward、progress、goal_success、clean 与 strict success。不要把带部分分数的 reward 自动叫过程奖励模型。</p></div></details>
+<details class="qa" data-category="强化学习与奖励" id="question-11"><summary><span class="qa-number">Q11</span><span class="qa-title">当前信用分配到什么粒度</span><span class="qa-category">强化学习与奖励</span><span class="qa-plus" aria-hidden="true">+</span></summary><div class="qa-body"><p><strong>回答：</strong> 当前默认 verl 路径先对每条轨迹的终态奖励算组内优势，再将同一标量赋给该轨迹所有响应步骤。它能比较不同轨迹，但难以直接区分一条轨迹里哪个动作有贡献。一个成功轨迹的冗余步骤也可能得到同号优势；不同 token 的实际梯度仍因概率、clipping 和 mask 不同。</p>
+<p><strong>追问准备：</strong> <code>Step.reward</code> 当前未被默认优势路径使用，不能只改字段或打开 per_step 就声称完成信用分配。</p></div></details>
+<details class="qa" data-category="强化学习与奖励" id="question-12"><summary><span class="qa-number">Q12</span><span class="qa-title">动态采样具体如何实现 为什么要回退</span><span class="qa-category">强化学习与奖励</span><span class="qa-plus" aria-hidden="true">+</span></summary><div class="qa-body"><p><strong>回答：</strong> 对同任务多条轨迹检查奖励是否为有限值，以及 max-min 是否达到阈值。有效组不足时继续生成下一个 batch，直到目标组数、轮数上限或数据耗尽。支持只用有效组、有效组加普通组补齐、按普通 batch 等回退，以避免某些任务分布下长期无法更新。历史主动态实验目标为 12 组，上限 8 轮，实际记录最多 2 轮。</p>
+<p><strong>追问准备：</strong> 有效组代表存在相对奖励信号，不等于严格成功组。需解释数据游标消耗和 fallback 对分布的影响。</p></div></details>
+<details class="qa" data-category="强化学习与奖励" id="question-13"><summary><span class="qa-number">Q13</span><span class="qa-title">你是不是实现了 DAPO</span><span class="qa-category">强化学习与奖励</span><span class="qa-plus" aria-hidden="true">+</span></summary><div class="qa-body"><p><strong>回答：</strong> 准确说是 DAPO-inspired 动态采样扩展。DAPO 还包括 Clip-Higher、token-level policy gradient loss 和 overlong reward 等设计。本地仍使用 GRPO 优势与 seq-mean-token-mean 聚合，多数 run 保留 KL；实验名叫 DAPO 不代表完整复现。</p>
+<p><strong>追问准备：</strong> 能说清自己改了哪一部分、哪些组件沿用原实现。<a href="https://arxiv.org/abs/2503.14476">DAPO 原文</a></p></div></details>
+<details class="qa" data-category="强化学习与奖励" id="question-14"><summary><span class="qa-number">Q14</span><span class="qa-title">一组轨迹奖励都相同 会发生什么</span><span class="qa-category">强化学习与奖励</span><span class="qa-plus" aria-hidden="true">+</span></summary><div class="qa-body"><p><strong>回答：</strong> 组内中心化后，任务奖励对应的相对优势为零。全成功和全失败都可能出现这种情况，进度奖励下也可能全部相同。动态采样希望补充有差异的组。不过即便这个组的任务 policy-gradient 项为零，KL 和 entropy 等正则项仍可能带来梯度，不能说模型完全停止更新。</p>
+<p><strong>追问准备：</strong> 0/1 奖励下有效组通常混合成功与失败；进度奖励下不同程度的失败也能形成有效组。</p></div></details>
+<details class="qa" data-category="强化学习与奖励" id="question-15"><summary><span class="qa-number">Q15</span><span class="qa-title">KL entropy 和 PPO clipping 有什么不同</span><span class="qa-category">强化学习与奖励</span><span class="qa-plus" aria-hidden="true">+</span></summary><div class="qa-body"><p><strong>回答：</strong> reference KL 用来约束当前策略相对参考模型的偏离；entropy 项鼓励分布保留探索性；PPO clipping 则限制当前策略相对采样/旧策略概率比在目标中的激励。它们不等价。项目中多数 run 使用 actor KL loss，不能与 use_kl_in_reward 混为一谈，后者是把 KL 放进奖励的另一条路径。</p>
+<p><strong>追问准备：</strong> 区分 πref、πold、πθ；KL 更低不自动意味着成功率更高，也不能只看一个 clipfrac 判断稳定性。</p></div></details>
+<details class="qa" data-category="强化学习与奖励" id="question-16"><summary><span class="qa-number">Q16</span><span class="qa-title">mini-batch 12 和 96 到底代表什么</span><span class="qa-category">强化学习与奖励</span><span class="qa-plus" aria-hidden="true">+</span></summary><div class="qa-body"><p><strong>回答：</strong> 它们是 PPO mini-batch 配置，不是环境数或 GUI 步数。当前 backend 还乘 rollout.n=8，对应全局目标 96 与 768 个展开的 step-row。每个外层 trainer step 可能包含多个内部 optimizer.step，实际次数依赖轨迹展开长度、过滤和 padding，不能直接用记录的 30 个 trainer step 当 30 次参数更新。</p>
+<p><strong>追问准备：</strong> 区分任务组、轨迹、GUI step、step-row、micro-batch、optimizer.step。日志没有足够信息时不硬推精确更新次数。</p></div></details>
+<details class="qa" data-category="训练与实现" id="question-17"><summary><span class="qa-number">Q17</span><span class="qa-title">多模态数据和 loss mask 有什么容易出错的地方</span><span class="qa-category">训练与实现</span><span class="qa-plus" aria-hidden="true">+</span></summary><div class="qa-body"><p><strong>回答：</strong> 截图和任务历史属于模型条件，策略目标作用于生成的 response token。需要保证图像尺寸处理与动作坐标映射一致，视觉输入和文本 token 顺序一致，padding/观察内容不被误当成动作学习目标。当前 response 中若同时有解释与动作，行级优势会作用于这些生成 token，而不是已经完成了精确的动作字段信用分配。</p>
+<p><strong>追问准备：</strong> 若截断丢失目标指令、历史动作或图片标记，模型可能学到错误对应。先查实际 processor、response mask 和 trace，不只看 prompt 文本。</p></div></details>
+<details class="qa" data-category="训练与实现" id="question-18"><summary><span class="qa-number">Q18</span><span class="qa-title">FSDP 和 vLLM 各自做什么</span><span class="qa-category">训练与实现</span><span class="qa-plus" aria-hidden="true">+</span></summary><div class="qa-body"><p><strong>回答：</strong> FSDP 负责训练侧的参数、梯度和优化器状态分片，按配置降低单卡训练内存压力；vLLM 负责 rollout 推理。我主要使用现有框架，改的是多轮动态采样期间的副本生命周期：生成未结束前保持可用，全部候选收集完成后再 sleep，配合训练更新边界。6 GPU 是历史配置，不代表我实现了这两个引擎。</p>
+<p><strong>追问准备：</strong> 分片与通信有开销，不能说六卡一定六倍吞吐；权重同步、旧策略 logprob 和 replica 状态需要一致。<a href="https://docs.pytorch.org/docs/2.15/fsdp.html">PyTorch FSDP 文档</a></p></div></details>
+<details class="qa" data-category="训练与实现" id="question-19"><summary><span class="qa-number">Q19</span><span class="qa-title">你用 LoRA 还是全参数训练 视觉塔更新了吗</span><span class="qa-category">训练与实现</span><span class="qa-plus" aria-hidden="true">+</span></summary><div class="qa-body"><p><strong>回答：</strong> 已核对的普通 progress 和 FCzero 正式日志记录 lora_rank=0、freeze_vision_tower=false，属于非 LoRA 的全模型微调配置。按当前代码路径，视觉塔未显式冻结。但没有逐模块梯度或权重差记录，因此我不会宣称已经测得视觉编码器每层都发生有效更新，也没有做冻结与解冻的受控消融。</p>
+<p><strong>追问准备：</strong> 后续保存 trainable 参数清单、优化器参数组、视觉模块梯度范数与前后权重差。不能仅凭“用了 FSDP”推断训练范围。</p></div></details>
+<details class="qa" data-category="训练与实现" id="question-20"><summary><span class="qa-number">Q20</span><span class="qa-title">如何判断一个任务成功</span><span class="qa-category">训练与实现</span><span class="qa-plus" aria-hidden="true">+</span></summary><div class="qa-body"><p><strong>回答：</strong> 严格成功要求所有目标检查通过、没有白名单外的状态修改，并以 COMPLETE 结束。达到目标却一直循环、错误 ABORT，或者改坏其他业务数据，都可能失败。查询类 Grounded 任务需要真实打开答题卡、填写并提交，不能只凭模型文本里说出答案就算成功。</p>
+<p><strong>追问准备：</strong> 先看固定任务分母的 strict pass@1，再看 progress 和终止类别。查询失败要区分信息读取、记忆和答卷操作。</p></div></details>
+<details class="qa" data-category="结果与实验" id="question-21"><summary><span class="qa-number">Q21</span><span class="qa-title">简历中的提升数字可信在哪里 有什么限制</span><span class="qa-category">结果与实验</span><span class="qa-plus" aria-hidden="true">+</span></summary><div class="qa-body"><p><strong>回答：</strong> 8.98%→21.88% 来自 FCzero 同一个 run，23/256→56/256，任务 ID 与题目文本一致，原始结果复核没有环境 ERROR。step0 有一个重复失败记录，按任务去重仍是 23 个成功。但这只是单次训练峰值，完整初态快照不齐全，没有多 seed 和独立最终 holdout，也不是相对普通 GRPO 的因果增益。</p>
+<p><strong>追问准备：</strong> 说“增加 12.89 个百分点”，不要说“相对提升 12.89%”；能解释为什么总体更高的 22.66% 不能拼接另一 run 的初始分数。</p></div></details>
+<details class="qa" data-category="结果与实验" id="question-22"><summary><span class="qa-number">Q22</span><span class="qa-title">动态采样到底有没有提升</span><span class="qa-category">结果与实验</span><span class="qa-plus" aria-hidden="true">+</span></summary><div class="qa-body"><p><strong>回答：</strong> 当前只能说提高了入选组的奖励差异，不能说稳定提高最终成功率。更可比的纯结果两组在健康区间交替领先，动态组平均候选量约为普通的 2.16 倍。动态 progress 那组还改变了验证集合，只覆盖 89 个基础任务，因此不能直接和普通组峰值比较。下一步要固定实例，用相同候选/token 或 GPU 时间预算做对照。</p>
+<p><strong>追问准备：</strong> 相同 outer step 不等于相同数据、算力或任务覆盖；候选成本必须包括被丢弃的数据。</p></div></details>
+<details class="qa" data-category="结果与实验" id="question-23"><summary><span class="qa-number">Q23</span><span class="qa-title">大 mini-batch 的 KL 更低 为什么成功率没更高</span><span class="qa-category">结果与实验</span><span class="qa-plus" aria-hidden="true">+</span></summary><div class="qa-body"><p><strong>回答：</strong> 更大 mini-batch 改变了数据聚合和外层循环内部的优化器调用次数。KL 和 clipfrac 降低说明某些优化统计变化，不代表任务策略更好。M96 的 progress 峰值 21.09%，现有记录未显示一致优势，而且还有任务文本、随机性与验证频率差异。需要明确按候选预算还是实际更新数比较。</p>
+<p><strong>追问准备：</strong> <code>rollout_probs_diff_mean</code> 是 rollout 与训练侧重算概率差异，发生在本轮更新前，不能把它当成本轮 optimizer 导致的 KL。</p></div></details>
+<details class="qa" data-category="结果与实验" id="question-24"><summary><span class="qa-number">Q24</span><span class="qa-title">验证先升后降 是不是过拟合</span><span class="qa-category">结果与实验</span><span class="qa-plus" aria-hidden="true">+</span></summary><div class="qa-body"><p><strong>回答：</strong> 先升后降是现象，原因不能直接确定。可能涉及过拟合、终止行为转移、优化幅度、数据采样变化，也可能是环境故障。FCzero 后期 ABORT 增加；纯结果 GRPO 后期大量 TargetClosedError。应先看固定实例的逐任务变化和错误覆盖，再在健康环境重评已有 checkpoint，而不是把所有下降统一叫过拟合。</p>
+<p><strong>追问准备：</strong> 变化的训练 batch reward 与固定验证成功率不是同分布曲线，动态组筛选还会引入选择偏差。</p></div></details>
+<details class="qa" data-category="结果与实验" id="question-25"><summary><span class="qa-number">Q25</span><span class="qa-title">错误 COMPLETE 清零为什么没解决终止问题</span><span class="qa-category">结果与实验</span><span class="qa-plus" aria-hidden="true">+</span></summary><div class="qa-body"><p><strong>回答：</strong> 这个规则改变的是相对奖励。未完成却 COMPLETE 会归零，但某些 ABORT 轨迹仍可能保留进度奖励，存在转向 ABORT 的激励。记录里 FCzero 后期 ABORT 增多、成功下降，所以我会同时检查严格成功、错误 COMPLETE、ABORT、循环和超时，并先做失败终止口径一致的对照。</p>
+<p><strong>追问准备：</strong> 这是一种机制假设，不能仅凭聚合曲线断言模型“学会投机”。自动截断也不是模型主动选择停止。</p></div></details>
+<details class="qa" data-category="结果与实验" id="question-26"><summary><span class="qa-number">Q26</span><span class="qa-title">成功率只有约 20% 这个项目有什么价值</span><span class="qa-category">结果与实验</span><span class="qa-plus" aria-hidden="true">+</span></summary><div class="qa-body"><p><strong>回答：</strong> 总体分数需要结合任务难度理解。FCzero 峰值的 L1 为 95%，跨应用为 6.45%、L4 为 1.25%，说明基础交互与长链组合的表现差距很大。项目价值在于完成实际训练、实现可解释的改造，并把“哪里失败、为什么暂时不能下结论”追到轨迹和代码。下一步用可验证实验改善瓶颈，而不是把一个总体峰值包装成通用能力。</p>
+<p><strong>追问准备：</strong> 不用上游论文的真机成绩为个人结果背书；不要声称达到 SOTA。</p></div></details>
+<details class="qa" data-category="工程与改进" id="question-27"><summary><span class="qa-number">Q27</span><span class="qa-title">环境并发和训练故障你怎么处理</span><span class="qa-category">工程与改进</span><span class="qa-plus" aria-hidden="true">+</span></summary><div class="qa-body"><p><strong>回答：</strong> 当前增量是环境池分 wave 启动、等待 readiness、首张截图预热以及初始化异常清理，避免部分未就绪环境被发布给训练。历史仍有训练期间浏览器关闭导致的故障，因此这不等于已经实现了全过程自动恢复。我会按任务记录环境 ERROR、重试和最终覆盖，重建坏实例后再比较模型效果。</p>
+<p><strong>追问准备：</strong> 96/128 是槽位配置，未做吞吐基准不能说提速多少；NCCL timeout 不等于已证明显存 OOM。</p></div></details>
+<details class="qa" data-category="工程与改进" id="question-28"><summary><span class="qa-number">Q28</span><span class="qa-title">如何保证实验复现与验证可信</span><span class="qa-category">工程与改进</span><span class="qa-plus" aria-hidden="true">+</span></summary><div class="qa-body"><p><strong>回答：</strong> 固定代码与 diff、模型、任务 ID、模板、参数、初态、解析器、judge 和 resolved step budget；保存训练/评测 seed、依赖版本、reward 环境变量和恢复来源。seed 相同但代码、世界数据或初态变化仍可能产生不同任务。所有组使用相同评测 manifest，历史 test 作为开发集，最终保留未参与调参的 holdout。</p>
+<p><strong>追问准备：</strong> 当前训练内与独立 benchmark 的步数预算不同，需要统一；恢复还要核对 RNG 与数据游标，能加载 checkpoint 不等于完整复现。</p></div></details>
+<details class="qa" data-category="工程与改进" id="question-29"><summary><span class="qa-number">Q29</span><span class="qa-title">如果继续做信用分配 你会怎样实现</span><span class="qa-category">工程与改进</span><span class="qa-plus" aria-hidden="true">+</span></summary><div class="qa-body"><p><strong>回答：</strong> 我会先记录真实执行动作前后的子目标状态，建立 episode、step 与 gateway trace 的唯一对应，再保留 outcome GRPO 并添加小权重的子目标段信用。必要导航即时进度为零，不应统一判错。仅把 progress 差分求和再广播会回到终态信号；必须让实际 step advantage 随动作或阶段改变。当前 PRM 与这条链路都还没有实现。</p>
+<p><strong>追问准备：</strong> 默认路径忽略 Step.reward；预计算优势映射还存在缺 episode ID 的风险。先关动态采样，避免终态同奖的组被丢掉，再做 λ=0 回归与多 seed 对照。<span>方案细节（历史记录）</span></p></div></details>
+<details class="qa" data-category="工程与改进" id="question-30"><summary><span class="qa-number">Q30</span><span class="qa-title">如果只给你有限算力 如何设计下一轮实验</span><span class="qa-category">工程与改进</span><span class="qa-plus" aria-hidden="true">+</span></summary><div class="qa-body"><p><strong>回答：</strong> 先修复评测与采样边界，再重评已有 checkpoint，复用现成权重。选择一个主假设，例如终止奖励一致性或子目标段信用，固定基础模型、实例、KL、mini-batch 与候选预算，先小 pilot 排错；将最有信息的候选与基线做至少三个训练 seed 的对照。既报严格成功与长链分层，也报真实交互、token、评分成本和环境错误。</p>
+<p><strong>追问准备：</strong> 负对照与 λ=0 可用固定 batch 的离线数值检查；预先约定选 checkpoint 规则，不比较各组任意时刻最高值。未复现的收益不填进简历。</p></div></details></div><p id="qa-empty" class="empty" hidden>没有匹配的问题，请调整关键词或主题。</p>
+</section>
+<section class="section" id="roadmap" aria-labelledby="roadmap-title"><div class="section-head"><div><div class="eyebrow"><span class="section-number">06</span>WHAT COMES NEXT</div><h2 id="roadmap-title">让下一次实验更有解释力。</h2></div><p>以下是待完成方案。先把比较条件固定，再验证一个明确的改进假设。</p></div>
+<div class="roadmap"><article class="roadmap-card"><div class="priority"><b>P0</b><span>评测与工程</span></div><h3>建立可信基线</h3><p>把实例、预算和错误口径固定下来。</p><ul><li>保存任务、参数、初态与 prompt hash</li><li>统一训练与 benchmark 步数预算</li><li>修复多取 batch、参数透传与指标覆盖</li><li>重评已有 checkpoint，隔离环境 ERROR</li></ul><div class="deliverable">验收：同实例、同预算、完整覆盖的基线结果。</div></article>
+<article class="roadmap-card"><div class="priority"><b>P1</b><span>奖励与信用</span></div><h3>瞄准长链失败</h3><p>从终止激励与子目标段信用入手。</p><ul><li>分类首个错误，区分视觉与决策失败</li><li>对齐错误 COMPLETE / ABORT 奖励</li><li>记录动作前后子目标与唯一 trace ID</li><li>先关闭动态筛选，做 λ=0 回归</li></ul><div class="deliverable">验收：等预算下，跨 App / L3–L4 成功率改善。</div></article>
+<article class="roadmap-card"><div class="priority"><b>P2</b><span>多模态与后训练</span></div><h3>补齐受控对照</h3><p>一次选择一个变量，形成可复用的研究结论。</p><ul><li>SFT warm-start 与 SFT + RL</li><li>图像分辨率、历史与跨 App 记忆</li><li>视觉塔冻结、LoRA 与全模型配置</li><li>过程标签验证后，再研究学习型 PRM</li></ul><div class="deliverable">验收：多 seed 结果、成本统计与独立 holdout。</div></article></div>
+<div class="research-question"><div><div class="eyebrow">NEXT RESEARCH QUESTION</div><h3>可验证子目标信用，能否在相同交互预算下<br>提高跨应用与长链任务的成功率？</h3><p>固定基线与实例，pilot 后基线和候选各至少 3 个训练 seed；预先约定 checkpoint 选择规则，并报告严格成功、终止分布与真实成本。</p></div><div class="hypothesis">A_step = A_outcome<br>　　　 + λ · C_segment<br><small>待验证的辅助目标</small></div></div>
+</section>
+<section class="section" id="sources" aria-labelledby="source-title"><div class="section-head"><div><div class="eyebrow"><span class="section-number">07</span>READ FURTHER</div><h2 id="source-title">结论可以追溯到记录。</h2></div><p>展示内容来自本地源码、TensorBoard 与逐任务结果复核。完整报告已嵌入下方。</p></div>
+<div class="source-grid"><a class="source-link" href="#full-report"><span>REPORT / HTML</span><strong>完整文字报告 <i aria-hidden="true">↗</i></strong><p>实验、简历、面试与改进方案</p></a><a class="source-link" href="resume_entry.md" download><span>RESUME / MARKDOWN</span><strong>简历条目源文件 <i aria-hidden="true">↗</i></strong><p>可直接编辑的项目经历</p></a><a class="source-link" href="experiments.csv" download><span>EVIDENCE / CSV</span><strong>15 个实验目录清单 <i aria-hidden="true">↗</i></strong><p>run、峰值、恢复与限制说明</p></a></div>
+<details class="full-document" id="full-report"><summary>展开完整文字报告 · 包含代码依据、论文链接和全部实验方案</summary><div class="full-document-body"><h2>MobileGym 多模态与后训练实习项目经历及面试准备</h2>
+<p>整理日期：2026 年 11 月 14 日。面向岗位：多模态算法、VLM 后训练、GUI Agent 强化学习实习。实验依据：本地 <code>MobileGym 项目</code> 的源码、历史配置、TensorBoard 和逐任务结果。</p>
+<h3>1 项目定位与使用方式</h3>
+<p>建议项目名称：<strong>基于 Qwen3-VL 的多模态 GUI Agent 在线强化学习</strong>。</p>
+<p>这个项目最适合展示四项能力：把视觉语言模型接入多步交互环境；理解并改造奖励与采样；运行分布式后训练；根据实际轨迹解释实验结果。当前最有依据的个人增量是动态补采样、奖励分支、模板重建和环境初始化改造。</p>
+<p>投后训练岗时优先讲 GRPO、奖励、有效样本与等预算分析；投多模态岗时优先讲截图观察、坐标动作、视觉与语言历史、grounding 和长链决策。对于强调视觉编码器设计或大规模多模态预训练的岗位，还需要补充模型结构、图像分辨率和训练数据的专门实验。</p>
+<p>本文先总结既有实验，再给出简历可用文本、30 个面试问答和改进路线。项目经历的日期、团队分工与实际负责范围按本人经历填写，不据日志推断任职单位或职位。下面的第一人称回答是准备稿，使用前应理解对应代码和证据；由本次协作完成的复盘也应如实说明。</p>
+<h3>2 你之前做过哪些实验</h3>
+<h4>2.1 截至本次核对的训练记录</h4>
+<p>2026 年 11 月 14 日历史盘点共覆盖这些 TensorBoard 记录。仍有 <strong>15 个实验目录、35 个 event 文件、7 条超过 20 个不同正数 training step 的训练历史</strong>。其中六组主要探索实验有验证曲线，第七条关闭了验证。这些记录不代表全部完成了原计划训练。</p>
+<p>已核对的历史哈希清单包含 33 个 event 和 6 个主要终端日志，39 项均匹配；两个后续重跑的必要事件序列也与此前审计一致。核对记录保存在 <a href="README.md#results">实验与证据口径</a>。</p>
+<h4>2.2 六组主要实验</h4>
+<p>下表 M12/M96 是实际 <code>ppo_mini_batch_size</code> 配置；N4 是 <code>sample_n=4</code>；训练 step 为外层 trainer step。奖励模式依据脚本、命名与实现交叉判断，历史环境变量快照不完整，因此其证据强度低于日志显式记录的 batch、KL 等字段。</p>
+<table>
+<thead>
+<tr>
+<th>实验</th>
+<th>研究变量</th>
+<th style="text-align: right;">已记录训练 step</th>
+<th>严格验证峰值</th>
+<th>最后完整验证</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GRPO-progress-M12</td>
+<td>原终态进度奖励</td>
+<td style="text-align: right;">31</td>
+<td>58/256＝22.66%，step10</td>
+<td>19.53%，step30</td>
+</tr>
+<tr>
+<td>Dynamic-progress-N4-M12</td>
+<td>动态补采样、更多任务实例、KL 关闭等</td>
+<td style="text-align: right;">23</td>
+<td>56/256＝21.88%，step12</td>
+<td>15.23%，step21</td>
+</tr>
+<tr>
+<td>GRPO-FCzero-M12</td>
+<td>错误 COMPLETE 奖励清零</td>
+<td style="text-align: right;">36</td>
+<td>56/256＝21.88%，step12、18</td>
+<td>14.06%，step33</td>
+</tr>
+<tr>
+<td>GRPO-result-M96</td>
+<td>严格成功 0/1 奖励</td>
+<td style="text-align: right;">30</td>
+<td>53/256＝20.70%，step15</td>
+<td>3.52%，step30，严重环境故障</td>
+</tr>
+<tr>
+<td>GRPO-progress-M96</td>
+<td>更大 PPO mini-batch</td>
+<td style="text-align: right;">42</td>
+<td>54/256＝21.09%，step21</td>
+<td>15.62%，step39</td>
+</tr>
+<tr>
+<td>Dynamic-result-M96</td>
+<td>严格结果奖励加动态采样</td>
+<td style="text-align: right;">37</td>
+<td>53/256＝20.70%，step24</td>
+<td>16.41%，step36</td>
+</tr>
+</tbody>
+</table>
+<p>这六组是探索性对照，部分同时改变了多个变量，不能称为严格的单变量消融或直接按峰值排名。特别是 Dynamic-progress 的验证集合实际改变了：256 个实例只覆盖 89 个基础任务，普通 N1 组覆盖 256 个基础任务。</p>
+<p>共同主要配置为 Qwen3-VL-4B-Instruct、6 GPU、每任务 8 条 rollout、学习率 <code>1e-6</code>。普通生成通常为 12 组，即 96 条候选；动态生成通常每轮 16 组，即 128 条，再选取目标 12 组。96/128 是环境槽位与生成配置，不是吞吐提升倍数。</p>
+<h4>2.3 其他运行</h4>
+<table>
+<thead>
+<tr>
+<th>记录</th>
+<th>情况</th>
+<th>可得结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>9 月 18 日 result-only RERUN-NOVAL</td>
+<td>25 步，checkpoint 到 step24，关闭验证</td>
+<td>已有重跑记录，不能用训练 batch 成功率代替泛化结果</td>
+</tr>
+<tr>
+<td>9 月 17 日 result-only RERUN</td>
+<td>3 步；验证原始结果去重后 28/256＝10.94%</td>
+<td>TB 验证聚合未落盘，原始结果可以重建</td>
+</tr>
+<tr>
+<td>SAMPLE-N1-DYNAMIC</td>
+<td>3 步，step3 为 8.20%</td>
+<td>短试验，不支持收敛结论</td>
+</tr>
+<tr>
+<td>SAMPLE-N1-DYNAMIC-FALSE_COMPLETE_ZERO</td>
+<td>12 步，最后完整验证 step9 为 16.41%</td>
+<td>联合方案短期探索，step12 验证未完成</td>
+</tr>
+<tr>
+<td>Qwen3-VL-8B</td>
+<td>两次初始验证 8.20%、8.59%，没有完成的训练更新</td>
+<td>不能写已完成 8B 强化学习</td>
+</tr>
+<tr>
+<td>smoke、rejection 等启动</td>
+<td>单步检查、初始化或失败记录</td>
+<td>用于链路排错，不当成正式性能实验</td>
+</tr>
+</tbody>
+</table>
+<p>完整目录表见 <a href="experiments.csv">experiments.csv</a>。</p>
+<h4>2.4 最适合写进简历的结果</h4>
+<p>FCzero 的同一 run，step0、12、18 使用相同的 256 个唯一任务 ID 与题目文本。严格成功数从 23 增至 56，即：</p>
+<p><strong>8.98% → 最高 21.88%，提升 12.89 个百分点。</strong></p>
+<p>12.89 个百分点按未四舍五入的 <code>(56−23)/256×100</code> 计算。它是单次训练的验证峰值，不是多 seed 均值，也不是 FCzero 相对普通 GRPO 的改进量。历史 test 已多次参与验证和选 checkpoint，应按开发评测理解；完整初态和参数快照仍不齐全。</p>
+<p>普通 progress 的 22.66% 是更高的历史观察值，但该正式 run 没有训练前验证。不能把其他启动的 9.38% 拼上去宣称该 run 从 9.38% 提升至 22.66%。</p>
+<h4>2.5 最有价值的结论</h4>
+<p><strong>简单交互能学到，跨应用长链仍弱。</strong> FCzero 峰值 step12：单 App 为 50/163＝30.67%，跨 App 为 6/93＝6.45%；L1 为 19/20＝95%，L4 为 1/80＝1.25%。训练跨应用占 11.88%，测试占 36.33%，分布差异值得关注。</p>
+<p><strong>动态采样提高入选组的奖励差异，但还没证明单位预算更优。</strong> 按记录中的候选组数估计，动态 progress 与动态 result-only 的候选轨迹量分别约为普通采样的 2.55 倍、2.16 倍。纯结果两组在健康区间交替领先；这些倍数不包含全部重试、验证和 GPU 开销。</p>
+<p><strong>错误完成减少不等于成功增加。</strong> FCzero 的 step0→12→33，成功数 23→56→36，重复循环 152→2→0，ABORT 6→63→126。后期更少循环，更多中止，但成功回落，需要联合分析终止策略。</p>
+<p><strong>部分下降由基础设施污染。</strong> result-only GRPO 的 step24/27/30 最终环境 ERROR 分别为 127/176/199 个，分别占固定 256 个任务的 49.61%、68.75%、77.73%。不能据其 3.52% 的末次结果判断算法崩溃，或证明另一方法稳定更好。</p>
+<h3>3 哪些是你的贡献 哪些来自上游</h3>
+<table>
+<thead>
+<tr>
+<th>内容</th>
+<th>当前证据支持的归属与写法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>模拟 App、OS、任务框架、状态 judge</td>
+<td>上游平台能力，作为项目基础介绍</td>
+</tr>
+<tr>
+<td>rLLM、verl、基础 GRPO、原有 progress 奖励</td>
+<td>上游已有，写“基于……扩展”</td>
+</tr>
+<tr>
+<td>动态有效组补采样、多轮收集、fallback</td>
+<td>当前本地增量，可作为核心算法工程贡献</td>
+</tr>
+<tr>
+<td>result_only 与 false_complete=zero</td>
+<td>当前新增奖励分支，可作为奖励消融贡献</td>
+</tr>
+<tr>
+<td>sample_templates 贯通、template_index 恢复</td>
+<td>当前任务多样性与复现增量</td>
+</tr>
+<tr>
+<td>环境池分 wave 启动、readiness、首图预热、失败清理</td>
+<td>当前工程可靠性增量</td>
+</tr>
+<tr>
+<td>vLLM 多轮生成后统一 sleep</td>
+<td>当前 rollout/update 边界改造</td>
+</tr>
+<tr>
+<td>PRM、逐步信用分配、多 seed 证实收益</td>
+<td>尚未完成，放在改进计划</td>
+</tr>
+<tr>
+<td>动态多取 batch、wrapper 参数丢弃、指标覆盖</td>
+<td>已识别但当前仍未修复，不能写成已解决</td>
+</tr>
+</tbody>
+</table>
+<p>本地 HEAD 仍为 <code>57bc275</code>；相对 Git 基线仍有 14 个已跟踪文件改动，428 行增加、78 行删除。未提交改动没有作者记录，团队合作部分应按真实分工调整。代码行数不建议放进简历。</p>
+<h3>4 可直接使用的项目经历</h3>
+<h4>4.1 推荐版本</h4>
+<p><strong>基于 Qwen3-VL 的多模态 GUI Agent 在线强化学习</strong><br />
+技术栈：Qwen3-VL-4B、GRPO、rLLM、verl、vLLM、FSDP、Playwright、TensorBoard</p>
+<ul>
+<li><strong>多模态后训练：</strong> 基于 MobileGym 扩展截图观察、坐标动作、状态判分与策略更新的在线 RL 流程，在 6 GPU 配置下开展 Qwen3-VL-4B 训练，使用 96/128 个环境槽位收集多步交互轨迹。</li>
+<li><strong>采样与奖励：</strong> 实现按组内奖励差异筛选的动态补采样及回退机制，协调多轮 rollout 的推理副本生命周期；新增严格结果奖励、错误完成清零分支，开展 6 组主要探索性对照。</li>
+<li><strong>实验结果：</strong> 在同一组 256 个验证任务上，单次训练严格成功率由 8.98% 提升至最高 21.88%，增加 12.89 个百分点；结合逐任务结果分析跨应用、长链任务及终止行为瓶颈。</li>
+<li><strong>可靠性与复现：</strong> 完善任务模板重建、环境池分批预热与初始化失败清理；结合 TensorBoard 和原始轨迹复盘采样成本、验证集合变化及浏览器异常对结果的影响。</li>
+</ul>
+<h4>4.2 版面有限时的三条版本</h4>
+<ul>
+<li>基于 MobileGym、rLLM/verl 开展 Qwen3-VL-4B 纯视觉 GUI Agent 在线强化学习，运行 6 GPU、96/128 环境槽位的截图交互与状态判分流程。</li>
+<li>实现动态有效组补采样与回退，新增严格结果奖励及错误 COMPLETE 清零策略，完成 6 组主要探索性实验，并改进任务模板重建与环境池预热。</li>
+<li>同一组 256 个验证任务上，单次训练成功率从 8.98% 提升至最高 21.88%；通过逐任务分析定位长链、跨应用与终止行为瓶颈，评估动态采样收益与候选开销。</li>
+</ul>
+<h4>4.3 根据岗位调整重点</h4>
+<table>
+<thead>
+<tr>
+<th>岗位</th>
+<th>优先讲清楚</th>
+<th>可调整的项目标题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>多模态 / GUI Agent</td>
+<td>图像与语言历史、坐标 grounding、环境动作、长链与跨 App</td>
+<td>基于 Qwen3-VL 的纯视觉 GUI Agent 训练与评测</td>
+</tr>
+<tr>
+<td>后训练 / 强化学习</td>
+<td>GRPO 优势、奖励对齐、有效组采样、成本与实验设计</td>
+<td>多模态 Agent 的 GRPO 后训练与奖励采样优化</td>
+</tr>
+<tr>
+<td>训练系统相关</td>
+<td>FSDP/vLLM 边界、并发环境、故障诊断、日志可复现性</td>
+<td>多模态 Agent 在线 RL 训练流程与运行可靠性改造</td>
+</tr>
+</tbody>
+</table>
+<p>不建议写“从零研发训练框架”“完整复现 DAPO”“动态采样显著提高性能”“已训练 PRM”“实现真机泛化”。这些表述超出当前证据。</p>
+<h4>4.4 60 秒口述介绍</h4>
+<blockquote>
+<p>我做的是基于 Qwen3-VL 的多模态 GUI Agent 后训练。模型只看任务指令、历史文本和当前截图，输出坐标动作，环境根据业务状态判分。我复用了 MobileGym 和 rLLM/verl，主要扩展了按组内奖励差异补采样的机制、两种奖励分支，以及环境初始化和任务模板重建。</p>
+<p>我跑了六组主要探索性实验。其中一次训练，在相同的 256 个验证任务上从 8.98% 提升到最高 21.88%。我也发现有效组变多不一定意味着单位交互预算更好，终止惩罚可能伴随更多 ABORT。下一步会固定评测协议，用等预算、多 seed 对照验证子目标信用分配对跨应用长链任务的帮助。</p>
+</blockquote>
+<h3>5 面试问题与回答</h3>
+<p>下面 30 个问题均包含可口述回答与进一步准备点。涉及“我的改造”的说法以实际分工为准；“计划”部分不应改成过去完成时。</p>
+<h4>Q01 请用一分钟介绍这个项目</h4>
+<p><strong>回答：</strong> 我基于 MobileGym 对 Qwen3-VL-4B 做多模态在线强化学习。模型通过截图和语言历史决定 GUI 动作，环境提供可验证奖励。我重点改了动态有效组补采样、严格结果/错误完成奖励，以及环境初始化与模板重建。一次同任务集合的训练从 23/256 成功提升到最高 56/256，同时识别出跨应用长链和终止行为是主要瓶颈。</p>
+<p><strong>追问准备：</strong> 按“任务与难点—个人改造—结果—限制”组织，避免只列工具名；明确这个数字是单次验证峰值。</p>
+<h4>Q02 开源项目已经有训练栈 你具体做了什么</h4>
+<p><strong>回答：</strong> 上游已经提供模拟环境、状态判分和基础 GRPO 训练。我增加了按奖励 range 判断有效组、跨 batch 补采样、达到上限后的回退，以及多轮 rollout 结束后再释放推理副本的调度。奖励方面新增 result_only 和错误 COMPLETE 清零；工程方面贯通模板索引，增加分批初始化、首图预热与失败清理。</p>
+<p><strong>追问准备：</strong> 能打开 unified_trainer、evaluator 和 pool 的改动解释控制流。不要把已有 checkpoint 恢复或 vLLM 本身说成自己实现。</p>
+<h4>Q03 为什么这是多模态后训练项目</h4>
+<p><strong>回答：</strong> 输入同时含截图和文本指令/历史，模型要把视觉元素定位与语言目标映射成动作序列。训练阶段用环境反馈更新预训练 VLM 的行为策略，属于后训练。我的工作主要是交互策略学习、奖励与采样，没有开发新的视觉编码器或重新做多模态预训练。</p>
+<p><strong>追问准备：</strong> 说明 grounding、planning、memory 和 termination 四类错误如何区分；不要把所有失败都归为视觉识别。</p>
+<h4>Q04 Agent 会不会读取 DOM 或内部状态作弊</h4>
+<p><strong>回答：</strong> 当前 generic_v2 构造给模型的输入是任务、历史文本和当前截图，未传入 route、DOM 或业务 state。内部状态用于环境重置与 judge，属于训练监督通道。若以后用状态生成过程标签，也会保持它只用于奖励计算，评测时不把隐藏答案加入 policy 输入。</p>
+<p><strong>追问准备：</strong> 指出 build_messages 与 judge 的边界。环境 Observation 对象有字段，并不代表模型真的收到这些字段。</p>
+<h4>Q05 训练数据是什么 160 个任务是不是太少</h4>
+<p><strong>回答：</strong> 标准划分是 160 个训练任务、256 个测试任务，它们指任务类/模板，任务还能采样参数和指令变体。sample_n=4 那次实际产生 443 条训练数据行，受 sample_max 和参数空间约束，并非简单的 640 条。但增加参数实例不等于增加任务家族和技能覆盖，跨应用任务在训练中的比例仍偏低。</p>
+<p><strong>追问准备：</strong> 任务 ID 不重叠不代表 App 不重叠；历史 test 多次用于开发验证，最终还需要独立 holdout。</p>
+<h4>Q06 为什么选择 4B 模型 8B 跑过吗</h4>
+<p><strong>回答：</strong> 这次主要沿用上游 Qwen3-VL-4B-Instruct 基线，在可用配置下先研究采样和奖励。4B 方便做多组探索，但我没有做严格的模型规模优劣比较。8B 有两次初始验证，没有完成训练更新，其中存在 NCCL 超时，因此不能把它写成完成了 8B RL，也不能断言更大模型不适合。</p>
+<p><strong>追问准备：</strong> GPU 型号、训练总时长和峰值显存只报实际测量；6 GPU 配置本身不足以推断这些数值。</p>
+<h4>Q07 为什么使用 RL 而不是只做 SFT</h4>
+<p><strong>回答：</strong> SFT 学习给定轨迹的动作分布，适合建立格式、grounding 和基本操作能力；在线 RL 可以在交互中探索不同路径，用最终任务反馈优化行为。这个环境可以重置并程序化判分，适合研究 RL。我目前没有完成严格的 SFT-versus-RL 对照，因此不能说 RL 在这个项目中已被证明全面优于 SFT。</p>
+<p><strong>追问准备：</strong> 无成功探索的长任务可先用训练集示范 warm-start，再以相同 RL 预算比较；示范质量和恢复行为覆盖很重要。</p>
+<h4>Q08 GRPO 与 PPO 的区别是什么</h4>
+<p><strong>回答：</strong> 常见 PPO actor-critic 实现利用价值函数估计优势，并对新旧策略概率比做 clipped surrogate 更新。GRPO 对同任务采样一组输出，用组内奖励均值与尺度构造相对优势，通常省去单独的学习型 value critic。我的实验每任务主要采样 8 条轨迹，使用组内标准化优势，再广播到该轨迹的响应步骤。</p>
+<pre><code class="language-text">A_i ≈ (R_i − mean_group(R)) / (std_group(R) + ε)
+rho = πθ(action | history) / πold(action | history)
+Jclip = E[min(rho*A, clip(rho, 1−ε_low, 1+ε_high)*A)]
+</code></pre>
+<p><strong>追问准备：</strong> 这是核心形式，实际还有 mask、聚合和 KL/熵项。PPO 并非数学上必须有 critic；GRPO 也不等于完全不需要 reference policy。<a href="https://arxiv.org/html/2402.03300v3">GRPO 原文</a>；<a href="https://arxiv.org/pdf/1707.06347">PPO 原文</a></p>
+<h4>Q09 能不能用 DPO 替代 GRPO</h4>
+<p><strong>回答：</strong> 可以构造偏好优化对照，但两者数据条件不同。标准 DPO 使用同一输入下的 preferred/rejected 响应对，通过策略相对 reference 的概率比优化偏好，不需要先训练独立 reward model。GUI 场景中，不同轨迹会看到不同后续截图，构造同条件、可信的动作或轨迹偏好并不简单。当前我利用可在线判分的环境做 GRPO，没有完成 DPO 实验。</p>
+<p><strong>追问准备：</strong> 可从相同可见前缀的不同动作构造对照，但要控制环境状态与后续采样；不能把“成功轨迹 vs 任意失败轨迹”直接当无偏逐步偏好。<a href="https://arxiv.org/html/2305.18290v3">DPO 原文</a></p>
+<h4>Q10 你的 reward 怎么设计 是否使用 PRM</h4>
+<p><strong>回答：</strong> 当前 reward 是规则终态奖励。原有 progress 根据最终通过的目标检查比例给分，并处理终止和副作用；我增加严格成功 0/1 和错误 COMPLETE 清零两个分支。没有逐步学习型评分器，所以不能称为 PRM。即使之后每步用状态规则打分，也应先称为可验证过程奖励。</p>
+<p><strong>追问准备：</strong> 能区分 reward、progress、goal_success、clean 与 strict success。不要把带部分分数的 reward 自动叫过程奖励模型。</p>
+<h4>Q11 当前信用分配到什么粒度</h4>
+<p><strong>回答：</strong> 当前默认 verl 路径先对每条轨迹的终态奖励算组内优势，再将同一标量赋给该轨迹所有响应步骤。它能比较不同轨迹，但难以直接区分一条轨迹里哪个动作有贡献。一个成功轨迹的冗余步骤也可能得到同号优势；不同 token 的实际梯度仍因概率、clipping 和 mask 不同。</p>
+<p><strong>追问准备：</strong> <code>Step.reward</code> 当前未被默认优势路径使用，不能只改字段或打开 per_step 就声称完成信用分配。</p>
+<h4>Q12 动态采样具体如何实现 为什么要回退</h4>
+<p><strong>回答：</strong> 对同任务多条轨迹检查奖励是否为有限值，以及 max-min 是否达到阈值。有效组不足时继续生成下一个 batch，直到目标组数、轮数上限或数据耗尽。支持只用有效组、有效组加普通组补齐、按普通 batch 等回退，以避免某些任务分布下长期无法更新。历史主动态实验目标为 12 组，上限 8 轮，实际记录最多 2 轮。</p>
+<p><strong>追问准备：</strong> 有效组代表存在相对奖励信号，不等于严格成功组。需解释数据游标消耗和 fallback 对分布的影响。</p>
+<h4>Q13 你是不是实现了 DAPO</h4>
+<p><strong>回答：</strong> 准确说是 DAPO-inspired 动态采样扩展。DAPO 还包括 Clip-Higher、token-level policy gradient loss 和 overlong reward 等设计。本地仍使用 GRPO 优势与 seq-mean-token-mean 聚合，多数 run 保留 KL；实验名叫 DAPO 不代表完整复现。</p>
+<p><strong>追问准备：</strong> 能说清自己改了哪一部分、哪些组件沿用原实现。<a href="https://arxiv.org/abs/2503.14476">DAPO 原文</a></p>
+<h4>Q14 一组轨迹奖励都相同 会发生什么</h4>
+<p><strong>回答：</strong> 组内中心化后，任务奖励对应的相对优势为零。全成功和全失败都可能出现这种情况，进度奖励下也可能全部相同。动态采样希望补充有差异的组。不过即便这个组的任务 policy-gradient 项为零，KL 和 entropy 等正则项仍可能带来梯度，不能说模型完全停止更新。</p>
+<p><strong>追问准备：</strong> 0/1 奖励下有效组通常混合成功与失败；进度奖励下不同程度的失败也能形成有效组。</p>
+<h4>Q15 KL entropy 和 PPO clipping 有什么不同</h4>
+<p><strong>回答：</strong> reference KL 用来约束当前策略相对参考模型的偏离；entropy 项鼓励分布保留探索性；PPO clipping 则限制当前策略相对采样/旧策略概率比在目标中的激励。它们不等价。项目中多数 run 使用 actor KL loss，不能与 use_kl_in_reward 混为一谈，后者是把 KL 放进奖励的另一条路径。</p>
+<p><strong>追问准备：</strong> 区分 πref、πold、πθ；KL 更低不自动意味着成功率更高，也不能只看一个 clipfrac 判断稳定性。</p>
+<h4>Q16 mini-batch 12 和 96 到底代表什么</h4>
+<p><strong>回答：</strong> 它们是 PPO mini-batch 配置，不是环境数或 GUI 步数。当前 backend 还乘 rollout.n=8，对应全局目标 96 与 768 个展开的 step-row。每个外层 trainer step 可能包含多个内部 optimizer.step，实际次数依赖轨迹展开长度、过滤和 padding，不能直接用记录的 30 个 trainer step 当 30 次参数更新。</p>
+<p><strong>追问准备：</strong> 区分任务组、轨迹、GUI step、step-row、micro-batch、optimizer.step。日志没有足够信息时不硬推精确更新次数。</p>
+<h4>Q17 多模态数据和 loss mask 有什么容易出错的地方</h4>
+<p><strong>回答：</strong> 截图和任务历史属于模型条件，策略目标作用于生成的 response token。需要保证图像尺寸处理与动作坐标映射一致，视觉输入和文本 token 顺序一致，padding/观察内容不被误当成动作学习目标。当前 response 中若同时有解释与动作，行级优势会作用于这些生成 token，而不是已经完成了精确的动作字段信用分配。</p>
+<p><strong>追问准备：</strong> 若截断丢失目标指令、历史动作或图片标记，模型可能学到错误对应。先查实际 processor、response mask 和 trace，不只看 prompt 文本。</p>
+<h4>Q18 FSDP 和 vLLM 各自做什么</h4>
+<p><strong>回答：</strong> FSDP 负责训练侧的参数、梯度和优化器状态分片，按配置降低单卡训练内存压力；vLLM 负责 rollout 推理。我主要使用现有框架，改的是多轮动态采样期间的副本生命周期：生成未结束前保持可用，全部候选收集完成后再 sleep，配合训练更新边界。6 GPU 是历史配置，不代表我实现了这两个引擎。</p>
+<p><strong>追问准备：</strong> 分片与通信有开销，不能说六卡一定六倍吞吐；权重同步、旧策略 logprob 和 replica 状态需要一致。<a href="https://docs.pytorch.org/docs/2.15/fsdp.html">PyTorch FSDP 文档</a></p>
+<h4>Q19 你用 LoRA 还是全参数训练 视觉塔更新了吗</h4>
+<p><strong>回答：</strong> 已核对的普通 progress 和 FCzero 正式日志记录 lora_rank=0、freeze_vision_tower=false，属于非 LoRA 的全模型微调配置。按当前代码路径，视觉塔未显式冻结。但没有逐模块梯度或权重差记录，因此我不会宣称已经测得视觉编码器每层都发生有效更新，也没有做冻结与解冻的受控消融。</p>
+<p><strong>追问准备：</strong> 后续保存 trainable 参数清单、优化器参数组、视觉模块梯度范数与前后权重差。不能仅凭“用了 FSDP”推断训练范围。</p>
+<h4>Q20 如何判断一个任务成功</h4>
+<p><strong>回答：</strong> 严格成功要求所有目标检查通过、没有白名单外的状态修改，并以 COMPLETE 结束。达到目标却一直循环、错误 ABORT，或者改坏其他业务数据，都可能失败。查询类 Grounded 任务需要真实打开答题卡、填写并提交，不能只凭模型文本里说出答案就算成功。</p>
+<p><strong>追问准备：</strong> 先看固定任务分母的 strict pass@1，再看 progress 和终止类别。查询失败要区分信息读取、记忆和答卷操作。</p>
+<h4>Q21 简历中的提升数字可信在哪里 有什么限制</h4>
+<p><strong>回答：</strong> 8.98%→21.88% 来自 FCzero 同一个 run，23/256→56/256，任务 ID 与题目文本一致，原始结果复核没有环境 ERROR。step0 有一个重复失败记录，按任务去重仍是 23 个成功。但这只是单次训练峰值，完整初态快照不齐全，没有多 seed 和独立最终 holdout，也不是相对普通 GRPO 的因果增益。</p>
+<p><strong>追问准备：</strong> 说“增加 12.89 个百分点”，不要说“相对提升 12.89%”；能解释为什么总体更高的 22.66% 不能拼接另一 run 的初始分数。</p>
+<h4>Q22 动态采样到底有没有提升</h4>
+<p><strong>回答：</strong> 当前只能说提高了入选组的奖励差异，不能说稳定提高最终成功率。更可比的纯结果两组在健康区间交替领先，动态组平均候选量约为普通的 2.16 倍。动态 progress 那组还改变了验证集合，只覆盖 89 个基础任务，因此不能直接和普通组峰值比较。下一步要固定实例，用相同候选/token 或 GPU 时间预算做对照。</p>
+<p><strong>追问准备：</strong> 相同 outer step 不等于相同数据、算力或任务覆盖；候选成本必须包括被丢弃的数据。</p>
+<h4>Q23 大 mini-batch 的 KL 更低 为什么成功率没更高</h4>
+<p><strong>回答：</strong> 更大 mini-batch 改变了数据聚合和外层循环内部的优化器调用次数。KL 和 clipfrac 降低说明某些优化统计变化，不代表任务策略更好。M96 的 progress 峰值 21.09%，现有记录未显示一致优势，而且还有任务文本、随机性与验证频率差异。需要明确按候选预算还是实际更新数比较。</p>
+<p><strong>追问准备：</strong> <code>rollout_probs_diff_mean</code> 是 rollout 与训练侧重算概率差异，发生在本轮更新前，不能把它当成本轮 optimizer 导致的 KL。</p>
+<h4>Q24 验证先升后降 是不是过拟合</h4>
+<p><strong>回答：</strong> 先升后降是现象，原因不能直接确定。可能涉及过拟合、终止行为转移、优化幅度、数据采样变化，也可能是环境故障。FCzero 后期 ABORT 增加；纯结果 GRPO 后期大量 TargetClosedError。应先看固定实例的逐任务变化和错误覆盖，再在健康环境重评已有 checkpoint，而不是把所有下降统一叫过拟合。</p>
+<p><strong>追问准备：</strong> 变化的训练 batch reward 与固定验证成功率不是同分布曲线，动态组筛选还会引入选择偏差。</p>
+<h4>Q25 错误 COMPLETE 清零为什么没解决终止问题</h4>
+<p><strong>回答：</strong> 这个规则改变的是相对奖励。未完成却 COMPLETE 会归零，但某些 ABORT 轨迹仍可能保留进度奖励，存在转向 ABORT 的激励。记录里 FCzero 后期 ABORT 增多、成功下降，所以我会同时检查严格成功、错误 COMPLETE、ABORT、循环和超时，并先做失败终止口径一致的对照。</p>
+<p><strong>追问准备：</strong> 这是一种机制假设，不能仅凭聚合曲线断言模型“学会投机”。自动截断也不是模型主动选择停止。</p>
+<h4>Q26 成功率只有约 20% 这个项目有什么价值</h4>
+<p><strong>回答：</strong> 总体分数需要结合任务难度理解。FCzero 峰值的 L1 为 95%，跨应用为 6.45%、L4 为 1.25%，说明基础交互与长链组合的表现差距很大。项目价值在于完成实际训练、实现可解释的改造，并把“哪里失败、为什么暂时不能下结论”追到轨迹和代码。下一步用可验证实验改善瓶颈，而不是把一个总体峰值包装成通用能力。</p>
+<p><strong>追问准备：</strong> 不用上游论文的真机成绩为个人结果背书；不要声称达到 SOTA。</p>
+<h4>Q27 环境并发和训练故障你怎么处理</h4>
+<p><strong>回答：</strong> 当前增量是环境池分 wave 启动、等待 readiness、首张截图预热以及初始化异常清理，避免部分未就绪环境被发布给训练。历史仍有训练期间浏览器关闭导致的故障，因此这不等于已经实现了全过程自动恢复。我会按任务记录环境 ERROR、重试和最终覆盖，重建坏实例后再比较模型效果。</p>
+<p><strong>追问准备：</strong> 96/128 是槽位配置，未做吞吐基准不能说提速多少；NCCL timeout 不等于已证明显存 OOM。</p>
+<h4>Q28 如何保证实验复现与验证可信</h4>
+<p><strong>回答：</strong> 固定代码与 diff、模型、任务 ID、模板、参数、初态、解析器、judge 和 resolved step budget；保存训练/评测 seed、依赖版本、reward 环境变量和恢复来源。seed 相同但代码、世界数据或初态变化仍可能产生不同任务。所有组使用相同评测 manifest，历史 test 作为开发集，最终保留未参与调参的 holdout。</p>
+<p><strong>追问准备：</strong> 当前训练内与独立 benchmark 的步数预算不同，需要统一；恢复还要核对 RNG 与数据游标，能加载 checkpoint 不等于完整复现。</p>
+<h4>Q29 如果继续做信用分配 你会怎样实现</h4>
+<p><strong>回答：</strong> 我会先记录真实执行动作前后的子目标状态，建立 episode、step 与 gateway trace 的唯一对应，再保留 outcome GRPO 并添加小权重的子目标段信用。必要导航即时进度为零，不应统一判错。仅把 progress 差分求和再广播会回到终态信号；必须让实际 step advantage 随动作或阶段改变。当前 PRM 与这条链路都还没有实现。</p>
+<p><strong>追问准备：</strong> 默认路径忽略 Step.reward；预计算优势映射还存在缺 episode ID 的风险。先关动态采样，避免终态同奖的组被丢掉，再做 λ=0 回归与多 seed 对照。<span>方案细节（历史记录）</span></p>
+<h4>Q30 如果只给你有限算力 如何设计下一轮实验</h4>
+<p><strong>回答：</strong> 先修复评测与采样边界，再重评已有 checkpoint，复用现成权重。选择一个主假设，例如终止奖励一致性或子目标段信用，固定基础模型、实例、KL、mini-batch 与候选预算，先小 pilot 排错；将最有信息的候选与基线做至少三个训练 seed 的对照。既报严格成功与长链分层，也报真实交互、token、评分成本和环境错误。</p>
+<p><strong>追问准备：</strong> 负对照与 λ=0 可用固定 batch 的离线数值检查；预先约定选 checkpoint 规则，不比较各组任意时刻最高值。未复现的收益不填进简历。</p>
+<h3>6 如何进一步改进这个项目</h3>
+<h4>6.1 第一优先级 让已有结果可以公平比较</h4>
+<table>
+<thead>
+<tr>
+<th>工作</th>
+<th>具体改动</th>
+<th>验收依据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>固定验证集合</td>
+<td>独立保存 task ID、template、params、state 和 prompt hash</td>
+<td>不同训练配置使用同一实例清单</td>
+</tr>
+<tr>
+<td>统一步数预算</td>
+<td>共用训练/benchmark 的预算解析，保存 resolved_max_steps</td>
+<td>相同任务通过不同入口得到相同预算</td>
+</tr>
+<tr>
+<td>修复动态采样边界</td>
+<td>达 max_rounds 前停止读取下一 batch</td>
+<td>mock 证明没有多吞未执行 batch</td>
+</tr>
+<tr>
+<td>透传 wrapper 参数</td>
+<td>主启动命令补 <code>"$@"</code>，增加配置 dry run</td>
+<td>命令行覆盖进入最终配置</td>
+</tr>
+<tr>
+<td>修复指标口径</td>
+<td>分开 candidates、selected、discarded；strict success 与 reward&gt;0 分开</td>
+<td>指标分母明确，候选轮次不互相覆盖</td>
+</tr>
+<tr>
+<td>隔离环境错误</td>
+<td>ERROR、重试、正常失败分别记录，坏实例重建</td>
+<td>评测覆盖完整，错误不伪装成普通失败</td>
+</tr>
+</tbody>
+</table>
+<p>这些是当前仍待完成的修复。源码重点位置包括 <a href="../mobilegym-rl/rllm/experimental/unified_trainer.py">动态采样</a>、<a href="../mobilegym-rl/cookbooks/mobilegym/train_qwen3_vl_4b_verl.sh">启动脚本</a>、<a href="../mobilegym-rl/cookbooks/mobilegym/mobilegym_flow.py">RL 预算</a> 与 <a href="../bench_env/config.py">benchmark 预算</a>。</p>
+<p>优先重评 base model、普通 progress step10、FCzero step12、result-only GRPO step15、Dynamic-result step24。峰值分片仍存在，但正式重评前要检查加载有效性。</p>
+<h4>6.2 第二优先级 做一个可解释的算法改进</h4>
+<p>建议主问题：<strong>可验证子目标信用能否在相同交互预算下提高跨应用与 L3/L4 成功率？</strong></p>
+<p>按阶段推进：</p>
+<ol>
+<li><strong>先做诊断。</strong> 抽取长链失败轨迹，标记首个错误：定位、搜索、记忆、跨 App 状态、业务操作、答卷、终止。不能在没有分类的情况下假设所有失败都需要 PRM。</li>
+<li><strong>修正终止激励。</strong> 比较错误 COMPLETE 与未完成 ABORT 的一致奖励口径，检查是否只是从一种失败转移到另一种。</li>
+<li><strong>增加步骤数据。</strong> 当前 <code>env.get_state()</code> 仍取完整状态，需要测开销；为步骤保存执行标记、子目标前后值、唯一 trace ID，正确处理循环检测前未执行的动作。</li>
+<li><strong>接真实过程优势。</strong> 采用 <code>A_step=A_outcome+λ*C_segment</code> 等清晰可消融设计，先让 λ=0 复现原优势。该混合项是待验证辅助目标，不自动无偏。</li>
+<li><strong>测同状态锚点。</strong> GiGPO 式对照可复用现有 rollout，但必须检查 GUI 隐藏状态、历史与剩余预算的可比性；没有中后段覆盖就不强行推广。</li>
+</ol>
+<p>首轮关闭动态筛选，因为现有筛选只看终态奖励差异，可能丢弃含有效过程信号的全失败组。过程方案有效后，再研究二者组合。</p>
+<h4>6.3 第三优先级 补齐多模态和后训练对照</h4>
+<table>
+<thead>
+<tr>
+<th>方向</th>
+<th>建议实验</th>
+<th>对目标岗位的价值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SFT warm-start</td>
+<td>训练集内高质量成功/恢复轨迹，SFT 与 SFT+RL 同预算比较</td>
+<td>能解释示范学习与在线优化的分工</td>
+</tr>
+<tr>
+<td>视觉与历史</td>
+<td>图像分辨率/历史策略/跨 App 信息保留单变量对照</td>
+<td>展示多模态输入设计与效率意识</td>
+</tr>
+<tr>
+<td>训练范围</td>
+<td>冻结视觉塔、非 LoRA、LoRA 的受控对照，记录 trainable 参数</td>
+<td>展示可验证的参数高效训练和模态适配分析</td>
+</tr>
+<tr>
+<td>偏好优化</td>
+<td>在可比较前缀上构造可靠动作偏好，再评估 DPO 路线</td>
+<td>扩展后训练方法理解，避免仅会跑 GRPO</td>
+</tr>
+<tr>
+<td>学习型 PRM</td>
+<td>先用状态规则与人工复核建立诊断标签，再验证视觉评分器</td>
+<td>展示数据、reward model 与 policy 的完整链路</td>
+</tr>
+<tr>
+<td>课程采样</td>
+<td>增加训练集内跨 App 与 L3/L4 任务覆盖，保留简单任务回放</td>
+<td>针对已观察的难度分布差异</td>
+</tr>
+</tbody>
+</table>
+<p>这些应依次选择主变量，不能在一轮中同时更换模型、数据、奖励和优化器。若 PRM 用于多候选重排，要把推理预算收益与训练收益分开。</p>
+<h4>6.4 最小正式实验方案</h4>
+<ul>
+<li><strong>基线：</strong> 固定初始 checkpoint 与严格 outcome GRPO，或预先选定的 progress 基线。</li>
+<li><strong>候选：</strong> 只增加一个信用或终止改动，其余配置相同。</li>
+<li><strong>预算：</strong> 固定真实候选轨迹/token，并另报总 GPU 时间与 judge 成本。</li>
+<li><strong>随机性：</strong> pilot 排错后，基线和候选各至少 3 个训练 seed；这是提高可信度的起点，不等于统计功效保证。</li>
+<li><strong>评测：</strong> 相同实例、预算、评测频率与 checkpoint 选择规则；独立最终 holdout。</li>
+<li><strong>报告：</strong> 每 seed、均值和波动，严格成功、跨 App、L3/L4、终止分布、环境错误、候选数和成本；按任务/家族做配对分析。</li>
+</ul>
+<p>如果过程分数提高但严格成功没提高，或 ABORT 增多，应回到激励和标签诊断。不能只挑一个最好看的指标宣布方法有效。</p>
+<h4>6.5 对实习申请最有帮助的交付物</h4>
+<p>建议最终项目仓库具备：一页项目 README、系统流程图、可运行配置、关键采样/奖励测试、固定评测 manifest、正式对照表、两段成功和两段失败轨迹、checkpoint 与代码版本说明。模型发布权限和成本允许时再提供可加载产物；现阶段不虚构公开地址。</p>
+<p>当正式对照完成后，简历可以升级为：“在固定实例和交互预算下，方法使独立评测成功率从多 seed 均值 X 提升至 Y，跨应用提升 Z 个百分点，额外成本为 W。”其中 X/Y/Z/W 均须来自新实验。</p>
+<h3>7 面试前最后准备</h3>
+<p>必须能亲自解释四段代码：<a href="../mobilegym-rl/cookbooks/mobilegym/evaluator.py">奖励 evaluator</a>、<a href="../mobilegym-rl/rllm/experimental/unified_trainer.py">动态补采样</a>、<a href="../mobilegym-rl/rllm/experimental/verl/verl_advantage.py">默认优势广播</a>、<a href="../bench_env/env/pool.py">环境池初始化</a>。</p>
+<p>必须记住的数字是：160/256 任务划分；每任务 8 条轨迹；普通 12 组、动态每轮 16 组；23/256→56/256；动态候选约 2.16/2.55 倍；跨应用峰值分层 6/93。其余精确超参可以查配置，避免凭记忆补造 GPU 型号、训练时长和吞吐。</p>
+<p>准备一个实际成功轨迹、一个正确前缀后失败的轨迹、一个环境 ERROR 案例，以及一项你能解释的反直觉结论，例如“有效组更多却没证明单位预算更优”。这些比只背算法定义更能支撑个人贡献。</p>
+<h3>8 证据与进一步阅读</h3>
+<h4>本地证据</h4>
+<ul>
+<li><a href="README.md#results">最新实验复核</a></li>
+<li><a href="experiments.csv">实验目录表</a></li>
+<li><span>完整历史审计（历史记录）</span></li>
+<li><span>历史结果与归属说明（历史记录）</span></li>
+<li><span>PRM 与信用分配改进报告（历史记录）</span></li>
+<li><span>FCzero 历史配置（历史记录）</span></li>
+</ul>
+<h4>算法阅读</h4>
+<ul>
+<li><a href="https://arxiv.org/html/2402.03300v3">DeepSeekMath 与 GRPO</a></li>
+<li><a href="https://arxiv.org/pdf/1707.06347">PPO</a></li>
+<li><a href="https://arxiv.org/html/2305.18290v3">DPO</a></li>
+<li><a href="https://arxiv.org/abs/2503.14476">DAPO</a></li>
+<li><a href="https://arxiv.org/html/2505.10978v3">GiGPO</a></li>
+</ul>
+<p>这些论文用于理解算法与设计后续实验，其作者结果不计入个人项目成果。本次文档完成了实验核对、简历组织与面试准备，未启动训练，也未修复文中列出的待办代码。</p>
+<hr />
+<h3>9 GUI Agent 任务理解、相关工作与优化思考</h3>
+<p>研究日期：2026 年 11 月 14 日。用途：为 MobileGym 项目面试准备补充任务理解、方法选择与可检验的研究计划。以下区分“论文方法”“本地已知事实”和“待验证方案”，不把外部论文成绩算作个人成果。</p>
+<h4>9.1 之前调研了什么 这次补充什么</h4>
+<p>之前已经调研过一轮，来源记录包含 12 篇论文，重点是 progress reward、PRM、信用分配、奖励塑形和在线课程。此前的 <span>改进报告（历史记录）</span> 保留了那一轮结论。</p>
+<p>本次扩大到五条主线：任务与评测、视觉 grounding、规划和记忆、数据与后训练、奖励和信用。检索 arXiv、ACL Anthology 等原始论文及官方项目，交叉核对方法、观测/动作接口、评测单位与实际阅读版本。部分近期工作仍是预印本。本报告是有目的的叙述性研究，不声称穷尽全部论文，也不提供跨协议排行榜。</p>
+<p><strong>面试时最值得表达的主张：</strong> GUI Agent 的优化应由失败来源驱动。先建立“感知—决策—执行—验证”的诊断，再决定补数据、改记忆、做 RL 或增加过程信用。你的项目适合进一步发展为“可验证环境下的长链多模态策略学习”。</p>
+<h4>9.2 如何理解 GUI Agent 这个任务</h4>
+<h5>9.2.1 它是带目标的部分可观测决策问题</h5>
+<p>可以用以下形式理解：</p>
+<pre><code>隐藏状态 s_t：业务数据、页面、导航栈、键盘、焦点、权限、未显示的信息等
+观察 o_t：当前截图；具体系统也可能开放 DOM / accessibility tree
+可见历史 h_t：(o_0, a_0, …, o_t)，或该历史的受控摘要
+目标 g：用户要求及约束
+策略 πθ(a_t | g, h_t)：决定操作、查看、等待、恢复或终止
+环境转移：执行 a_t 后得到 s_(t+1)，再产生新观察
+</code></pre>
+<p>同一截图可能对应不同隐藏状态；环境转移即使确定，也不意味着模型完全知道状态。目标可能要求先读取信息，再在另一 App 中使用，当前画面不足以决定动作。POMDP 视角可从 OSWorld 与 Agent S2 的形式化出发，但上面的具体变量解释是针对本项目的建模。<a href="https://arxiv.org/html/2404.07972v2">OSWorld</a>、<a href="https://arxiv.org/html/2504.00906v1">Agent S2</a></p>
+<p>在本地 MobileGym 中，generic_v2 使用当前截图和历史文本。judge 能读取业务状态，是环境的监督能力；它不意味着 policy 也读取了该状态。训练与评测必须分别写清楚：</p>
+<table>
+<thead>
+<tr>
+<th>通道</th>
+<th>能看到什么</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Policy 输入</td>
+<td>指令、当前图、允许的可见历史</td>
+<td>产生动作</td>
+</tr>
+<tr>
+<td>执行器</td>
+<td>动作参数与环境接口</td>
+<td>将动作落实为点击、输入等</td>
+</tr>
+<tr>
+<td>Reward / judge</td>
+<td>任务条件、初态与结果状态</td>
+<td>评分、成功判断、副作用检查</td>
+</tr>
+<tr>
+<td>诊断 oracle</td>
+<td>人工子目标、正确元素框等额外信息</td>
+<td>仅用于定位瓶颈，单独报告</td>
+</tr>
+</tbody>
+</table>
+<h5>9.2.2 六种能力共同决定完整任务成功</h5>
+<ol>
+<li><strong>Grounding：</strong> 已经知道要找哪个元素，能否定位到正确位置？</li>
+<li><strong>Planning：</strong> 根据目标和进度，此时应该执行哪个业务操作？</li>
+<li><strong>State tracking：</strong> 上一步是否生效，页面是否仍在加载，实际对象是谁？</li>
+<li><strong>Memory：</strong> 跨页面和跨 App 后，能否保留正确实体、数值与约束？</li>
+<li><strong>Recovery：</strong> 操作失败或进入错误页面后，能否识别并恢复？</li>
+<li><strong>Termination：</strong> 什么时候应继续、核验、完成或中止？</li>
+</ol>
+<p>例如“把聊天中确认的会议地址加入日历”，可能先涉及信息读取，再涉及跨 App 记忆、字段输入和保存验证。点击位置全部正确，也可能因为日期记错而失败。这是示意任务，不是新增实验。</p>
+<p>可以用一个简化算式解释长链困难：若每个关键决策的条件成功率都为 95%，20 个关键决策全部成功约为 0.95²⁰＝35.85%。这是恒定条件成功率、无恢复的教学模型，不是项目成功率预测；真实错误存在依赖，恢复操作也会改变结果。</p>
+<h5>9.2.3 优化目标应同时考虑结果、成本和约束</h5>
+<p>当前项目的严格成功要求目标达成、没有不允许的副作用并正确 COMPLETE。产品层面还需考虑交互次数、推理 token、延迟和可恢复性。一个实用研究目标是：</p>
+<pre><code>在固定交互与计算预算、相同观测/动作接口下，提高严格任务成功率；
+同时报告成本、终止分布、环境错误和非预期状态修改。
+</code></pre>
+<p>不要直接用“最短轨迹”替代成功：检查信息、等待加载和纠错可能需要合理的额外操作。也不要一开始把许多成本项混成单个奖励；先测清它们与成功的关系，再用消融决定权重。</p>
+<h4>9.3 代表性工作教会我们什么</h4>
+<p>下面按问题组织文献，而不是把不同基准的最好分数放在一起。版本与阅读范围见文末来源索引。</p>
+<h5>9.3.1 任务和评测：测到的是哪一种能力</h5>
+<table>
+<thead>
+<tr>
+<th>工作</th>
+<th>原始研究的关注点</th>
+<th>阅读时必须保留的区别</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://arxiv.org/html/2405.14573v5">AndroidWorld</a></td>
+<td>参数化移动任务、初始化与设备状态判分</td>
+<td>Android emulator 中的真实应用；环境可提供截图和 a11y，不保证所有基线纯视觉</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2404.07972v2">OSWorld</a></td>
+<td>桌面真实应用中的执行和功能正确性</td>
+<td>主 369 任务是 Ubuntu；观测、PyAutoGUI 动作与预算需固定</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2307.13854v4">WebArena</a></td>
+<td>自托管网站、业务任务与功能评测</td>
+<td>模板与任务实例不同；可开放 DOM / 元素 ID，部分评测含模型匹配</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2401.13649v2">VisualWebArena</a></td>
+<td>需要视觉信息的在线网页任务</td>
+<td>SoM 元素框与 ID 来自 JavaScript；图像输入不等于原始截图加坐标协议</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2406.03679v6">AndroidControl</a></td>
+<td>演示数据规模、不同泛化划分</td>
+<td>原论文基线使用 a11y 文本，主要是离线逐步动作评测</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2504.07981v1">ScreenSpot-Pro</a></td>
+<td>高分辨率界面上的目标定位</td>
+<td>点落在目标框内，与在线任务完成是不同指标</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2606.29537v2">OSWorld 2.0</a></td>
+<td>长工作流、动态环境、结果检查点</td>
+<td>终态检查点部分分不自动构成时间逐步 PRM</td>
+</tr>
+</tbody>
+</table>
+<p><strong>对本项目的推论：</strong> 建立三层评测：固定截图定位 → 固定可见前缀的一步动作 → 在线完整任务严格成功。前两层帮助定位原因，第三层检验策略在自身产生的状态上能否完成目标。不能把离线准确率当作在线能力的替代品。</p>
+<h5>9.3.2 视觉与规划：专门定位器和端到端策略各有用处</h5>
+<table>
+<thead>
+<tr>
+<th>工作</th>
+<th>核心思路</th>
+<th>对 MobileGym 的可借鉴部分</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://arxiv.org/html/2401.10935v2">SeeClick</a></td>
+<td>用 GUI 元素与坐标监督学习视觉定位</td>
+<td>利用模拟器产生训练标签；评测策略仍只读截图</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2410.05243v3">UGround</a></td>
+<td>规划器描述目标，专门 grounding 模型定位</td>
+<td>固定正确目标描述，测独立定位器能修复多少失败</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2411.17465v1">ShowUI</a></td>
+<td>视觉 token 选择及图像/动作交错建模</td>
+<td>先试近期图像与关键帧，再考虑改模型内部压缩</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2504.00906v1">Agent S2</a></td>
+<td>专家 grounding 与主动分层重规划</td>
+<td>将计划、执行和验证拆开诊断；计入额外模型调用</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2501.12326v1">UI-TARS</a></td>
+<td>原生视觉策略、反思修正数据及 Agent DPO</td>
+<td>收集真实错误前缀下的纠正动作和恢复示范</td>
+</tr>
+</tbody>
+</table>
+<p><strong>选择方法的依据：</strong> 如果给定正确目标描述仍点错，优先处理定位或坐标映射。如果同一状态下给定子目标能明显改善动作，规划或目标表达可能是瓶颈。这样的 oracle 提示是诊断工具，其结果不能并入正常任务成功率；还需控制随机性、提示长度和描述歧义。</p>
+<h5>9.3.3 数据和后训练：算法名称不足以说明训练方式</h5>
+<table>
+<thead>
+<tr>
+<th>工作</th>
+<th>核验到的训练/数据机制</th>
+<th>不能据此直接推出什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://aclanthology.org/2025.acl-long.277/">OS-Genesis</a></td>
+<td>先探索状态转移，再反向合成任务，筛选轨迹</td>
+<td>生成的语言任务天然可执行、无标注成本</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2509.02544v2">UI-TARS-2</a></td>
+<td>迭代数据流程与多轮 PPO；value 预训练、GAE、轨迹池</td>
+<td>它使用 GRPO；其所有结果都在纯 GUI 接口取得</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2504.14239v1">InfiGUI-R1</a></td>
+<td>Actor2Reasoner、推理蒸馏/SFT，随后 RLOO</td>
+<td>子目标文本评分等于真实业务状态完成</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2504.10458v4">GUI-R1</a></td>
+<td>对固定观测的动作输出做规则奖励 GRPO，筛选训练问题</td>
+<td>3K 样本就是全部数据成本；离线 step SR 等于在线任务 SR</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2610.14157v1">OpenMobile-2</a></td>
+<td>扩展环境和演示数据；GUI / hybrid SFT 与可验证 RL</td>
+<td>GUI + app-native tools 成绩与纯截图坐标策略可直接比较</td>
+</tr>
+</tbody>
+</table>
+<p>这些研究提供方法选择，不能组成“同一个基准上的先后胜负”。例如 UI-TARS 原版的在线轨迹收集与偏好训练、UI-TARS-2 的 PPO，以及 InfiGUI-R1 的 RLOO，应分别解释。</p>
+<h4>9.4 有哪些手段 如何决定先做什么</h4>
+<h5>9.4.1 观测、记忆与执行：先验证低成本改动</h5>
+<p>当前历史文本可能没有记录未来要用的数值。建议先冻结模型，做以下对照；它们都是新增方案：</p>
+<table>
+<thead>
+<tr>
+<th>方案</th>
+<th>预期作用</th>
+<th>验证与代价</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>当前图 + 原文本历史</td>
+<td>保留现有基线</td>
+<td>保存实际模型输入</td>
+</tr>
+<tr>
+<td>当前图 + 最近 2 张图</td>
+<td>识别转移、近一步误操作</td>
+<td>图像 token、时延、相同任务重复评测</td>
+</tr>
+<tr>
+<td>当前图 + 关键历史图</td>
+<td>跨 App 保留源信息</td>
+<td>关键帧选择错误、旧状态误用</td>
+</tr>
+<tr>
+<td>近期图 + 结构化摘要</td>
+<td>控制长上下文成本</td>
+<td>摘要事实错误、丢约束、递归误差</td>
+</tr>
+</tbody>
+</table>
+<p>摘要可以包含“目标实体、已确认值、证据 step、已完成事项、待做事项”，并区分观察与推测。只允许从模型可见记录生成，不能把 judge 的隐藏字段直接写进部署记忆。ShowUI 与 UI-TARS-2 提供了历史建模的不同实现，但上述四组是针对本项目提出的对照设计。<a href="https://arxiv.org/html/2411.17465v1">ShowUI</a>、<a href="https://arxiv.org/html/2509.02544v2">UI-TARS-2</a></p>
+<p>执行层同样需要检查：坐标是否与该帧尺寸匹配，键盘是否遮挡，点击后是否等待稳定画面，超时重试是否重复提交。截图相同不一定代表动作未生效，截图变化也不等于业务完成。先把执行故障单列，避免用更多 RL 更新去拟合执行器问题。</p>
+<p>主动查看、滚动找元素、打开详情、等待后重看可以具有信息价值，但都消耗预算。最初应测“额外查看减少了哪一种不确定性”，不要给每次查看固定正奖励。</p>
+<h5>9.4.2 数据：增加技能覆盖，而不仅是改写指令</h5>
+<p>数据可沿五个维度扩展：任务目标、参数实体、界面布局、状态起点、失败与恢复路径。训练任务 ID 或文本变多，并不自动意味着技能覆盖变多。</p>
+<p>适合本项目的做法：</p>
+<ul>
+<li>利用声明式导航和可控状态生成候选任务，执行并通过 judge 后才收录。</li>
+<li>生成目标相近但约束不同的任务，要求核对实体、日期或副作用。</li>
+<li>记录真实失败状态后的恢复示范，不能假定一次 BACK 总能撤销业务操作。</li>
+<li>将跨 App 数据依赖作为单独维度：源信息如何获得、何时使用、是否过期。</li>
+<li>合成与审核只使用训练/开发任务，最终 holdout 不参与造数据或改规则。</li>
+</ul>
+<p>OS-Genesis 的“先探索再构造任务”提供一种数据入口；它使用模型进行任务生成和轨迹质量判断，因此仍需要把教师成本、失败候选和验证开销纳入统计。<a href="https://aclanthology.org/2025.acl-long.277/">OS-Genesis</a></p>
+<h5>9.4.3 SFT、偏好优化和 RL 的分工</h5>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>必需数据条件</th>
+<th>擅长提供的训练信号</th>
+<th>本项目的入口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SFT</td>
+<td>可靠、可执行的正例步骤</td>
+<td>格式、定位、基本技能和恢复行为</td>
+<td>训练集内成功/恢复示范</td>
+</tr>
+<tr>
+<td>DPO</td>
+<td>同可见上下文下的可信正负响应</td>
+<td>对错误与纠正动作的相对偏好</td>
+<td>相同前缀的错误动作与复核修正</td>
+</tr>
+<tr>
+<td>固定观测的动作 RL</td>
+<td>动作类型、目标框等标签</td>
+<td>一步动作输出的规则奖励</td>
+<td>独立诊断或 warm-start</td>
+</tr>
+<tr>
+<td>在线 GRPO</td>
+<td>同任务多条交互轨迹和终态奖励</td>
+<td>完整任务的相对表现</td>
+<td>当前已运行路径</td>
+</tr>
+<tr>
+<td>PPO + value</td>
+<td>在线轨迹及价值估计训练</td>
+<td>基于 return/TD 的时序优势</td>
+<td>需新增 value 训练、校准和稳定性验证</td>
+</tr>
+</tbody>
+</table>
+<p>恢复 SFT 中可以把错误步骤保留为上下文，只对已核验的纠正步骤施加正监督。DPO 不能随意配对两个不同截图下的动作。在线 RL 有机会遇到策略自身诱发的状态；全失败且同奖的组仍缺乏组内任务奖励信号，因此可能需要示范、课程或额外过程信息。</p>
+<p>UI-TARS 的纠正数据/偏好流程、GUI-R1 的固定观测动作奖励，以及 UI-TARS-2 的多轮 PPO，分别说明了不同数据条件，不能用“都做了 RL”抹平差异。<a href="https://arxiv.org/html/2501.12326v1">UI-TARS</a>、<a href="https://arxiv.org/html/2504.10458v4">GUI-R1</a>、<a href="https://arxiv.org/html/2509.02544v2">UI-TARS-2</a></p>
+<h4>9.5 Reward、PRM 与信用分配 应该怎么区分</h4>
+<h5>9.5.1 先回答你当前的 reward 是什么</h5>
+<p>本项目当前是<strong>规则终态奖励</strong>：根据最终目标检查、终止类型和副作用等计算轨迹分数。progress 能给部分分，但这仍然是终态结果分解。严格 result_only 与错误 COMPLETE 清零是已有本地分支。</p>
+<p>默认 verl 路径读取 trajectory reward，计算组内优势，再广播到同条轨迹的响应步骤。Step.reward 的存在不代表该值已经参与默认优势计算。<a href="../mobilegym-rl/rllm/experimental/verl/verl_advantage.py">本地优势路径</a></p>
+<table>
+<thead>
+<tr>
+<th>概念</th>
+<th>输出/作用</th>
+<th>是否依赖学习得到的评分器</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>规则 outcome reward</td>
+<td>最终目标是否满足，或终态分项进度</td>
+<td>否</td>
+</tr>
+<tr>
+<td>规则过程奖励</td>
+<td>动作前后某个可验证子目标变化</td>
+<td>否</td>
+</tr>
+<tr>
+<td>ORM</td>
+<td>学习预测整条轨迹结果</td>
+<td>是</td>
+</tr>
+<tr>
+<td>PRM</td>
+<td>对步骤、前缀或转移提供学习型过程评分；标签语义由方法定义</td>
+<td>是</td>
+</tr>
+<tr>
+<td>Credit assignment</td>
+<td>将结果/过程信息转为不同决策的学习信号</td>
+<td>不一定；可基于规则、value、分组或重分配</td>
+</tr>
+<tr>
+<td>推理时 verifier</td>
+<td>对候选动作或轨迹筛选/排序</td>
+<td>可为规则或模型；不必更新 policy</td>
+</tr>
+</tbody>
+</table>
+<p>每一步都有数字，不自动等于 PRM；有 PRM 也不自动等于训练时逐步信用分配。要继续追问：它预测正确性、成功概率还是进展？用于重排还是 RL？最终如何进入 advantage？</p>
+<h5>9.5.2 代表论文之间的关键区别</h5>
+<ul>
+<li><strong>ProgRM：</strong> 学习 GUI 进展评分，说明进度标签是可研究的监督对象。其接口与评测设置需单独核对，不能直接套用 MobileGym 的业务状态语义。<a href="https://arxiv.org/html/2505.18121v1">ProgRM</a></li>
+<li><strong>GuidNav：</strong> 过程评分用于推理时候选选择；这条路线增加选择预算，不等于已经训练出更好的 policy。<a href="https://arxiv.org/html/2504.16073v1">GuidNav</a></li>
+<li><strong>GUI-Shepherd：</strong> 将过程评价与长序列验证结合，并研究在线 PPO/GAE；需要核对奖励来源和参考轨迹条件。<a href="https://arxiv.org/html/2509.23738v1">GUI-Shepherd</a></li>
+<li><strong>GiGPO：</strong> 在 episode 组之外寻找可比较的 anchor state 组，增加局部相对优势。v3 还包含视觉小环境附录实验，但不是移动 GUI 证据；截图相似也不足以证明状态、历史和剩余预算相同。<a href="https://arxiv.org/html/2505.10978v3">GiGPO</a></li>
+<li><strong>AgentPRM：</strong> 区分前缀的 promise 与 progress。本次核对发现其附录 RL 实验使用最后一步 PRM 得分作为整轨迹奖励；不能据此声称它直接验证了逐步 dense policy update。<a href="https://arxiv.org/html/2511.08325v1">AgentPRM</a></li>
+</ul>
+<p>这些是对原文使用方式的辨析，论文自身收益不能替代本项目对照。新增状态规则过程信号应先叫“可验证过程奖励”；以后训练只看可见图像/历史的评分器，才进入学习型 PRM 的问题。</p>
+<h5>9.5.3 为什么把 progress 做差分还不够</h5>
+<p>设 p_t 为第 t 步后的子目标进度。若定义：</p>
+<pre><code>r_t = p_t − p_(t−1)
+Σ_t r_t = p_T − p_0
+</code></pre>
+<p>求和会消去中间项。如果仍把这个总和变成一个轨迹优势并广播，步骤间依旧没有由过程进度产生的差异化优势；共享同一个优势值，并不意味着不同步骤的策略梯度相同。要完全复现旧奖励，还须保留初始进度以及原先的终止、答案和副作用处理；不能把上式直接当现有 reward 的等价改写。</p>
+<p>势函数塑形的标准形式是 F_t＝γΦ(s_(t+1))−Φ(s_t)。折扣求和后为 −Φ(s_0)＋γ^TΦ(s_T)。在相同起点、终止势为零等条件下，它只是一个常数；继续用于组内终态广播时可能被中心化抵消。一般的正向进度奖金并不自动拥有策略不变性保证。<a href="https://people.eecs.berkeley.edu/~russell/papers/icml99-shaping.pdf">Ng、Harada 与 Russell，1999</a></p>
+<h5>9.5.4 四条真正需要比较的信用路线</h5>
+<table>
+<thead>
+<tr>
+<th>路线</th>
+<th>如何区分步骤贡献</th>
+<th>代价与风险</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>子目标段信用</td>
+<td>将可验证子目标变化归入对应执行片段</td>
+<td>切段质量；必要导航零即时进度；改变辅助目标</td>
+</tr>
+<tr>
+<td>Value / GAE</td>
+<td>根据可见历史估计未来回报，形成时序差分优势</td>
+<td>价值误差、额外训练与显存、稀疏回报</td>
+</tr>
+<tr>
+<td>Anchor-state 局部分组</td>
+<td>比较足够相近决策条件下的不同后续结果</td>
+<td>重复状态覆盖低、隐藏状态混淆、条件不等价</td>
+</tr>
+<tr>
+<td>同前缀分叉 rollout</td>
+<td>在可恢复状态上尝试不同动作并估计后续成功</td>
+<td>克隆真实性、Monte Carlo 成本、后续策略偏差</td>
+</tr>
+</tbody>
+</table>
+<p>本项目优先研究第一条。一个可消融的起点是：</p>
+<pre><code>A_(episode,t) = A_outcome(episode) + λ · C_segment(episode,t)
+</code></pre>
+<p>C_segment 要有明确的事件定义、范围和归一化规则；λ＝0 必须恢复原数值与 mask。该式是待验证的混合辅助目标，不宣称无偏或保证最优策略不变。</p>
+<p>落地要贯通“执行前后记录 → episode/step/trace 唯一映射 → advantage → response mask”。循环检测有可能在 env.step 之前退出，最后生成动作未实际执行；这类事件必须单列。第一轮先关闭只看终态奖励差异的动态筛选，否则含过程差异的同终态组可能被丢掉。</p>
+<p>中间态分叉应先验证 UI、业务状态、导航栈、焦点、键盘和时钟恢复。MobileGym 论文描述的 snapshot/fork 能力，不等于当前训练入口已经验证任意中途状态的精确复现。<a href="https://arxiv.org/html/2605.26114v1">MobileGym</a></p>
+<h4>9.6 结合你的实验 应该优先优化什么</h4>
+<p>本节是下一轮方案，尚未运行。历史最好点跨 App 为 6/93，单 App 为 50/163；训练跨 App 占比 19/160，验证占比 93/256。它们提示应优先检查任务覆盖和信息保持，但不能单凭相关性认定“缺记忆”就是根因。FCzero 后期 ABORT 增多、成功率回落，也不能只用奖励曲线解释。</p>
+<h5>9.6.1 从失败记录到具体干预</h5>
+<table>
+<thead>
+<tr>
+<th>可观察的失败</th>
+<th>先检查什么</th>
+<th>可单独尝试的改进</th>
+<th>验证指标与反例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>点错按钮、点在空白处</td>
+<td>坐标缩放、裁剪、目标可见性、动作是否执行</td>
+<td>grounding SFT；局部裁剪；独立 grounder</td>
+<td>同一意图下命中率；小目标/高分辨率切片；裁剪漏上下文</td>
+</tr>
+<tr>
+<td>点对了错误功能</td>
+<td>指令是否理解、实体是否消歧</td>
+<td>子目标表示；动作前目标核对</td>
+<td>计划正确率、错误对象率；不能用命中框率替代</td>
+</tr>
+<tr>
+<td>跨 App 后忘记姓名、金额或内容</td>
+<td>输入历史是否保留来源证据</td>
+<td>最近截图；结构化任务记忆</td>
+<td>跨 App 严格成功；记忆事实错误；token/延迟</td>
+</tr>
+<tr>
+<td>长时间滚动、重复跳转</td>
+<td>页面变化检测、历史和动作结果是否可见</td>
+<td>变化摘要、重复状态提示、恢复数据</td>
+<td>重复动作率、恢复成功、ABORT；少循环不必然多成功</td>
+</tr>
+<tr>
+<td>中途走错后无法恢复</td>
+<td>训练数据是否只有理想轨迹</td>
+<td>从真实错误状态构建恢复 SFT</td>
+<td>固定扰动后的完成率；正常任务是否受损</td>
+</tr>
+<tr>
+<td>提前 COMPLETE、误报成功</td>
+<td>模型能否看到完成证据，终止语义是否一致</td>
+<td>可见证据核对、终止校准数据</td>
+<td>false-COMPLETE 与漏报；严格成功优先</td>
+</tr>
+<tr>
+<td>动态采样经常补满仍无有效组</td>
+<td>全成功/全失败组比例、任务难度、预算错误</td>
+<td>难度分层课程；调整组大小的独立对照</td>
+<td>有效组/候选数、困难任务覆盖、总环境动作</td>
+</tr>
+<tr>
+<td>正确前缀和致错动作得到相同权重</td>
+<td>是否真正消费逐步 advantage</td>
+<td>子目标段信用；可靠 anchor 分组；value/GAE</td>
+<td>非零局部优势覆盖、正确/错误动作权重、hold-out 成功</td>
+</tr>
+<tr>
+<td>长任务几乎全失败</td>
+<td>任务可执行性、预算、数据覆盖、能力组合</td>
+<td>合法子任务课程；逐步增加跨度</td>
+<td>同预算下长任务成功；不能只增加步数再宣称算法增益</td>
+</tr>
+<tr>
+<td>后期掉点且环境 ERROR 增多</td>
+<td>环境重置、并发、超时、服务异常</td>
+<td>先修复可重复的执行问题</td>
+<td>原始总体成功 + ERROR 分布；禁止删失败再报最好结果</td>
+</tr>
+</tbody>
+</table>
+<p>这里的自动失败分类应抽样人工复核。一次失败可能同时含定位、状态判断和计划错误；用“最早可确认偏离点”标主因，允许多标签，避免把末端超时当根因。</p>
+<p><strong>低成本诊断可以先做三个 oracle 对照。</strong> 仅在诊断集提供正确下一步意图、正确目标坐标或正确历史事实，分别观察失败是否缓解。它们改变了观察/监督条件，只用于定位瓶颈，不得计入正式纯视觉成绩；其中“正确意图”也可能包含额外信息，因此不是干净的能力因果分解。</p>
+<h5>9.6.2 建议执行顺序与停止条件</h5>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>设计</th>
+<th>支持继续投入的信号</th>
+<th>停止或转向条件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P0：恢复可信基线</td>
+<td>固定环境版本、FCzero 规则、任务参数、预算、初态和评测流程；重跑冻结 checkpoint</td>
+<td>结果可复现，ERROR 与任务难度可分辨</td>
+<td>重置/执行不稳定时先修工程</td>
+</tr>
+<tr>
+<td>P1：冻结模型的记忆对照</td>
+<td>当前文本历史 vs 最近 2–3 张截图 vs 结构化记忆 vs 两者组合</td>
+<td>跨 App/信息搬运改善，正常任务无明显损失，成本可接受</td>
+<td>摘要幻觉或视觉 token 开销抵消收益</td>
+</tr>
+<tr>
+<td>P2：恢复数据 SFT</td>
+<td>相同基座、相同总训练 token；普通示范与加入恢复轨迹对照</td>
+<td>固定错误状态能恢复，完整任务成功也改善</td>
+<td>只改善人工扰动，正常起点无收益；错误前缀被模仿</td>
+</tr>
+<tr>
+<td>P3：局部信用可行性</td>
+<td>保持 outcome 基线；先选一种规则片段或 anchor 辅助项</td>
+<td>梯度映射正确、覆盖充分、同预算严格成功改善</td>
+<td>anchor 低覆盖或合组不可靠；子目标可被刷分</td>
+</tr>
+<tr>
+<td>P4：学习型 PRM</td>
+<td>已验证监督语义后，训练图像+历史评分器；先离线与冻结 actor 重排</td>
+<td>OOD 校准、候选区分及端到端收益均成立</td>
+<td>离线排序高分却诱发奖励利用，或 scorer 成本过高</td>
+</tr>
+</tbody>
+</table>
+<p>P1 是推理接口干预，P2/P3 是训练干预，分别报告。近期多图的收益也可能来自额外计算，因此另报告相同 token 上限的压缩策略，而不强行声称所有输入完全等价。</p>
+<p>第一轮选 16 个训练侧任务、每题 8 条轨迹，共 128 条，可以检查标签、覆盖和映射；这是工程诊断预算，没有足够统计功效的保证。先证明局部项系数为零时与基线一致，再做在线实验。每次只增加一个主要因素，保留方案再用至少 3 个独立训练 seed 和冻结测试集复核；3 个 seed 也不是充分精度的保证。</p>
+<p><strong>我会先做 P0→P1，并根据失败类型选择 P2 或 P3。</strong> 现阶段还没有“PRM 是性能瓶颈”的证据；项目已有可查询状态，先用它验证过程标签是否真的有用，能降低错误方向的投入。</p>
+<h5>9.6.3 如果要做课程与样本效率优化</h5>
+<p>WebRL 提供失败驱动的课程与回放思路；MobileRL 把成功轨迹长度、困难正例与难度过滤结合。它们的输入接口和优化器都与当前路径不同，适合拆成单因素实验。<a href="https://arxiv.org/html/2411.02337v3">WebRL</a>、<a href="https://arxiv.org/html/2509.18119v2">MobileRL</a></p>
+<p>建议按任务家族、跨 App 与难度分层采样，保留最难层的最低探索配额。仅对成功轨迹奖励效率，防止提前 ABORT 因长度短而获益。若引入历史正例回放，应保存行为策略信息并明确 off-policy 处理；不能把不同策略的旧轨迹直接当成当前同组 rollout。补采样减少了无效更新，也可能增加大量环境开销，必须同时看动作、token、GPU 时间和总墙钟时间。</p>
+<h4>9.7 怎样证明优化有效 评测应如何设计</h4>
+<h5>9.7.1 至少区分四层泛化</h5>
+<table>
+<thead>
+<tr>
+<th>层次</th>
+<th>划分单位</th>
+<th>回答的问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>参数泛化</td>
+<td>同任务族的新实体、金额、日期和随机初态</td>
+<td>是否记住具体答案或对象？</td>
+</tr>
+<tr>
+<td>模板/任务族泛化</td>
+<td>未参与训练和选点的任务语义组合</td>
+<td>能否组合已有技能？</td>
+</tr>
+<tr>
+<td>App/界面泛化</td>
+<td>未见 App、布局变化、主题、语言、分辨率</td>
+<td>视觉和操作规则能否迁移？</td>
+</tr>
+<tr>
+<td>平台/真实环境迁移</td>
+<td>浏览器模拟器到 Android/桌面等</td>
+<td>是否依赖模拟器时延、布局或状态规则？</td>
+</tr>
+</tbody>
+</table>
+<p>这四种难度不构成普遍严格排序。task ID 不相交只证明 ID 层面的分离；模板、业务流程、画面或生成器仍可能重合。当前反复用于选点的验证集应当视为开发集，另冻结一个最终测试集。所有数据生成器、PRM 标签和课程筛选都不能读取其答案或结果来调参。</p>
+<h5>9.7.2 统一报告表</h5>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>应报告的内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>主结果</td>
+<td>固定预算下 strict pass@1，成功数/总数；按任务族、单/跨 App、难度分层</td>
+</tr>
+<tr>
+<td>部分进度</td>
+<td>与严格成功并列，说明终态 check 的语义，不能换名为成功率</td>
+</tr>
+<tr>
+<td>稳定性</td>
+<td>多训练 seed 的均值/离散度；同 checkpoint 多环境初态的重复测量</td>
+</tr>
+<tr>
+<td>错误与终止</td>
+<td>ERROR、超时、循环、ABORT、false-COMPLETE；统一保留总体分母</td>
+</tr>
+<tr>
+<td>效率</td>
+<td>环境动作、生成/输入 token、墙钟时间、GPU 小时、PRM/teacher 调用；包含丢弃 rollout</td>
+</tr>
+<tr>
+<td>恢复</td>
+<td>固定扰动下成功率、额外动作；同时保留正常起点主结果</td>
+</tr>
+<tr>
+<td>搜索</td>
+<td>候选数、重试数、verifier 选择规则；与单次策略执行分开报告</td>
+</tr>
+<tr>
+<td>选择过程</td>
+<td>checkpoint 选择规则、验证次数、停止规则；避免只挑最好点</td>
+</tr>
+<tr>
+<td>能力保持</td>
+<td>固定 grounding/动作集、简单任务和长任务，检查后训练的能力退化</td>
+</tr>
+</tbody>
+</table>
+<p>相同动作预算不等于相同计算预算，候选重排与多图历史尤其如此。可以同时给“同动作预算”和“同 token/GPU 成本”两条性能曲线，寻找成本—成功率的折中。成功轨迹平均长度有幸存者偏差，应同时报告全体 episode 的动作数和失败终止分布。</p>
+<p>配对任务 bootstrap 可以估计任务采样的不确定性；有模板相关性时按任务家族做 cluster bootstrap 更合理。它不能替代训练 seed 的方差，也不能把一次训练的多个 checkpoint 当独立训练样本。pass@k 要明确重复采样和候选选择条件；单次成功率不能在不满足条件时直接换算为真实多次尝试能力。</p>
+<h5>9.7.3 Judge 与环境也是实验对象</h5>
+<p>基于状态的规则 judge 可检查真实业务结果，但仍可能存在遗漏。应设计少量针对性的反例：错误对象、只改页面不改数据、完成后撤销、重复执行、部分字段正确、提前 COMPLETE、跨 App 副作用。对照人工轨迹审计，检查假阳性与假阴性。</p>
+<p>完整重置应验证业务状态、导航栈、焦点、键盘、模拟时间和权限等。评测时隐藏状态可由 judge 使用；若把隐藏状态直接传给 actor，必须另标输入协议。只统计“环境正常”的成功率会掩盖系统可靠性：可补充条件分析，但主表仍保留所有预先指定任务和失败原因。</p>
+<h4>9.8 值得延伸思考的方向</h4>
+<h5>9.8.1 端到端模型还是模块化系统</h5>
+<p>SeeClick/UGround 把定位作为可训练接口，Agent S2 强调分层规划与专家模块；UI-TARS 系列则探索更统一的视觉动作模型。模块化方便定位错误、替换 grounder 和控制成本，但模块之间的目标描述可能丢信息；端到端减少手工接口，也更难区分能力瓶颈。<a href="https://arxiv.org/html/2410.05243v3">UGround</a>、<a href="https://arxiv.org/html/2504.00906v1">Agent S2</a>、<a href="https://arxiv.org/html/2501.12326v1">UI-TARS</a></p>
+<p>对本项目可先保持同一个 4B actor，增加可审计的任务记忆与动作结果记录；若确认大多数错误来自定位，再考虑专门 grounder。比较时固定高层计划，并把额外模型、调用次数与延迟计入成本。</p>
+<h5>9.8.2 有 API 还需要 GUI Agent 吗</h5>
+<p>GUI 为没有开放 API 或业务接口不统一的应用提供可见操作入口；API 则能减少部分操作的歧义和步数。二者可以组成混合系统，但动作空间与可靠性条件变了。</p>
+<p>OpenMobile2 将模拟移动环境、模拟器环境和 App 原生工具结合，适合作为“纯视觉基准之外的产品路线”阅读。其工具调用成绩不能直接作为纯截图坐标策略的同协议比较；MobileGym 中供任务初始化/判题的内部 API 也不是 actor 自动获准使用的工具。<a href="https://arxiv.org/html/2610.14157v1">OpenMobile2</a></p>
+<p>可以设计独立实验：纯 GUI、GUI+同范围公开工具、工具失败后的 GUI fallback。比较严格完成、时延、工具权限、失败可恢复性，而不是只用动作数更少证明模型能力更强。</p>
+<h5>9.8.3 既然有模拟器，还要不要学 world model</h5>
+<p>WM-R1 用学习的 GUI 世界模型生成可交互的后续状态，并支持想象与策略学习。这能扩充训练交互，但策略收益受转移预测、渲染一致性和结果评价误差影响；生成画面像真的，不代表业务状态真的正确。<a href="https://arxiv.org/html/2608.27508v1">WM-R1</a></p>
+<p>MobileGym 已有程序实现的环境和结构化状态，当前先利用可验证的真实环境 rollout 通常更直接。若长尾 App 或真实设备交互昂贵，再考虑 learned world model，并做“一步预测一致性→多步漂移→真实环境策略收益”的逐级检验。世界模型中的成功率不能替代真实或程序环境成功率；训练策略还可能主动利用模型漏洞。</p>
+<h5>9.8.4 Sim-to-real 的关键是覆盖什么差异</h5>
+<p>需要分别检查布局/字体、设备尺寸、软键盘、异步等待、系统弹窗、权限、网络错误、应用状态和动作时延。对这些因素做可控随机化，有助于研究稳健性；随机化范围应来自目标设备的实际差异，过度随机化也会增加学习难度。</p>
+<p>MobileGym 论文对其自身平台的迁移证据不等于你的 checkpoint 已完成真实设备验证。简历应保留“浏览器模拟移动环境”口径；有相同任务语义、明确映射和真实设备复测后，再写 sim-to-real 结果。<a href="https://arxiv.org/html/2605.26114v1">MobileGym</a></p>
+<h5>9.8.5 不确定性、停止和交互安全</h5>
+<p>停止也是动作选择的一部分。模型应能区分“完成证据充分”“仍可恢复”“无法完成”；仅增加 ABORT 惩罚可能诱发胡乱点击，仅惩罚 false-COMPLETE 也可能增加放弃。应同时观察严格成功、误报、漏报、恢复和成本。</p>
+<p>在真实应用中，页面内容还可能包含与用户目标冲突的指令；可研究将页面视为数据、限制高影响操作、在不确定时请求用户确认。但这应另设任务与威胁模型，本项目尚未验证相关能力，不能写成已经实现的安全保障。</p>
+<h4>9.9 面试延伸问答 12 个能展开讨论的问题</h4>
+<p>以下 R01–R12 是在前面 30 个项目问答之外新增的研究问题。回答用“已经观察到什么—如何解释—如何证伪”组织；涉及改进时明确是计划。</p>
+<h5>R01 你怎样定义 GUI Agent，它和普通视觉问答有什么不同？</h5>
+<p><strong>回答思路：</strong> 它是通过有限观察持续改变环境状态的决策任务。截图只显示状态的一部分，动作会影响后续可见信息、可执行选项和最终业务结果，所以要联合考虑 grounding、状态估计、计划、恢复和终止。视觉问答主要评价当前答案，GUI 还要评价整段交互的结果与代价。</p>
+<p><strong>追问准备：</strong> 用跨 App 复制联系人信息举例：源页面离开后关键信息不可见，记忆直接影响后续动作。可对照当前截图、近期多图和结构化记忆；不能只因为跨 App 分数低就断言记忆不足。</p>
+<h5>R02 Grounding 准确率很高，为什么整任务成功率仍然很低？</h5>
+<p><strong>回答思路：</strong> “点中了所说的按钮”不保证“这个按钮是当前该点的”。还存在目标理解、动作顺序、隐藏状态、执行时序和终止错误。长序列会积累失败风险，但独立同分布误差模型只是解释用的简化。</p>
+<p><strong>追问准备：</strong> 将动作意图与坐标分开标注，使用正确意图/坐标的诊断对照，找最早偏离点。不要把离线 point-in-box 指标和在线 strict pass@1 放在一个榜单排序。</p>
+<h5>R03 给模型更多历史截图一定更好吗？</h5>
+<p><strong>回答思路：</strong> 历史可能补充页面变化和已离开的实体，也会带来视觉 token、干扰和上下文压缩问题。关键是保留与当前决策相关的证据，而不只是增加窗口长度。</p>
+<p><strong>追问准备：</strong> 冻结 actor 比较文本历史、最近截图、结构化记忆、混合记忆；测跨 App 成功、事实保持与成本。记忆摘要应标注来源步骤和置信度，错误信息需要可更新；不能把 ground-truth 隐藏状态写进纯视觉记忆。</p>
+<h5>R04 SFT、DPO 和在线 RL 分别适合解决什么？</h5>
+<p><strong>回答思路：</strong> SFT 建立接口、基础技能和恢复行为；DPO 需要同一上下文下可解释的偏好对；在线 RL 在可执行环境中直接优化结果和交互决策。三者的数据来源与失败模式不同，不能用算法名称替代问题诊断。</p>
+<p><strong>追问准备：</strong> 如果格式错误很多，先做数据与 SFT；基础行为可用但完整任务欠佳，再考虑在线反馈。UI-TARS 的 Agent DPO、InfiGUI-R1 的 RLOO 与 UI-TARS-2 的 PPO 应准确区分，不能统称 GRPO。</p>
+<h5>R05 你现在的 reward 是 PRM 吗？有部分分为何还不算？</h5>
+<p><strong>回答思路：</strong> 当前是最终状态的规则评分，可以给部分目标达成分，但没有使用学习得到的过程评分器。PRM 需要说明训练数据、预测对象与使用位置，也可以复用已有评分模型；逐步调用一个终态检查也只是规则过程信号。</p>
+<p><strong>追问准备：</strong> 继续检查 reward 怎样进入 advantage。当前路径将轨迹优势广播；即使新增 Step.reward 字段，也要贯通训练消费链路，才能声称实现逐步信用。</p>
+<h5>R06 为什么把 progress 相邻作差，不一定改进信用分配？</h5>
+<p><strong>回答思路：</strong> 差分求和仍是终点减起点，如果最后又变成一个轨迹标量并广播，没有新增由过程进度产生的动作优势差异；各动作本身的梯度仍可能不同。信用分配要使不同决策获得不同的回报估计或 baseline。</p>
+<p><strong>追问准备：</strong> 画出 reward→return→advantage→token mask 的链路，给出 telescoping 等式。势函数塑形的策略不变性有条件；新局部辅助项应做零系数一致性与副作用审计。</p>
+<h5>R07 同一截图下比较动作，是否就是 GiGPO？</h5>
+<p><strong>回答思路：</strong> 不够。GiGPO 的局部比较依赖足够可比的决策状态与后续 return。相同截图可能对应不同表单草稿、任务参数、历史信息或剩余预算；视觉相似可能制造错误的优势。</p>
+<p><strong>追问准备：</strong> 先统计可靠 anchor 的覆盖、不同轨迹数和 return 方差。若严格匹配后覆盖很低，就转向子目标段或 value；不能通过随意粗化状态来获得漂亮覆盖率。其视觉小环境实验也不能直接证明手机 GUI 迁移。</p>
+<h5>R08 为什么不直接训练一个更大的 PRM？</h5>
+<p><strong>回答思路：</strong> 更大的模型不会自动消除标签含糊、隐藏信息缺失和奖励利用。当前环境已经能提供可验证状态，先证明过程标签优于 outcome 基线，再判断是否需要把它蒸馏为图像评分器。</p>
+<p><strong>追问准备：</strong> PRM 离线相关性、校准、候选排序和在线策略收益分别测。冻结 actor 的重排收益包含额外搜索预算；AgentPRM 的末步轨迹奖励实验也不能当作 dense 更新证据。</p>
+<h5>R09 当前实验支持哪些结论，不支持哪些？</h5>
+<p><strong>回答思路：</strong> 同一 FCzero run 在固定任务 ID 与题目文本下，从 23/256 到峰值 56/256，支持该次训练过程中验证表现改善。跨 App 与高难任务仍弱，后期回落提示稳定性和终止行为值得追踪。</p>
+<p><strong>追问准备：</strong> 不能由此证明 FCzero 优于普通 GRPO，不能报多 seed 稳定提升，也不能把六组配置差异较大的历史 run 当严格消融。补做共同初始化、同协议、等预算对照及新 hold-out。</p>
+<h5>R10 多采几个候选再让 verifier 选，算性能优化吗？</h5>
+<p><strong>回答思路：</strong> 算系统推理优化，但要分别报告额外计算收益和 policy 参数更新收益。候选、重试和环境回退次数都应纳入预算，且 selector 只能使用协议允许的信息。</p>
+<p><strong>追问准备：</strong> 比较单次 actor、同候选数随机选择、verifier 选择，使用相同初态和预算；没有可恢复状态时，不能假装各候选都在同一状态真实执行过。</p>
+<h5>R11 如果面试官说模拟器太简单，你怎么回答？</h5>
+<p><strong>回答思路：</strong> 模拟器的价值是可控初态、状态判题、可复现交互和低成本实验，适合研究后训练机制。它与真实设备在异步、布局、应用业务和错误分布上可能不同，需要单独验证外部有效性。</p>
+<p><strong>追问准备：</strong> 先在模拟器内做受控扰动与 held-out App，再选有明确任务对应关系的真实设备测试。当前应坦诚尚未得到本 checkpoint 的真实设备迁移结果。</p>
+<h5>R12 资源只够再做两组实验，你会怎么选？</h5>
+<p><strong>回答思路：</strong> 先修到冻结基线可复现，这是测量前提。然后根据失败审计选一个主因素：若信息丢失占主因，做原历史 vs 近期多图/记忆；若过程监督明确且映射可靠，做原 GRPO vs 单一局部信用项。</p>
+<p><strong>追问准备：</strong> 固定 task、初态、初始化、奖励和预算，预先指定 strict pass@1 与跨 App 分层结果，报告成本和失败模式。两组、单 seed 的结果只用于方向筛选，不承诺统计显著或最终产品收益。</p>
+<h4>9.10 阅读路线、来源与检索边界</h4>
+<h5>9.10.1 建议按问题阅读，而不是背排行榜</h5>
+<ol>
+<li><strong>任务是什么：</strong> AndroidWorld + MobileGym。先看 observation/action、初始化、judge 与预算，画出训练闭环。</li>
+<li><strong>模型究竟哪里出错：</strong> SeeClick + ScreenSpot-Pro + UGround。理解 grounding 的独立指标与高分辨率条件。</li>
+<li><strong>数据如何成为能力：</strong> UI-TARS + OSGenesis。区分生成指令、获得成功轨迹、恢复数据与偏好对的成本。</li>
+<li><strong>在线训练怎样改变行为：</strong> DigiRL + MobileRL + UI-TARS-2。比较 value/AWR、轨迹 GRPO 与 PPO/GAE；核对输入协议。</li>
+<li><strong>怎样给动作分配信用：</strong> GiGPO + GUI-Shepherd + AgentPRM。追踪标签、奖励、advantage 和推理使用方式。</li>
+<li><strong>研究边界如何扩展：</strong> Agent S2 + OSWorld2 + OpenMobile2 + WM-R1。讨论长任务、模块化、混合工具与世界模型。</li>
+</ol>
+<p>每篇建议做一张卡：任务/接口、监督来源、算法实际更新、主指标、额外成本、最关键限制、一个可迁移实验。面试重点是说明为什么选择某种机制，以及什么证据会让你放弃它。</p>
+<h5>9.10.2 检索方式与证据强度</h5>
+<p>这是截至 2026-11-14 的<strong>定向叙述式调研</strong>，以原有 12 篇奖励/信用资料为种子，补检 GUI grounding、长任务、数据合成、SFT/DPO、在线 RL、记忆、评测和环境。通过搜索与直接访问核对 arXiv、ACL Anthology、会议页面及作者材料；综述只用于发现线索，方法结论以原始论文为依据。</p>
+<p>阅读范围是摘要、方法、实验设置、相关表格和必要附录，逐篇记录版本；没有声称逐字读完所有论文、复现作者代码或检索穷尽。不同基座、数据、输入、动作接口、重试预算的成绩不做统一排名。2026 年近期预印本也不自动代表已经独立复现或达到稳定共识。</p>
+<p>访问限制包括 MobileRL 正式会议 PDF 的浏览器验证、DigiRL 最终 PDF 的工具大小限制；采用明确记录的 arXiv 版本。UI-R1 的 arXiv 与正式版数据规模不同，作为补充来源单列。GuidNav 部分汇总数字无法由分域表直接重建，因此本文不借其 headline 数字论证本项目预期增益。</p>
+<p>来源清单记录版本和实际阅读范围；检索日志记录查询和访问限制。前文的本地实验结论来自项目记录，方案属于本文结合文献的推论，不是论文替本项目证明的结果。</p>
+<p><strong>流程出处：</strong> 本次用 literature-review 技能组织检索与记录；依该技能要求引用 Kassis 等，<em>Scientific Agent Skills: A Library of Procedural Knowledge for Research Agents</em>（2026）。它是研究流程来源，不计入 GUI 方法论文，也不作为算法有效性的证据。<a href="https://arxiv.org/abs/2609.00065">流程论文</a></p>
+<h5>9.10.3 经核对的来源索引</h5>
+<p>详细元数据与阅读范围见 <a href="gui_agent_sources.json">来源清单</a>，查询与限制见 <a href="gui_agent_research.md#scope">检索日志</a>。以下链接固定到本次阅读的版本或出版页面。</p>
+<!-- VERIFIED_SOURCE_INDEX -->
+
+<p>本轮共 <strong>28 篇核心文献 + 1 篇补充版本核验</strong>；其中含基准、数据集、平台与理论，不是 28 种训练算法。流程引用另列，不计入上述数量。</p>
+<table>
+<thead>
+<tr>
+<th>编号</th>
+<th>文献</th>
+<th>本次版本</th>
+<th>阅读用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01</td>
+<td><a href="https://arxiv.org/html/2605.26114v1">MobileGym: A Verifiable and Highly Parallel Simulation Platform for Mobile GUI Agent Research</a></td>
+<td>arXiv v1</td>
+<td>platform / simulation / evaluation</td>
+</tr>
+<tr>
+<td>02</td>
+<td><a href="https://arxiv.org/html/2504.00906v1">Agent S2: A Compositional Generalist-Specialist Framework for Computer Use Agents</a></td>
+<td>arXiv v1</td>
+<td>agent_architecture / planning / grounding</td>
+</tr>
+<tr>
+<td>03</td>
+<td><a href="https://aclanthology.org/2025.acl-long.277.pdf">OS-Genesis: Automating GUI Agent Trajectory Construction via Reverse Task Synthesis</a></td>
+<td>ACL 2025 published paper</td>
+<td>data_synthesis / trajectory_construction</td>
+</tr>
+<tr>
+<td>04</td>
+<td><a href="https://arxiv.org/html/2610.14157v1">OpenMobile-2: Building Versatile Mobile Agents with Scalable Environments and App-Native Tools</a></td>
+<td>arXiv v1</td>
+<td>mobile_agent / hybrid_tools / post_training</td>
+</tr>
+<tr>
+<td>05</td>
+<td><a href="https://arxiv.org/html/2608.27508v1">WM-R1: Training GUI Agents to Reason and leverage World Models with Reinforcement Learning</a></td>
+<td>arXiv v1</td>
+<td>world_model / reinforcement_learning</td>
+</tr>
+<tr>
+<td>06</td>
+<td><a href="https://people.eecs.berkeley.edu/~russell/papers/icml99-shaping.pdf">Policy Invariance Under Reward Transformations: Theory and Application to Reward Shaping</a></td>
+<td>ICML 1999</td>
+<td>theory / reward_shaping</td>
+</tr>
+<tr>
+<td>07</td>
+<td><a href="https://arxiv.org/html/2405.14573v5">AndroidWorld: A Dynamic Benchmarking Environment for Autonomous Agents</a></td>
+<td>v5</td>
+<td>benchmark / evaluation</td>
+</tr>
+<tr>
+<td>08</td>
+<td><a href="https://arxiv.org/html/2404.07972v2">OSWorld: Benchmarking Multimodal Agents for Open-Ended Tasks in Real Computer Environments</a></td>
+<td>v2</td>
+<td>benchmark / evaluation</td>
+</tr>
+<tr>
+<td>09</td>
+<td><a href="https://arxiv.org/html/2307.13854v4">WebArena: A Realistic Web Environment for Building Autonomous Agents</a></td>
+<td>v4</td>
+<td>benchmark / evaluation</td>
+</tr>
+<tr>
+<td>10</td>
+<td><a href="https://arxiv.org/html/2401.13649v2">VisualWebArena: Evaluating Multimodal Agents on Realistic Visual Web Tasks</a></td>
+<td>v2</td>
+<td>benchmark / evaluation</td>
+</tr>
+<tr>
+<td>11</td>
+<td><a href="https://arxiv.org/html/2406.03679v6">On the Effects of Data Scale on UI Control Agents</a></td>
+<td>v6</td>
+<td>dataset / offline_evaluation</td>
+</tr>
+<tr>
+<td>12</td>
+<td><a href="https://arxiv.org/html/2504.07981v1">ScreenSpot-Pro: GUI Grounding for Professional High-Resolution Computer Use</a></td>
+<td>v1</td>
+<td>benchmark / grounding</td>
+</tr>
+<tr>
+<td>13</td>
+<td><a href="https://arxiv.org/html/2606.29537v2">OSWorld 2.0: Benchmarking Computer Use Agents on Long-Horizon Real-World Tasks</a></td>
+<td>v2</td>
+<td>benchmark / evaluation</td>
+</tr>
+<tr>
+<td>14</td>
+<td><a href="https://arxiv.org/html/2401.10935v2">SeeClick: Harnessing GUI Grounding for Advanced Visual GUI Agents</a></td>
+<td>v2</td>
+<td>agent_method / supervised grounding continual pretraining and downstream adaptation</td>
+</tr>
+<tr>
+<td>15</td>
+<td><a href="https://arxiv.org/html/2410.05243v3">Navigating the Digital World as Humans Do: Universal Visual Grounding for GUI Agents</a></td>
+<td>v3</td>
+<td>agent_method / supervised visual grounding; separate planner in SeeAct-V</td>
+</tr>
+<tr>
+<td>16</td>
+<td><a href="https://arxiv.org/html/2411.17465v1">ShowUI: One Vision-Language-Action Model for GUI Visual Agent</a></td>
+<td>v1</td>
+<td>agent_method / offline instruction tuning and downstream supervised adaptation</td>
+</tr>
+<tr>
+<td>17</td>
+<td><a href="https://arxiv.org/html/2501.12326v1">UI-TARS: Pioneering Automated GUI Interaction with Native Agents</a></td>
+<td>v1</td>
+<td>agent_method / continual pretraining, annealing/SFT, reflective correction SFT and Agent DPO</td>
+</tr>
+<tr>
+<td>18</td>
+<td><a href="https://arxiv.org/html/2509.02544v2">UI-TARS-2 Technical Report: Advancing GUI Agent with Multi-Turn Reinforcement Learning</a></td>
+<td>v2</td>
+<td>agent_method / CT/SFT/data iteration and multi-turn online PPO; critic/value pretraining</td>
+</tr>
+<tr>
+<td>19</td>
+<td><a href="https://arxiv.org/html/2504.14239v1">InfiGUI-R1: Advancing Multimodal GUI Agents from Reactive Actors to Deliberative Reasoners</a></td>
+<td>v1</td>
+<td>agent_method / spatial reasoning distillation/SFT then RLOO</td>
+</tr>
+<tr>
+<td>20</td>
+<td><a href="https://arxiv.org/html/2504.10458v4">GUI-R1 : A Generalist R1-Style Vision-Language Action Model For GUI Agents</a></td>
+<td>v4</td>
+<td>agent_method / GRPO on sampled action responses with ground-truth rule rewards; separate supervised baseline</td>
+</tr>
+<tr>
+<td>21</td>
+<td><a href="https://arxiv.org/html/2505.18121v1">ProgRM: Build Better GUI Agents with Progress Rewards</a></td>
+<td>arXiv v1</td>
+<td>post_training / credit_assignment</td>
+</tr>
+<tr>
+<td>22</td>
+<td><a href="https://arxiv.org/html/2509.23738v1">GUI-Shepherd: Reliable Process Reward and Verification for Long-Sequence GUI Tasks</a></td>
+<td>arXiv v1</td>
+<td>post_training / credit_assignment</td>
+</tr>
+<tr>
+<td>23</td>
+<td><a href="https://arxiv.org/html/2504.16073v1">Guiding VLM Agents with Process Rewards at Inference Time for GUI Navigation</a></td>
+<td>arXiv v1</td>
+<td>post_training / credit_assignment</td>
+</tr>
+<tr>
+<td>24</td>
+<td><a href="https://arxiv.org/html/2505.10978v3">Group-in-Group Policy Optimization for LLM Agent Training</a></td>
+<td>arXiv v3</td>
+<td>post_training / credit_assignment</td>
+</tr>
+<tr>
+<td>25</td>
+<td><a href="https://arxiv.org/html/2511.08325v1">AgentPRM: Process Reward Models for LLM Agents via Step-Wise Promise and Progress</a></td>
+<td>arXiv v1</td>
+<td>post_training / credit_assignment</td>
+</tr>
+<tr>
+<td>26</td>
+<td><a href="https://arxiv.org/html/2411.02337v3">WebRL: Training LLM Web Agents via Self-Evolving Online Curriculum Reinforcement Learning</a></td>
+<td>arXiv v3</td>
+<td>post_training / credit_assignment</td>
+</tr>
+<tr>
+<td>27</td>
+<td><a href="https://arxiv.org/html/2406.11896v1">DigiRL: Training In-The-Wild Device-Control Agents with Autonomous Reinforcement Learning</a></td>
+<td>arXiv v1</td>
+<td>post_training / credit_assignment</td>
+</tr>
+<tr>
+<td>28</td>
+<td><a href="https://arxiv.org/html/2509.18119v2">MobileRL: Online Agentic Reinforcement Learning for Mobile GUI Agents</a></td>
+<td>arXiv v2</td>
+<td>post_training / credit_assignment</td>
+</tr>
+<tr>
+<td>29（补）</td>
+<td><a href="https://arxiv.org/html/2503.21620v5">UI-R1: Enhancing Efficient Action Prediction of GUI Agents by Reinforcement Learning</a></td>
+<td>arXiv v5 (2025-05-24), AAAI2026 publication metadata and PDF opening</td>
+<td>supplementary / single_step_rl / version_check</td>
+</tr>
+</tbody>
+</table></div></details>
+</section>
+<section class="section" id="research" aria-labelledby="research-title">
+<div class="section-head"><div><div class="eyebrow"><span class="section-number">08</span>RESEARCH &amp; NEXT QUESTIONS</div><h2 id="research-title">论文与延伸思考</h2></div><p>从任务理解到可检验的优化方案。28 篇核心文献 + 1 篇补充阅读，延伸讨论 12 个面试问题；区分论文结论、本地事实与待验证计划。</p></div>
+<div class="research-directions" aria-label="三个阅读方向">
+<a class="research-direction" href="#research-9-2" data-research-jump><span class="eyebrow">01 / UNDERSTAND</span><h3>先理解任务 <span aria-hidden="true">↗</span></h3><p>定位、规划、记忆与恢复，分别在哪里失效？</p><span class="research-card-link">进入 9.2 · 任务理解</span></a>
+<a class="research-direction" href="#research-9-6" data-research-jump><span class="eyebrow">02 / EXPERIMENT</span><h3>再设计改进 <span aria-hidden="true">↗</span></h3><p>结合已有实验，选择一个能验证的优化变量。</p><span class="research-card-link">进入 9.6 · 优化实验</span></a>
+<a class="research-direction" href="#research-9-9" data-research-jump><span class="eyebrow">03 / DISCUSS</span><h3>准备深入讨论 <span aria-hidden="true">↗</span></h3><p>用 R01–R12 练习方法取舍、证据边界与研究判断。</p><span class="research-card-link">进入 9.9 · 延伸问答</span></a>
+</div>
+<div class="research-downloads" aria-label="研究材料"><a href="gui_agent_research.md" download>研究正文 Markdown ↗</a><a href="gui_agent_sources.json" download>文献来源 JSON ↗</a><a href="gui_agent_research.md#scope" download>检索与阅读记录 ↗</a></div>
+<div class="research-list"><details class="research-chapter" id="research-9-1"><summary><span class="research-number">9.1</span><span class="research-chapter-title">之前调研了什么 这次补充什么</span><span class="research-plus" aria-hidden="true">+</span></summary><div class="research-body"><p>之前已经调研过一轮，来源记录包含 12 篇论文，重点是 progress reward、PRM、信用分配、奖励塑形和在线课程。此前的 <span>改进报告（历史记录）</span> 保留了那一轮结论。</p>
+<p>本次扩大到五条主线：任务与评测、视觉 grounding、规划和记忆、数据与后训练、奖励和信用。检索 arXiv、ACL Anthology 等原始论文及官方项目，交叉核对方法、观测/动作接口、评测单位与实际阅读版本。部分近期工作仍是预印本。本报告是有目的的叙述性研究，不声称穷尽全部论文，也不提供跨协议排行榜。</p>
+<p><strong>面试时最值得表达的主张：</strong> GUI Agent 的优化应由失败来源驱动。先建立“感知—决策—执行—验证”的诊断，再决定补数据、改记忆、做 RL 或增加过程信用。你的项目适合进一步发展为“可验证环境下的长链多模态策略学习”。</p></div></details>
+<details class="research-chapter" id="research-9-2" open><summary><span class="research-number">9.2</span><span class="research-chapter-title">如何理解 GUI Agent 这个任务</span><span class="research-plus" aria-hidden="true">+</span></summary><div class="research-body"><h4>9.2.1 它是带目标的部分可观测决策问题</h4>
+<p>可以用以下形式理解：</p>
+<pre><code>隐藏状态 s_t：业务数据、页面、导航栈、键盘、焦点、权限、未显示的信息等
+观察 o_t：当前截图；具体系统也可能开放 DOM / accessibility tree
+可见历史 h_t：(o_0, a_0, …, o_t)，或该历史的受控摘要
+目标 g：用户要求及约束
+策略 πθ(a_t | g, h_t)：决定操作、查看、等待、恢复或终止
+环境转移：执行 a_t 后得到 s_(t+1)，再产生新观察
+</code></pre>
+<p>同一截图可能对应不同隐藏状态；环境转移即使确定，也不意味着模型完全知道状态。目标可能要求先读取信息，再在另一 App 中使用，当前画面不足以决定动作。POMDP 视角可从 OSWorld 与 Agent S2 的形式化出发，但上面的具体变量解释是针对本项目的建模。<a href="https://arxiv.org/html/2404.07972v2">OSWorld</a>、<a href="https://arxiv.org/html/2504.00906v1">Agent S2</a></p>
+<p>在本地 MobileGym 中，generic_v2 使用当前截图和历史文本。judge 能读取业务状态，是环境的监督能力；它不意味着 policy 也读取了该状态。训练与评测必须分别写清楚：</p>
+<div class="research-table-wrap" role="region" aria-label="研究章节 9.2 表格，窄屏可横向滚动" tabindex="0"><table>
+<thead>
+<tr>
+<th>通道</th>
+<th>能看到什么</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Policy 输入</td>
+<td>指令、当前图、允许的可见历史</td>
+<td>产生动作</td>
+</tr>
+<tr>
+<td>执行器</td>
+<td>动作参数与环境接口</td>
+<td>将动作落实为点击、输入等</td>
+</tr>
+<tr>
+<td>Reward / judge</td>
+<td>任务条件、初态与结果状态</td>
+<td>评分、成功判断、副作用检查</td>
+</tr>
+<tr>
+<td>诊断 oracle</td>
+<td>人工子目标、正确元素框等额外信息</td>
+<td>仅用于定位瓶颈，单独报告</td>
+</tr>
+</tbody>
+</table></div>
+<h4>9.2.2 六种能力共同决定完整任务成功</h4>
+<ol>
+<li><strong>Grounding：</strong> 已经知道要找哪个元素，能否定位到正确位置？</li>
+<li><strong>Planning：</strong> 根据目标和进度，此时应该执行哪个业务操作？</li>
+<li><strong>State tracking：</strong> 上一步是否生效，页面是否仍在加载，实际对象是谁？</li>
+<li><strong>Memory：</strong> 跨页面和跨 App 后，能否保留正确实体、数值与约束？</li>
+<li><strong>Recovery：</strong> 操作失败或进入错误页面后，能否识别并恢复？</li>
+<li><strong>Termination：</strong> 什么时候应继续、核验、完成或中止？</li>
+</ol>
+<p>例如“把聊天中确认的会议地址加入日历”，可能先涉及信息读取，再涉及跨 App 记忆、字段输入和保存验证。点击位置全部正确，也可能因为日期记错而失败。这是示意任务，不是新增实验。</p>
+<p>可以用一个简化算式解释长链困难：若每个关键决策的条件成功率都为 95%，20 个关键决策全部成功约为 0.95²⁰＝35.85%。这是恒定条件成功率、无恢复的教学模型，不是项目成功率预测；真实错误存在依赖，恢复操作也会改变结果。</p>
+<h4>9.2.3 优化目标应同时考虑结果、成本和约束</h4>
+<p>当前项目的严格成功要求目标达成、没有不允许的副作用并正确 COMPLETE。产品层面还需考虑交互次数、推理 token、延迟和可恢复性。一个实用研究目标是：</p>
+<pre><code>在固定交互与计算预算、相同观测/动作接口下，提高严格任务成功率；
+同时报告成本、终止分布、环境错误和非预期状态修改。
+</code></pre>
+<p>不要直接用“最短轨迹”替代成功：检查信息、等待加载和纠错可能需要合理的额外操作。也不要一开始把许多成本项混成单个奖励；先测清它们与成功的关系，再用消融决定权重。</p></div></details>
+<details class="research-chapter" id="research-9-3"><summary><span class="research-number">9.3</span><span class="research-chapter-title">代表性工作教会我们什么</span><span class="research-plus" aria-hidden="true">+</span></summary><div class="research-body"><p>下面按问题组织文献，而不是把不同基准的最好分数放在一起。版本与阅读范围见文末来源索引。</p>
+<h4>9.3.1 任务和评测：测到的是哪一种能力</h4>
+<div class="research-table-wrap" role="region" aria-label="研究章节 9.3 表格，窄屏可横向滚动" tabindex="0"><table>
+<thead>
+<tr>
+<th>工作</th>
+<th>原始研究的关注点</th>
+<th>阅读时必须保留的区别</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://arxiv.org/html/2405.14573v5">AndroidWorld</a></td>
+<td>参数化移动任务、初始化与设备状态判分</td>
+<td>Android emulator 中的真实应用；环境可提供截图和 a11y，不保证所有基线纯视觉</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2404.07972v2">OSWorld</a></td>
+<td>桌面真实应用中的执行和功能正确性</td>
+<td>主 369 任务是 Ubuntu；观测、PyAutoGUI 动作与预算需固定</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2307.13854v4">WebArena</a></td>
+<td>自托管网站、业务任务与功能评测</td>
+<td>模板与任务实例不同；可开放 DOM / 元素 ID，部分评测含模型匹配</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2401.13649v2">VisualWebArena</a></td>
+<td>需要视觉信息的在线网页任务</td>
+<td>SoM 元素框与 ID 来自 JavaScript；图像输入不等于原始截图加坐标协议</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2406.03679v6">AndroidControl</a></td>
+<td>演示数据规模、不同泛化划分</td>
+<td>原论文基线使用 a11y 文本，主要是离线逐步动作评测</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2504.07981v1">ScreenSpot-Pro</a></td>
+<td>高分辨率界面上的目标定位</td>
+<td>点落在目标框内，与在线任务完成是不同指标</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2606.29537v2">OSWorld 2.0</a></td>
+<td>长工作流、动态环境、结果检查点</td>
+<td>终态检查点部分分不自动构成时间逐步 PRM</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>对本项目的推论：</strong> 建立三层评测：固定截图定位 → 固定可见前缀的一步动作 → 在线完整任务严格成功。前两层帮助定位原因，第三层检验策略在自身产生的状态上能否完成目标。不能把离线准确率当作在线能力的替代品。</p>
+<h4>9.3.2 视觉与规划：专门定位器和端到端策略各有用处</h4>
+<div class="research-table-wrap" role="region" aria-label="研究章节 9.3 表格，窄屏可横向滚动" tabindex="0"><table>
+<thead>
+<tr>
+<th>工作</th>
+<th>核心思路</th>
+<th>对 MobileGym 的可借鉴部分</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://arxiv.org/html/2401.10935v2">SeeClick</a></td>
+<td>用 GUI 元素与坐标监督学习视觉定位</td>
+<td>利用模拟器产生训练标签；评测策略仍只读截图</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2410.05243v3">UGround</a></td>
+<td>规划器描述目标，专门 grounding 模型定位</td>
+<td>固定正确目标描述，测独立定位器能修复多少失败</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2411.17465v1">ShowUI</a></td>
+<td>视觉 token 选择及图像/动作交错建模</td>
+<td>先试近期图像与关键帧，再考虑改模型内部压缩</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2504.00906v1">Agent S2</a></td>
+<td>专家 grounding 与主动分层重规划</td>
+<td>将计划、执行和验证拆开诊断；计入额外模型调用</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2501.12326v1">UI-TARS</a></td>
+<td>原生视觉策略、反思修正数据及 Agent DPO</td>
+<td>收集真实错误前缀下的纠正动作和恢复示范</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>选择方法的依据：</strong> 如果给定正确目标描述仍点错，优先处理定位或坐标映射。如果同一状态下给定子目标能明显改善动作，规划或目标表达可能是瓶颈。这样的 oracle 提示是诊断工具，其结果不能并入正常任务成功率；还需控制随机性、提示长度和描述歧义。</p>
+<h4>9.3.3 数据和后训练：算法名称不足以说明训练方式</h4>
+<div class="research-table-wrap" role="region" aria-label="研究章节 9.3 表格，窄屏可横向滚动" tabindex="0"><table>
+<thead>
+<tr>
+<th>工作</th>
+<th>核验到的训练/数据机制</th>
+<th>不能据此直接推出什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://aclanthology.org/2025.acl-long.277/">OS-Genesis</a></td>
+<td>先探索状态转移，再反向合成任务，筛选轨迹</td>
+<td>生成的语言任务天然可执行、无标注成本</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2509.02544v2">UI-TARS-2</a></td>
+<td>迭代数据流程与多轮 PPO；value 预训练、GAE、轨迹池</td>
+<td>它使用 GRPO；其所有结果都在纯 GUI 接口取得</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2504.14239v1">InfiGUI-R1</a></td>
+<td>Actor2Reasoner、推理蒸馏/SFT，随后 RLOO</td>
+<td>子目标文本评分等于真实业务状态完成</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2504.10458v4">GUI-R1</a></td>
+<td>对固定观测的动作输出做规则奖励 GRPO，筛选训练问题</td>
+<td>3K 样本就是全部数据成本；离线 step SR 等于在线任务 SR</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/html/2610.14157v1">OpenMobile-2</a></td>
+<td>扩展环境和演示数据；GUI / hybrid SFT 与可验证 RL</td>
+<td>GUI + app-native tools 成绩与纯截图坐标策略可直接比较</td>
+</tr>
+</tbody>
+</table></div>
+<p>这些研究提供方法选择，不能组成“同一个基准上的先后胜负”。例如 UI-TARS 原版的在线轨迹收集与偏好训练、UI-TARS-2 的 PPO，以及 InfiGUI-R1 的 RLOO，应分别解释。</p></div></details>
+<details class="research-chapter" id="research-9-4"><summary><span class="research-number">9.4</span><span class="research-chapter-title">有哪些手段 如何决定先做什么</span><span class="research-plus" aria-hidden="true">+</span></summary><div class="research-body"><h4>9.4.1 观测、记忆与执行：先验证低成本改动</h4>
+<p>当前历史文本可能没有记录未来要用的数值。建议先冻结模型，做以下对照；它们都是新增方案：</p>
+<div class="research-table-wrap" role="region" aria-label="研究章节 9.4 表格，窄屏可横向滚动" tabindex="0"><table>
+<thead>
+<tr>
+<th>方案</th>
+<th>预期作用</th>
+<th>验证与代价</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>当前图 + 原文本历史</td>
+<td>保留现有基线</td>
+<td>保存实际模型输入</td>
+</tr>
+<tr>
+<td>当前图 + 最近 2 张图</td>
+<td>识别转移、近一步误操作</td>
+<td>图像 token、时延、相同任务重复评测</td>
+</tr>
+<tr>
+<td>当前图 + 关键历史图</td>
+<td>跨 App 保留源信息</td>
+<td>关键帧选择错误、旧状态误用</td>
+</tr>
+<tr>
+<td>近期图 + 结构化摘要</td>
+<td>控制长上下文成本</td>
+<td>摘要事实错误、丢约束、递归误差</td>
+</tr>
+</tbody>
+</table></div>
+<p>摘要可以包含“目标实体、已确认值、证据 step、已完成事项、待做事项”，并区分观察与推测。只允许从模型可见记录生成，不能把 judge 的隐藏字段直接写进部署记忆。ShowUI 与 UI-TARS-2 提供了历史建模的不同实现，但上述四组是针对本项目提出的对照设计。<a href="https://arxiv.org/html/2411.17465v1">ShowUI</a>、<a href="https://arxiv.org/html/2509.02544v2">UI-TARS-2</a></p>
+<p>执行层同样需要检查：坐标是否与该帧尺寸匹配，键盘是否遮挡，点击后是否等待稳定画面，超时重试是否重复提交。截图相同不一定代表动作未生效，截图变化也不等于业务完成。先把执行故障单列，避免用更多 RL 更新去拟合执行器问题。</p>
+<p>主动查看、滚动找元素、打开详情、等待后重看可以具有信息价值，但都消耗预算。最初应测“额外查看减少了哪一种不确定性”，不要给每次查看固定正奖励。</p>
+<h4>9.4.2 数据：增加技能覆盖，而不仅是改写指令</h4>
+<p>数据可沿五个维度扩展：任务目标、参数实体、界面布局、状态起点、失败与恢复路径。训练任务 ID 或文本变多，并不自动意味着技能覆盖变多。</p>
+<p>适合本项目的做法：</p>
+<ul>
+<li>利用声明式导航和可控状态生成候选任务，执行并通过 judge 后才收录。</li>
+<li>生成目标相近但约束不同的任务，要求核对实体、日期或副作用。</li>
+<li>记录真实失败状态后的恢复示范，不能假定一次 BACK 总能撤销业务操作。</li>
+<li>将跨 App 数据依赖作为单独维度：源信息如何获得、何时使用、是否过期。</li>
+<li>合成与审核只使用训练/开发任务，最终 holdout 不参与造数据或改规则。</li>
+</ul>
+<p>OS-Genesis 的“先探索再构造任务”提供一种数据入口；它使用模型进行任务生成和轨迹质量判断，因此仍需要把教师成本、失败候选和验证开销纳入统计。<a href="https://aclanthology.org/2025.acl-long.277/">OS-Genesis</a></p>
+<h4>9.4.3 SFT、偏好优化和 RL 的分工</h4>
+<div class="research-table-wrap" role="region" aria-label="研究章节 9.4 表格，窄屏可横向滚动" tabindex="0"><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>必需数据条件</th>
+<th>擅长提供的训练信号</th>
+<th>本项目的入口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SFT</td>
+<td>可靠、可执行的正例步骤</td>
+<td>格式、定位、基本技能和恢复行为</td>
+<td>训练集内成功/恢复示范</td>
+</tr>
+<tr>
+<td>DPO</td>
+<td>同可见上下文下的可信正负响应</td>
+<td>对错误与纠正动作的相对偏好</td>
+<td>相同前缀的错误动作与复核修正</td>
+</tr>
+<tr>
+<td>固定观测的动作 RL</td>
+<td>动作类型、目标框等标签</td>
+<td>一步动作输出的规则奖励</td>
+<td>独立诊断或 warm-start</td>
+</tr>
+<tr>
+<td>在线 GRPO</td>
+<td>同任务多条交互轨迹和终态奖励</td>
+<td>完整任务的相对表现</td>
+<td>当前已运行路径</td>
+</tr>
+<tr>
+<td>PPO + value</td>
+<td>在线轨迹及价值估计训练</td>
+<td>基于 return/TD 的时序优势</td>
+<td>需新增 value 训练、校准和稳定性验证</td>
+</tr>
+</tbody>
+</table></div>
+<p>恢复 SFT 中可以把错误步骤保留为上下文，只对已核验的纠正步骤施加正监督。DPO 不能随意配对两个不同截图下的动作。在线 RL 有机会遇到策略自身诱发的状态；全失败且同奖的组仍缺乏组内任务奖励信号，因此可能需要示范、课程或额外过程信息。</p>
+<p>UI-TARS 的纠正数据/偏好流程、GUI-R1 的固定观测动作奖励，以及 UI-TARS-2 的多轮 PPO，分别说明了不同数据条件，不能用“都做了 RL”抹平差异。<a href="https://arxiv.org/html/2501.12326v1">UI-TARS</a>、<a href="https://arxiv.org/html/2504.10458v4">GUI-R1</a>、<a href="https://arxiv.org/html/2509.02544v2">UI-TARS-2</a></p></div></details>
+<details class="research-chapter" id="research-9-5"><summary><span class="research-number">9.5</span><span class="research-chapter-title">Reward、PRM 与信用分配 应该怎么区分</span><span class="research-plus" aria-hidden="true">+</span></summary><div class="research-body"><h4>9.5.1 先回答你当前的 reward 是什么</h4>
+<p>本项目当前是<strong>规则终态奖励</strong>：根据最终目标检查、终止类型和副作用等计算轨迹分数。progress 能给部分分，但这仍然是终态结果分解。严格 result_only 与错误 COMPLETE 清零是已有本地分支。</p>
+<p>默认 verl 路径读取 trajectory reward，计算组内优势，再广播到同条轨迹的响应步骤。Step.reward 的存在不代表该值已经参与默认优势计算。<a href="../mobilegym-rl/rllm/experimental/verl/verl_advantage.py">本地优势路径</a></p>
+<div class="research-table-wrap" role="region" aria-label="研究章节 9.5 表格，窄屏可横向滚动" tabindex="0"><table>
+<thead>
+<tr>
+<th>概念</th>
+<th>输出/作用</th>
+<th>是否依赖学习得到的评分器</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>规则 outcome reward</td>
+<td>最终目标是否满足，或终态分项进度</td>
+<td>否</td>
+</tr>
+<tr>
+<td>规则过程奖励</td>
+<td>动作前后某个可验证子目标变化</td>
+<td>否</td>
+</tr>
+<tr>
+<td>ORM</td>
+<td>学习预测整条轨迹结果</td>
+<td>是</td>
+</tr>
+<tr>
+<td>PRM</td>
+<td>对步骤、前缀或转移提供学习型过程评分；标签语义由方法定义</td>
+<td>是</td>
+</tr>
+<tr>
+<td>Credit assignment</td>
+<td>将结果/过程信息转为不同决策的学习信号</td>
+<td>不一定；可基于规则、value、分组或重分配</td>
+</tr>
+<tr>
+<td>推理时 verifier</td>
+<td>对候选动作或轨迹筛选/排序</td>
+<td>可为规则或模型；不必更新 policy</td>
+</tr>
+</tbody>
+</table></div>
+<p>每一步都有数字，不自动等于 PRM；有 PRM 也不自动等于训练时逐步信用分配。要继续追问：它预测正确性、成功概率还是进展？用于重排还是 RL？最终如何进入 advantage？</p>
+<h4>9.5.2 代表论文之间的关键区别</h4>
+<ul>
+<li><strong>ProgRM：</strong> 学习 GUI 进展评分，说明进度标签是可研究的监督对象。其接口与评测设置需单独核对，不能直接套用 MobileGym 的业务状态语义。<a href="https://arxiv.org/html/2505.18121v1">ProgRM</a></li>
+<li><strong>GuidNav：</strong> 过程评分用于推理时候选选择；这条路线增加选择预算，不等于已经训练出更好的 policy。<a href="https://arxiv.org/html/2504.16073v1">GuidNav</a></li>
+<li><strong>GUI-Shepherd：</strong> 将过程评价与长序列验证结合，并研究在线 PPO/GAE；需要核对奖励来源和参考轨迹条件。<a href="https://arxiv.org/html/2509.23738v1">GUI-Shepherd</a></li>
+<li><strong>GiGPO：</strong> 在 episode 组之外寻找可比较的 anchor state 组，增加局部相对优势。v3 还包含视觉小环境附录实验，但不是移动 GUI 证据；截图相似也不足以证明状态、历史和剩余预算相同。<a href="https://arxiv.org/html/2505.10978v3">GiGPO</a></li>
+<li><strong>AgentPRM：</strong> 区分前缀的 promise 与 progress。本次核对发现其附录 RL 实验使用最后一步 PRM 得分作为整轨迹奖励；不能据此声称它直接验证了逐步 dense policy update。<a href="https://arxiv.org/html/2511.08325v1">AgentPRM</a></li>
+</ul>
+<p>这些是对原文使用方式的辨析，论文自身收益不能替代本项目对照。新增状态规则过程信号应先叫“可验证过程奖励”；以后训练只看可见图像/历史的评分器，才进入学习型 PRM 的问题。</p>
+<h4>9.5.3 为什么把 progress 做差分还不够</h4>
+<p>设 p_t 为第 t 步后的子目标进度。若定义：</p>
+<pre><code>r_t = p_t − p_(t−1)
+Σ_t r_t = p_T − p_0
+</code></pre>
+<p>求和会消去中间项。如果仍把这个总和变成一个轨迹优势并广播，步骤间依旧没有由过程进度产生的差异化优势；共享同一个优势值，并不意味着不同步骤的策略梯度相同。要完全复现旧奖励，还须保留初始进度以及原先的终止、答案和副作用处理；不能把上式直接当现有 reward 的等价改写。</p>
+<p>势函数塑形的标准形式是 F_t＝γΦ(s_(t+1))−Φ(s_t)。折扣求和后为 −Φ(s_0)＋γ^TΦ(s_T)。在相同起点、终止势为零等条件下，它只是一个常数；继续用于组内终态广播时可能被中心化抵消。一般的正向进度奖金并不自动拥有策略不变性保证。<a href="https://people.eecs.berkeley.edu/~russell/papers/icml99-shaping.pdf">Ng、Harada 与 Russell，1999</a></p>
+<h4>9.5.4 四条真正需要比较的信用路线</h4>
+<div class="research-table-wrap" role="region" aria-label="研究章节 9.5 表格，窄屏可横向滚动" tabindex="0"><table>
+<thead>
+<tr>
+<th>路线</th>
+<th>如何区分步骤贡献</th>
+<th>代价与风险</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>子目标段信用</td>
+<td>将可验证子目标变化归入对应执行片段</td>
+<td>切段质量；必要导航零即时进度；改变辅助目标</td>
+</tr>
+<tr>
+<td>Value / GAE</td>
+<td>根据可见历史估计未来回报，形成时序差分优势</td>
+<td>价值误差、额外训练与显存、稀疏回报</td>
+</tr>
+<tr>
+<td>Anchor-state 局部分组</td>
+<td>比较足够相近决策条件下的不同后续结果</td>
+<td>重复状态覆盖低、隐藏状态混淆、条件不等价</td>
+</tr>
+<tr>
+<td>同前缀分叉 rollout</td>
+<td>在可恢复状态上尝试不同动作并估计后续成功</td>
+<td>克隆真实性、Monte Carlo 成本、后续策略偏差</td>
+</tr>
+</tbody>
+</table></div>
+<p>本项目优先研究第一条。一个可消融的起点是：</p>
+<pre><code>A_(episode,t) = A_outcome(episode) + λ · C_segment(episode,t)
+</code></pre>
+<p>C_segment 要有明确的事件定义、范围和归一化规则；λ＝0 必须恢复原数值与 mask。该式是待验证的混合辅助目标，不宣称无偏或保证最优策略不变。</p>
+<p>落地要贯通“执行前后记录 → episode/step/trace 唯一映射 → advantage → response mask”。循环检测有可能在 env.step 之前退出，最后生成动作未实际执行；这类事件必须单列。第一轮先关闭只看终态奖励差异的动态筛选，否则含过程差异的同终态组可能被丢掉。</p>
+<p>中间态分叉应先验证 UI、业务状态、导航栈、焦点、键盘和时钟恢复。MobileGym 论文描述的 snapshot/fork 能力，不等于当前训练入口已经验证任意中途状态的精确复现。<a href="https://arxiv.org/html/2605.26114v1">MobileGym</a></p></div></details>
+<details class="research-chapter" id="research-9-6"><summary><span class="research-number">9.6</span><span class="research-chapter-title">结合你的实验 应该优先优化什么</span><span class="research-plus" aria-hidden="true">+</span></summary><div class="research-body"><p>本节是下一轮方案，尚未运行。历史最好点跨 App 为 6/93，单 App 为 50/163；训练跨 App 占比 19/160，验证占比 93/256。它们提示应优先检查任务覆盖和信息保持，但不能单凭相关性认定“缺记忆”就是根因。FCzero 后期 ABORT 增多、成功率回落，也不能只用奖励曲线解释。</p>
+<h4>9.6.1 从失败记录到具体干预</h4>
+<div class="research-table-wrap" role="region" aria-label="研究章节 9.6 表格，窄屏可横向滚动" tabindex="0"><table>
+<thead>
+<tr>
+<th>可观察的失败</th>
+<th>先检查什么</th>
+<th>可单独尝试的改进</th>
+<th>验证指标与反例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>点错按钮、点在空白处</td>
+<td>坐标缩放、裁剪、目标可见性、动作是否执行</td>
+<td>grounding SFT；局部裁剪；独立 grounder</td>
+<td>同一意图下命中率；小目标/高分辨率切片；裁剪漏上下文</td>
+</tr>
+<tr>
+<td>点对了错误功能</td>
+<td>指令是否理解、实体是否消歧</td>
+<td>子目标表示；动作前目标核对</td>
+<td>计划正确率、错误对象率；不能用命中框率替代</td>
+</tr>
+<tr>
+<td>跨 App 后忘记姓名、金额或内容</td>
+<td>输入历史是否保留来源证据</td>
+<td>最近截图；结构化任务记忆</td>
+<td>跨 App 严格成功；记忆事实错误；token/延迟</td>
+</tr>
+<tr>
+<td>长时间滚动、重复跳转</td>
+<td>页面变化检测、历史和动作结果是否可见</td>
+<td>变化摘要、重复状态提示、恢复数据</td>
+<td>重复动作率、恢复成功、ABORT；少循环不必然多成功</td>
+</tr>
+<tr>
+<td>中途走错后无法恢复</td>
+<td>训练数据是否只有理想轨迹</td>
+<td>从真实错误状态构建恢复 SFT</td>
+<td>固定扰动后的完成率；正常任务是否受损</td>
+</tr>
+<tr>
+<td>提前 COMPLETE、误报成功</td>
+<td>模型能否看到完成证据，终止语义是否一致</td>
+<td>可见证据核对、终止校准数据</td>
+<td>false-COMPLETE 与漏报；严格成功优先</td>
+</tr>
+<tr>
+<td>动态采样经常补满仍无有效组</td>
+<td>全成功/全失败组比例、任务难度、预算错误</td>
+<td>难度分层课程；调整组大小的独立对照</td>
+<td>有效组/候选数、困难任务覆盖、总环境动作</td>
+</tr>
+<tr>
+<td>正确前缀和致错动作得到相同权重</td>
+<td>是否真正消费逐步 advantage</td>
+<td>子目标段信用；可靠 anchor 分组；value/GAE</td>
+<td>非零局部优势覆盖、正确/错误动作权重、hold-out 成功</td>
+</tr>
+<tr>
+<td>长任务几乎全失败</td>
+<td>任务可执行性、预算、数据覆盖、能力组合</td>
+<td>合法子任务课程；逐步增加跨度</td>
+<td>同预算下长任务成功；不能只增加步数再宣称算法增益</td>
+</tr>
+<tr>
+<td>后期掉点且环境 ERROR 增多</td>
+<td>环境重置、并发、超时、服务异常</td>
+<td>先修复可重复的执行问题</td>
+<td>原始总体成功 + ERROR 分布；禁止删失败再报最好结果</td>
+</tr>
+</tbody>
+</table></div>
+<p>这里的自动失败分类应抽样人工复核。一次失败可能同时含定位、状态判断和计划错误；用“最早可确认偏离点”标主因，允许多标签，避免把末端超时当根因。</p>
+<p><strong>低成本诊断可以先做三个 oracle 对照。</strong> 仅在诊断集提供正确下一步意图、正确目标坐标或正确历史事实，分别观察失败是否缓解。它们改变了观察/监督条件，只用于定位瓶颈，不得计入正式纯视觉成绩；其中“正确意图”也可能包含额外信息，因此不是干净的能力因果分解。</p>
+<h4>9.6.2 建议执行顺序与停止条件</h4>
+<div class="research-table-wrap" role="region" aria-label="研究章节 9.6 表格，窄屏可横向滚动" tabindex="0"><table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>设计</th>
+<th>支持继续投入的信号</th>
+<th>停止或转向条件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P0：恢复可信基线</td>
+<td>固定环境版本、FCzero 规则、任务参数、预算、初态和评测流程；重跑冻结 checkpoint</td>
+<td>结果可复现，ERROR 与任务难度可分辨</td>
+<td>重置/执行不稳定时先修工程</td>
+</tr>
+<tr>
+<td>P1：冻结模型的记忆对照</td>
+<td>当前文本历史 vs 最近 2–3 张截图 vs 结构化记忆 vs 两者组合</td>
+<td>跨 App/信息搬运改善，正常任务无明显损失，成本可接受</td>
+<td>摘要幻觉或视觉 token 开销抵消收益</td>
+</tr>
+<tr>
+<td>P2：恢复数据 SFT</td>
+<td>相同基座、相同总训练 token；普通示范与加入恢复轨迹对照</td>
+<td>固定错误状态能恢复，完整任务成功也改善</td>
+<td>只改善人工扰动，正常起点无收益；错误前缀被模仿</td>
+</tr>
+<tr>
+<td>P3：局部信用可行性</td>
+<td>保持 outcome 基线；先选一种规则片段或 anchor 辅助项</td>
+<td>梯度映射正确、覆盖充分、同预算严格成功改善</td>
+<td>anchor 低覆盖或合组不可靠；子目标可被刷分</td>
+</tr>
+<tr>
+<td>P4：学习型 PRM</td>
+<td>已验证监督语义后，训练图像+历史评分器；先离线与冻结 actor 重排</td>
+<td>OOD 校准、候选区分及端到端收益均成立</td>
+<td>离线排序高分却诱发奖励利用，或 scorer 成本过高</td>
+</tr>
+</tbody>
+</table></div>
+<p>P1 是推理接口干预，P2/P3 是训练干预，分别报告。近期多图的收益也可能来自额外计算，因此另报告相同 token 上限的压缩策略，而不强行声称所有输入完全等价。</p>
+<p>第一轮选 16 个训练侧任务、每题 8 条轨迹，共 128 条，可以检查标签、覆盖和映射；这是工程诊断预算，没有足够统计功效的保证。先证明局部项系数为零时与基线一致，再做在线实验。每次只增加一个主要因素，保留方案再用至少 3 个独立训练 seed 和冻结测试集复核；3 个 seed 也不是充分精度的保证。</p>
+<p><strong>我会先做 P0→P1，并根据失败类型选择 P2 或 P3。</strong> 现阶段还没有“PRM 是性能瓶颈”的证据；项目已有可查询状态，先用它验证过程标签是否真的有用，能降低错误方向的投入。</p>
+<h4>9.6.3 如果要做课程与样本效率优化</h4>
+<p>WebRL 提供失败驱动的课程与回放思路；MobileRL 把成功轨迹长度、困难正例与难度过滤结合。它们的输入接口和优化器都与当前路径不同，适合拆成单因素实验。<a href="https://arxiv.org/html/2411.02337v3">WebRL</a>、<a href="https://arxiv.org/html/2509.18119v2">MobileRL</a></p>
+<p>建议按任务家族、跨 App 与难度分层采样，保留最难层的最低探索配额。仅对成功轨迹奖励效率，防止提前 ABORT 因长度短而获益。若引入历史正例回放，应保存行为策略信息并明确 off-policy 处理；不能把不同策略的旧轨迹直接当成当前同组 rollout。补采样减少了无效更新，也可能增加大量环境开销，必须同时看动作、token、GPU 时间和总墙钟时间。</p></div></details>
+<details class="research-chapter" id="research-9-7"><summary><span class="research-number">9.7</span><span class="research-chapter-title">怎样证明优化有效 评测应如何设计</span><span class="research-plus" aria-hidden="true">+</span></summary><div class="research-body"><h4>9.7.1 至少区分四层泛化</h4>
+<div class="research-table-wrap" role="region" aria-label="研究章节 9.7 表格，窄屏可横向滚动" tabindex="0"><table>
+<thead>
+<tr>
+<th>层次</th>
+<th>划分单位</th>
+<th>回答的问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>参数泛化</td>
+<td>同任务族的新实体、金额、日期和随机初态</td>
+<td>是否记住具体答案或对象？</td>
+</tr>
+<tr>
+<td>模板/任务族泛化</td>
+<td>未参与训练和选点的任务语义组合</td>
+<td>能否组合已有技能？</td>
+</tr>
+<tr>
+<td>App/界面泛化</td>
+<td>未见 App、布局变化、主题、语言、分辨率</td>
+<td>视觉和操作规则能否迁移？</td>
+</tr>
+<tr>
+<td>平台/真实环境迁移</td>
+<td>浏览器模拟器到 Android/桌面等</td>
+<td>是否依赖模拟器时延、布局或状态规则？</td>
+</tr>
+</tbody>
+</table></div>
+<p>这四种难度不构成普遍严格排序。task ID 不相交只证明 ID 层面的分离；模板、业务流程、画面或生成器仍可能重合。当前反复用于选点的验证集应当视为开发集，另冻结一个最终测试集。所有数据生成器、PRM 标签和课程筛选都不能读取其答案或结果来调参。</p>
+<h4>9.7.2 统一报告表</h4>
+<div class="research-table-wrap" role="region" aria-label="研究章节 9.7 表格，窄屏可横向滚动" tabindex="0"><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>应报告的内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>主结果</td>
+<td>固定预算下 strict pass@1，成功数/总数；按任务族、单/跨 App、难度分层</td>
+</tr>
+<tr>
+<td>部分进度</td>
+<td>与严格成功并列，说明终态 check 的语义，不能换名为成功率</td>
+</tr>
+<tr>
+<td>稳定性</td>
+<td>多训练 seed 的均值/离散度；同 checkpoint 多环境初态的重复测量</td>
+</tr>
+<tr>
+<td>错误与终止</td>
+<td>ERROR、超时、循环、ABORT、false-COMPLETE；统一保留总体分母</td>
+</tr>
+<tr>
+<td>效率</td>
+<td>环境动作、生成/输入 token、墙钟时间、GPU 小时、PRM/teacher 调用；包含丢弃 rollout</td>
+</tr>
+<tr>
+<td>恢复</td>
+<td>固定扰动下成功率、额外动作；同时保留正常起点主结果</td>
+</tr>
+<tr>
+<td>搜索</td>
+<td>候选数、重试数、verifier 选择规则；与单次策略执行分开报告</td>
+</tr>
+<tr>
+<td>选择过程</td>
+<td>checkpoint 选择规则、验证次数、停止规则；避免只挑最好点</td>
+</tr>
+<tr>
+<td>能力保持</td>
+<td>固定 grounding/动作集、简单任务和长任务，检查后训练的能力退化</td>
+</tr>
+</tbody>
+</table></div>
+<p>相同动作预算不等于相同计算预算，候选重排与多图历史尤其如此。可以同时给“同动作预算”和“同 token/GPU 成本”两条性能曲线，寻找成本—成功率的折中。成功轨迹平均长度有幸存者偏差，应同时报告全体 episode 的动作数和失败终止分布。</p>
+<p>配对任务 bootstrap 可以估计任务采样的不确定性；有模板相关性时按任务家族做 cluster bootstrap 更合理。它不能替代训练 seed 的方差，也不能把一次训练的多个 checkpoint 当独立训练样本。pass@k 要明确重复采样和候选选择条件；单次成功率不能在不满足条件时直接换算为真实多次尝试能力。</p>
+<h4>9.7.3 Judge 与环境也是实验对象</h4>
+<p>基于状态的规则 judge 可检查真实业务结果，但仍可能存在遗漏。应设计少量针对性的反例：错误对象、只改页面不改数据、完成后撤销、重复执行、部分字段正确、提前 COMPLETE、跨 App 副作用。对照人工轨迹审计，检查假阳性与假阴性。</p>
+<p>完整重置应验证业务状态、导航栈、焦点、键盘、模拟时间和权限等。评测时隐藏状态可由 judge 使用；若把隐藏状态直接传给 actor，必须另标输入协议。只统计“环境正常”的成功率会掩盖系统可靠性：可补充条件分析，但主表仍保留所有预先指定任务和失败原因。</p></div></details>
+<details class="research-chapter" id="research-9-8"><summary><span class="research-number">9.8</span><span class="research-chapter-title">值得延伸思考的方向</span><span class="research-plus" aria-hidden="true">+</span></summary><div class="research-body"><h4>9.8.1 端到端模型还是模块化系统</h4>
+<p>SeeClick/UGround 把定位作为可训练接口，Agent S2 强调分层规划与专家模块；UI-TARS 系列则探索更统一的视觉动作模型。模块化方便定位错误、替换 grounder 和控制成本，但模块之间的目标描述可能丢信息；端到端减少手工接口，也更难区分能力瓶颈。<a href="https://arxiv.org/html/2410.05243v3">UGround</a>、<a href="https://arxiv.org/html/2504.00906v1">Agent S2</a>、<a href="https://arxiv.org/html/2501.12326v1">UI-TARS</a></p>
+<p>对本项目可先保持同一个 4B actor，增加可审计的任务记忆与动作结果记录；若确认大多数错误来自定位，再考虑专门 grounder。比较时固定高层计划，并把额外模型、调用次数与延迟计入成本。</p>
+<h4>9.8.2 有 API 还需要 GUI Agent 吗</h4>
+<p>GUI 为没有开放 API 或业务接口不统一的应用提供可见操作入口；API 则能减少部分操作的歧义和步数。二者可以组成混合系统，但动作空间与可靠性条件变了。</p>
+<p>OpenMobile2 将模拟移动环境、模拟器环境和 App 原生工具结合，适合作为“纯视觉基准之外的产品路线”阅读。其工具调用成绩不能直接作为纯截图坐标策略的同协议比较；MobileGym 中供任务初始化/判题的内部 API 也不是 actor 自动获准使用的工具。<a href="https://arxiv.org/html/2610.14157v1">OpenMobile2</a></p>
+<p>可以设计独立实验：纯 GUI、GUI+同范围公开工具、工具失败后的 GUI fallback。比较严格完成、时延、工具权限、失败可恢复性，而不是只用动作数更少证明模型能力更强。</p>
+<h4>9.8.3 既然有模拟器，还要不要学 world model</h4>
+<p>WM-R1 用学习的 GUI 世界模型生成可交互的后续状态，并支持想象与策略学习。这能扩充训练交互，但策略收益受转移预测、渲染一致性和结果评价误差影响；生成画面像真的，不代表业务状态真的正确。<a href="https://arxiv.org/html/2608.27508v1">WM-R1</a></p>
+<p>MobileGym 已有程序实现的环境和结构化状态，当前先利用可验证的真实环境 rollout 通常更直接。若长尾 App 或真实设备交互昂贵，再考虑 learned world model，并做“一步预测一致性→多步漂移→真实环境策略收益”的逐级检验。世界模型中的成功率不能替代真实或程序环境成功率；训练策略还可能主动利用模型漏洞。</p>
+<h4>9.8.4 Sim-to-real 的关键是覆盖什么差异</h4>
+<p>需要分别检查布局/字体、设备尺寸、软键盘、异步等待、系统弹窗、权限、网络错误、应用状态和动作时延。对这些因素做可控随机化，有助于研究稳健性；随机化范围应来自目标设备的实际差异，过度随机化也会增加学习难度。</p>
+<p>MobileGym 论文对其自身平台的迁移证据不等于你的 checkpoint 已完成真实设备验证。简历应保留“浏览器模拟移动环境”口径；有相同任务语义、明确映射和真实设备复测后，再写 sim-to-real 结果。<a href="https://arxiv.org/html/2605.26114v1">MobileGym</a></p>
+<h4>9.8.5 不确定性、停止和交互安全</h4>
+<p>停止也是动作选择的一部分。模型应能区分“完成证据充分”“仍可恢复”“无法完成”；仅增加 ABORT 惩罚可能诱发胡乱点击，仅惩罚 false-COMPLETE 也可能增加放弃。应同时观察严格成功、误报、漏报、恢复和成本。</p>
+<p>在真实应用中，页面内容还可能包含与用户目标冲突的指令；可研究将页面视为数据、限制高影响操作、在不确定时请求用户确认。但这应另设任务与威胁模型，本项目尚未验证相关能力，不能写成已经实现的安全保障。</p></div></details>
+<details class="research-chapter" id="research-9-9"><summary><span class="research-number">9.9</span><span class="research-chapter-title">面试延伸问答 12 个能展开讨论的问题</span><span class="research-plus" aria-hidden="true">+</span></summary><div class="research-body"><p>以下 R01–R12 是在前面 30 个项目问答之外新增的研究问题。回答用“已经观察到什么—如何解释—如何证伪”组织；涉及改进时明确是计划。</p>
+<h4>R01 你怎样定义 GUI Agent，它和普通视觉问答有什么不同？</h4>
+<p><strong>回答思路：</strong> 它是通过有限观察持续改变环境状态的决策任务。截图只显示状态的一部分，动作会影响后续可见信息、可执行选项和最终业务结果，所以要联合考虑 grounding、状态估计、计划、恢复和终止。视觉问答主要评价当前答案，GUI 还要评价整段交互的结果与代价。</p>
+<p><strong>追问准备：</strong> 用跨 App 复制联系人信息举例：源页面离开后关键信息不可见，记忆直接影响后续动作。可对照当前截图、近期多图和结构化记忆；不能只因为跨 App 分数低就断言记忆不足。</p>
+<h4>R02 Grounding 准确率很高，为什么整任务成功率仍然很低？</h4>
+<p><strong>回答思路：</strong> “点中了所说的按钮”不保证“这个按钮是当前该点的”。还存在目标理解、动作顺序、隐藏状态、执行时序和终止错误。长序列会积累失败风险，但独立同分布误差模型只是解释用的简化。</p>
+<p><strong>追问准备：</strong> 将动作意图与坐标分开标注，使用正确意图/坐标的诊断对照，找最早偏离点。不要把离线 point-in-box 指标和在线 strict pass@1 放在一个榜单排序。</p>
+<h4>R03 给模型更多历史截图一定更好吗？</h4>
+<p><strong>回答思路：</strong> 历史可能补充页面变化和已离开的实体，也会带来视觉 token、干扰和上下文压缩问题。关键是保留与当前决策相关的证据，而不只是增加窗口长度。</p>
+<p><strong>追问准备：</strong> 冻结 actor 比较文本历史、最近截图、结构化记忆、混合记忆；测跨 App 成功、事实保持与成本。记忆摘要应标注来源步骤和置信度，错误信息需要可更新；不能把 ground-truth 隐藏状态写进纯视觉记忆。</p>
+<h4>R04 SFT、DPO 和在线 RL 分别适合解决什么？</h4>
+<p><strong>回答思路：</strong> SFT 建立接口、基础技能和恢复行为；DPO 需要同一上下文下可解释的偏好对；在线 RL 在可执行环境中直接优化结果和交互决策。三者的数据来源与失败模式不同，不能用算法名称替代问题诊断。</p>
+<p><strong>追问准备：</strong> 如果格式错误很多，先做数据与 SFT；基础行为可用但完整任务欠佳，再考虑在线反馈。UI-TARS 的 Agent DPO、InfiGUI-R1 的 RLOO 与 UI-TARS-2 的 PPO 应准确区分，不能统称 GRPO。</p>
+<h4>R05 你现在的 reward 是 PRM 吗？有部分分为何还不算？</h4>
+<p><strong>回答思路：</strong> 当前是最终状态的规则评分，可以给部分目标达成分，但没有使用学习得到的过程评分器。PRM 需要说明训练数据、预测对象与使用位置，也可以复用已有评分模型；逐步调用一个终态检查也只是规则过程信号。</p>
+<p><strong>追问准备：</strong> 继续检查 reward 怎样进入 advantage。当前路径将轨迹优势广播；即使新增 Step.reward 字段，也要贯通训练消费链路，才能声称实现逐步信用。</p>
+<h4>R06 为什么把 progress 相邻作差，不一定改进信用分配？</h4>
+<p><strong>回答思路：</strong> 差分求和仍是终点减起点，如果最后又变成一个轨迹标量并广播，没有新增由过程进度产生的动作优势差异；各动作本身的梯度仍可能不同。信用分配要使不同决策获得不同的回报估计或 baseline。</p>
+<p><strong>追问准备：</strong> 画出 reward→return→advantage→token mask 的链路，给出 telescoping 等式。势函数塑形的策略不变性有条件；新局部辅助项应做零系数一致性与副作用审计。</p>
+<h4>R07 同一截图下比较动作，是否就是 GiGPO？</h4>
+<p><strong>回答思路：</strong> 不够。GiGPO 的局部比较依赖足够可比的决策状态与后续 return。相同截图可能对应不同表单草稿、任务参数、历史信息或剩余预算；视觉相似可能制造错误的优势。</p>
+<p><strong>追问准备：</strong> 先统计可靠 anchor 的覆盖、不同轨迹数和 return 方差。若严格匹配后覆盖很低，就转向子目标段或 value；不能通过随意粗化状态来获得漂亮覆盖率。其视觉小环境实验也不能直接证明手机 GUI 迁移。</p>
+<h4>R08 为什么不直接训练一个更大的 PRM？</h4>
+<p><strong>回答思路：</strong> 更大的模型不会自动消除标签含糊、隐藏信息缺失和奖励利用。当前环境已经能提供可验证状态，先证明过程标签优于 outcome 基线，再判断是否需要把它蒸馏为图像评分器。</p>
+<p><strong>追问准备：</strong> PRM 离线相关性、校准、候选排序和在线策略收益分别测。冻结 actor 的重排收益包含额外搜索预算；AgentPRM 的末步轨迹奖励实验也不能当作 dense 更新证据。</p>
+<h4>R09 当前实验支持哪些结论，不支持哪些？</h4>
+<p><strong>回答思路：</strong> 同一 FCzero run 在固定任务 ID 与题目文本下，从 23/256 到峰值 56/256，支持该次训练过程中验证表现改善。跨 App 与高难任务仍弱，后期回落提示稳定性和终止行为值得追踪。</p>
+<p><strong>追问准备：</strong> 不能由此证明 FCzero 优于普通 GRPO，不能报多 seed 稳定提升，也不能把六组配置差异较大的历史 run 当严格消融。补做共同初始化、同协议、等预算对照及新 hold-out。</p>
+<h4>R10 多采几个候选再让 verifier 选，算性能优化吗？</h4>
+<p><strong>回答思路：</strong> 算系统推理优化，但要分别报告额外计算收益和 policy 参数更新收益。候选、重试和环境回退次数都应纳入预算，且 selector 只能使用协议允许的信息。</p>
+<p><strong>追问准备：</strong> 比较单次 actor、同候选数随机选择、verifier 选择，使用相同初态和预算；没有可恢复状态时，不能假装各候选都在同一状态真实执行过。</p>
+<h4>R11 如果面试官说模拟器太简单，你怎么回答？</h4>
+<p><strong>回答思路：</strong> 模拟器的价值是可控初态、状态判题、可复现交互和低成本实验，适合研究后训练机制。它与真实设备在异步、布局、应用业务和错误分布上可能不同，需要单独验证外部有效性。</p>
+<p><strong>追问准备：</strong> 先在模拟器内做受控扰动与 held-out App，再选有明确任务对应关系的真实设备测试。当前应坦诚尚未得到本 checkpoint 的真实设备迁移结果。</p>
+<h4>R12 资源只够再做两组实验，你会怎么选？</h4>
+<p><strong>回答思路：</strong> 先修到冻结基线可复现，这是测量前提。然后根据失败审计选一个主因素：若信息丢失占主因，做原历史 vs 近期多图/记忆；若过程监督明确且映射可靠，做原 GRPO vs 单一局部信用项。</p>
+<p><strong>追问准备：</strong> 固定 task、初态、初始化、奖励和预算，预先指定 strict pass@1 与跨 App 分层结果，报告成本和失败模式。两组、单 seed 的结果只用于方向筛选，不承诺统计显著或最终产品收益。</p></div></details>
+<details class="research-chapter" id="research-9-10"><summary><span class="research-number">9.10</span><span class="research-chapter-title">阅读路线、来源与检索边界</span><span class="research-plus" aria-hidden="true">+</span></summary><div class="research-body"><h4>9.10.1 建议按问题阅读，而不是背排行榜</h4>
+<ol>
+<li><strong>任务是什么：</strong> AndroidWorld + MobileGym。先看 observation/action、初始化、judge 与预算，画出训练闭环。</li>
+<li><strong>模型究竟哪里出错：</strong> SeeClick + ScreenSpot-Pro + UGround。理解 grounding 的独立指标与高分辨率条件。</li>
+<li><strong>数据如何成为能力：</strong> UI-TARS + OSGenesis。区分生成指令、获得成功轨迹、恢复数据与偏好对的成本。</li>
+<li><strong>在线训练怎样改变行为：</strong> DigiRL + MobileRL + UI-TARS-2。比较 value/AWR、轨迹 GRPO 与 PPO/GAE；核对输入协议。</li>
+<li><strong>怎样给动作分配信用：</strong> GiGPO + GUI-Shepherd + AgentPRM。追踪标签、奖励、advantage 和推理使用方式。</li>
+<li><strong>研究边界如何扩展：</strong> Agent S2 + OSWorld2 + OpenMobile2 + WM-R1。讨论长任务、模块化、混合工具与世界模型。</li>
+</ol>
+<p>每篇建议做一张卡：任务/接口、监督来源、算法实际更新、主指标、额外成本、最关键限制、一个可迁移实验。面试重点是说明为什么选择某种机制，以及什么证据会让你放弃它。</p>
+<h4>9.10.2 检索方式与证据强度</h4>
+<p>这是截至 2026-11-14 的<strong>定向叙述式调研</strong>，以原有 12 篇奖励/信用资料为种子，补检 GUI grounding、长任务、数据合成、SFT/DPO、在线 RL、记忆、评测和环境。通过搜索与直接访问核对 arXiv、ACL Anthology、会议页面及作者材料；综述只用于发现线索，方法结论以原始论文为依据。</p>
+<p>阅读范围是摘要、方法、实验设置、相关表格和必要附录，逐篇记录版本；没有声称逐字读完所有论文、复现作者代码或检索穷尽。不同基座、数据、输入、动作接口、重试预算的成绩不做统一排名。2026 年近期预印本也不自动代表已经独立复现或达到稳定共识。</p>
+<p>访问限制包括 MobileRL 正式会议 PDF 的浏览器验证、DigiRL 最终 PDF 的工具大小限制；采用明确记录的 arXiv 版本。UI-R1 的 arXiv 与正式版数据规模不同，作为补充来源单列。GuidNav 部分汇总数字无法由分域表直接重建，因此本文不借其 headline 数字论证本项目预期增益。</p>
+<p>来源清单记录版本和实际阅读范围；检索日志记录查询和访问限制。前文的本地实验结论来自项目记录，方案属于本文结合文献的推论，不是论文替本项目证明的结果。</p>
+<p><strong>流程出处：</strong> 本次用 literature-review 技能组织检索与记录；依该技能要求引用 Kassis 等，<em>Scientific Agent Skills: A Library of Procedural Knowledge for Research Agents</em>（2026）。它是研究流程来源，不计入 GUI 方法论文，也不作为算法有效性的证据。<a href="https://arxiv.org/abs/2609.00065">流程论文</a></p>
+<h4>9.10.3 经核对的来源索引</h4>
+<p>详细元数据与阅读范围见 <a href="gui_agent_sources.json">来源清单</a>，查询与限制见 <a href="gui_agent_research.md#scope">检索日志</a>。以下链接固定到本次阅读的版本或出版页面。</p>
+<!-- VERIFIED_SOURCE_INDEX -->
+
+<p>本轮共 <strong>28 篇核心文献 + 1 篇补充版本核验</strong>；其中含基准、数据集、平台与理论，不是 28 种训练算法。流程引用另列，不计入上述数量。</p>
+<div class="research-table-wrap" role="region" aria-label="研究章节 9.10 表格，窄屏可横向滚动" tabindex="0"><table>
+<thead>
+<tr>
+<th>编号</th>
+<th>文献</th>
+<th>本次版本</th>
+<th>阅读用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01</td>
+<td><a href="https://arxiv.org/html/2605.26114v1">MobileGym: A Verifiable and Highly Parallel Simulation Platform for Mobile GUI Agent Research</a></td>
+<td>arXiv v1</td>
+<td>platform / simulation / evaluation</td>
+</tr>
+<tr>
+<td>02</td>
+<td><a href="https://arxiv.org/html/2504.00906v1">Agent S2: A Compositional Generalist-Specialist Framework for Computer Use Agents</a></td>
+<td>arXiv v1</td>
+<td>agent_architecture / planning / grounding</td>
+</tr>
+<tr>
+<td>03</td>
+<td><a href="https://aclanthology.org/2025.acl-long.277.pdf">OS-Genesis: Automating GUI Agent Trajectory Construction via Reverse Task Synthesis</a></td>
+<td>ACL 2025 published paper</td>
+<td>data_synthesis / trajectory_construction</td>
+</tr>
+<tr>
+<td>04</td>
+<td><a href="https://arxiv.org/html/2610.14157v1">OpenMobile-2: Building Versatile Mobile Agents with Scalable Environments and App-Native Tools</a></td>
+<td>arXiv v1</td>
+<td>mobile_agent / hybrid_tools / post_training</td>
+</tr>
+<tr>
+<td>05</td>
+<td><a href="https://arxiv.org/html/2608.27508v1">WM-R1: Training GUI Agents to Reason and leverage World Models with Reinforcement Learning</a></td>
+<td>arXiv v1</td>
+<td>world_model / reinforcement_learning</td>
+</tr>
+<tr>
+<td>06</td>
+<td><a href="https://people.eecs.berkeley.edu/~russell/papers/icml99-shaping.pdf">Policy Invariance Under Reward Transformations: Theory and Application to Reward Shaping</a></td>
+<td>ICML 1999</td>
+<td>theory / reward_shaping</td>
+</tr>
+<tr>
+<td>07</td>
+<td><a href="https://arxiv.org/html/2405.14573v5">AndroidWorld: A Dynamic Benchmarking Environment for Autonomous Agents</a></td>
+<td>v5</td>
+<td>benchmark / evaluation</td>
+</tr>
+<tr>
+<td>08</td>
+<td><a href="https://arxiv.org/html/2404.07972v2">OSWorld: Benchmarking Multimodal Agents for Open-Ended Tasks in Real Computer Environments</a></td>
+<td>v2</td>
+<td>benchmark / evaluation</td>
+</tr>
+<tr>
+<td>09</td>
+<td><a href="https://arxiv.org/html/2307.13854v4">WebArena: A Realistic Web Environment for Building Autonomous Agents</a></td>
+<td>v4</td>
+<td>benchmark / evaluation</td>
+</tr>
+<tr>
+<td>10</td>
+<td><a href="https://arxiv.org/html/2401.13649v2">VisualWebArena: Evaluating Multimodal Agents on Realistic Visual Web Tasks</a></td>
+<td>v2</td>
+<td>benchmark / evaluation</td>
+</tr>
+<tr>
+<td>11</td>
+<td><a href="https://arxiv.org/html/2406.03679v6">On the Effects of Data Scale on UI Control Agents</a></td>
+<td>v6</td>
+<td>dataset / offline_evaluation</td>
+</tr>
+<tr>
+<td>12</td>
+<td><a href="https://arxiv.org/html/2504.07981v1">ScreenSpot-Pro: GUI Grounding for Professional High-Resolution Computer Use</a></td>
+<td>v1</td>
+<td>benchmark / grounding</td>
+</tr>
+<tr>
+<td>13</td>
+<td><a href="https://arxiv.org/html/2606.29537v2">OSWorld 2.0: Benchmarking Computer Use Agents on Long-Horizon Real-World Tasks</a></td>
+<td>v2</td>
+<td>benchmark / evaluation</td>
+</tr>
+<tr>
+<td>14</td>
+<td><a href="https://arxiv.org/html/2401.10935v2">SeeClick: Harnessing GUI Grounding for Advanced Visual GUI Agents</a></td>
+<td>v2</td>
+<td>agent_method / supervised grounding continual pretraining and downstream adaptation</td>
+</tr>
+<tr>
+<td>15</td>
+<td><a href="https://arxiv.org/html/2410.05243v3">Navigating the Digital World as Humans Do: Universal Visual Grounding for GUI Agents</a></td>
+<td>v3</td>
+<td>agent_method / supervised visual grounding; separate planner in SeeAct-V</td>
+</tr>
+<tr>
+<td>16</td>
+<td><a href="https://arxiv.org/html/2411.17465v1">ShowUI: One Vision-Language-Action Model for GUI Visual Agent</a></td>
+<td>v1</td>
+<td>agent_method / offline instruction tuning and downstream supervised adaptation</td>
+</tr>
+<tr>
+<td>17</td>
+<td><a href="https://arxiv.org/html/2501.12326v1">UI-TARS: Pioneering Automated GUI Interaction with Native Agents</a></td>
+<td>v1</td>
+<td>agent_method / continual pretraining, annealing/SFT, reflective correction SFT and Agent DPO</td>
+</tr>
+<tr>
+<td>18</td>
+<td><a href="https://arxiv.org/html/2509.02544v2">UI-TARS-2 Technical Report: Advancing GUI Agent with Multi-Turn Reinforcement Learning</a></td>
+<td>v2</td>
+<td>agent_method / CT/SFT/data iteration and multi-turn online PPO; critic/value pretraining</td>
+</tr>
+<tr>
+<td>19</td>
+<td><a href="https://arxiv.org/html/2504.14239v1">InfiGUI-R1: Advancing Multimodal GUI Agents from Reactive Actors to Deliberative Reasoners</a></td>
+<td>v1</td>
+<td>agent_method / spatial reasoning distillation/SFT then RLOO</td>
+</tr>
+<tr>
+<td>20</td>
+<td><a href="https://arxiv.org/html/2504.10458v4">GUI-R1 : A Generalist R1-Style Vision-Language Action Model For GUI Agents</a></td>
+<td>v4</td>
+<td>agent_method / GRPO on sampled action responses with ground-truth rule rewards; separate supervised baseline</td>
+</tr>
+<tr>
+<td>21</td>
+<td><a href="https://arxiv.org/html/2505.18121v1">ProgRM: Build Better GUI Agents with Progress Rewards</a></td>
+<td>arXiv v1</td>
+<td>post_training / credit_assignment</td>
+</tr>
+<tr>
+<td>22</td>
+<td><a href="https://arxiv.org/html/2509.23738v1">GUI-Shepherd: Reliable Process Reward and Verification for Long-Sequence GUI Tasks</a></td>
+<td>arXiv v1</td>
+<td>post_training / credit_assignment</td>
+</tr>
+<tr>
+<td>23</td>
+<td><a href="https://arxiv.org/html/2504.16073v1">Guiding VLM Agents with Process Rewards at Inference Time for GUI Navigation</a></td>
+<td>arXiv v1</td>
+<td>post_training / credit_assignment</td>
+</tr>
+<tr>
+<td>24</td>
+<td><a href="https://arxiv.org/html/2505.10978v3">Group-in-Group Policy Optimization for LLM Agent Training</a></td>
+<td>arXiv v3</td>
+<td>post_training / credit_assignment</td>
+</tr>
+<tr>
+<td>25</td>
+<td><a href="https://arxiv.org/html/2511.08325v1">AgentPRM: Process Reward Models for LLM Agents via Step-Wise Promise and Progress</a></td>
+<td>arXiv v1</td>
+<td>post_training / credit_assignment</td>
+</tr>
+<tr>
+<td>26</td>
+<td><a href="https://arxiv.org/html/2411.02337v3">WebRL: Training LLM Web Agents via Self-Evolving Online Curriculum Reinforcement Learning</a></td>
+<td>arXiv v3</td>
+<td>post_training / credit_assignment</td>
+</tr>
+<tr>
+<td>27</td>
+<td><a href="https://arxiv.org/html/2406.11896v1">DigiRL: Training In-The-Wild Device-Control Agents with Autonomous Reinforcement Learning</a></td>
+<td>arXiv v1</td>
+<td>post_training / credit_assignment</td>
+</tr>
+<tr>
+<td>28</td>
+<td><a href="https://arxiv.org/html/2509.18119v2">MobileRL: Online Agentic Reinforcement Learning for Mobile GUI Agents</a></td>
+<td>arXiv v2</td>
+<td>post_training / credit_assignment</td>
+</tr>
+<tr>
+<td>29（补）</td>
+<td><a href="https://arxiv.org/html/2503.21620v5">UI-R1: Enhancing Efficient Action Prediction of GUI Agents by Reinforcement Learning</a></td>
+<td>arXiv v5 (2025-05-24), AAAI2026 publication metadata and PDF opening</td>
+<td>supplementary / single_step_rl / version_check</td>
+</tr>
+</tbody>
+</table></div></div></details></div>
+</section>
+<footer class="foot"><span>MobileGym · 多模态与后训练项目复盘 · 2026.11.14</span><span>单次历史验证 · 计划与已完成工作分别标明 <a href="#overview">返回顶部 ↑</a></span></footer>
+</div></main>
+<textarea class="copy-source" id="copy-source" aria-hidden="true" tabindex="-1">基于 Qwen3-VL 的多模态 GUI Agent 在线强化学习
+技术栈：Qwen3-VL-4B / GRPO / rLLM / verl / vLLM / FSDP / Playwright / TensorBoard
+
+- 多模态后训练： 基于 MobileGym 扩展截图观察、坐标动作、状态判分与策略更新的在线 RL 流程，在 6 GPU 配置下开展 Qwen3-VL-4B 训练，使用 96/128 个环境槽位收集多步交互轨迹。
+- 采样与奖励： 实现按组内奖励差异筛选的动态补采样及回退机制，协调多轮 rollout 的推理副本生命周期；新增严格结果奖励、错误完成清零分支，开展 6 组主要探索性对照。
+- 实验结果： 在同一组 256 个验证任务上，单次训练严格成功率由 8.98% 提升至最高 21.88%，增加 12.89 个百分点；结合逐任务结果分析跨应用、长链任务及终止行为瓶颈。
+- 可靠性与复现： 完善任务模板重建、环境池分批预热与初始化失败清理；结合 TensorBoard 和原始轨迹复盘采样成本、验证集合变化及浏览器异常对结果的影响。</textarea>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+<script>
+(function(){
+'use strict';
+const qaItems=Array.from(document.querySelectorAll('#qa-list .qa'));
+const search=document.getElementById('qa-search');
+const category=document.getElementById('qa-category');
+const expand=document.getElementById('expand-questions');
+const count=document.getElementById('qa-count');
+const empty=document.getElementById('qa-empty');
+let allExpanded=false;
+function syncExpand(){
+  const visible=qaItems.filter(function(item){return !item.hidden});
+  allExpanded=visible.length>0&&visible.every(function(item){return item.open});
+  expand.textContent=allExpanded?'收起当前问题':'展开当前问题';
+  expand.disabled=visible.length===0;
+}
+function filterQuestions(){
+  const words=search.value.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean);
+  const group=category.value;
+  let total=0;
+  qaItems.forEach(function(item){
+    const text=item.textContent.toLocaleLowerCase();
+    const visible=(group==='all'||item.dataset.category===group)&&words.every(function(word){return text.includes(word)});
+    item.hidden=!visible;
+    if(visible)total++;
+  });
+  count.textContent='显示 '+total+' / 30 个问题';
+  empty.hidden=total!==0;
+  syncExpand();
+}
+search.addEventListener('input',filterQuestions);
+category.addEventListener('change',filterQuestions);
+expand.addEventListener('click',function(){
+  const target=!allExpanded;
+  qaItems.filter(function(item){return !item.hidden}).forEach(function(item){item.open=target});
+  syncExpand();
+});
+qaItems.forEach(function(item){item.addEventListener('toggle',syncExpand)});
+let activeResume='full';
+document.querySelectorAll('[data-resume]').forEach(function(button){
+  button.addEventListener('click',function(){
+    activeResume=button.dataset.resume;
+    document.querySelectorAll('[data-resume]').forEach(function(b){b.setAttribute('aria-pressed',String(b===button))});
+    document.getElementById('resume-full').hidden=activeResume!=='full';
+    document.getElementById('resume-compact').hidden=activeResume!=='compact';
+  });
+});
+let toastTimer;
+function notify(message){
+  const toast=document.getElementById('toast');
+  toast.textContent=message;toast.hidden=false;
+  clearTimeout(toastTimer);toastTimer=setTimeout(function(){toast.hidden=true},3500);
+}
+async function copyText(text){
+  try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text);return true}}catch(e){}
+  const area=document.getElementById('copy-source');
+  area.value=text;area.focus();area.select();
+  let copied=false;
+  try{copied=document.execCommand('copy')}catch(e){}
+  document.getElementById('copy-resume').focus();
+  return copied;
+}
+document.getElementById('copy-resume').addEventListener('click',async function(){
+  const area=document.getElementById('resume-'+activeResume);
+  const text=area.innerText.trim();
+  const copied=await copyText(text);
+  notify(copied?'已复制简历项目经历':'当前浏览器限制复制，请选中简历正文复制。');
+});
+function openEmbeddedReport(){
+  if(location.hash==='#full-report')document.getElementById('full-report').open=true;
+}
+window.addEventListener('hashchange',openEmbeddedReport);
+openEmbeddedReport();
+const mobileNav=document.querySelector('.mobile-nav');
+mobileNav.addEventListener('change',function(){location.hash=mobileNav.value});
+const links=Array.from(document.querySelectorAll('.nav a'));
+const sections=links.map(function(a){return document.querySelector(a.getAttribute('href'))});
+let scrollQueued=false;
+function syncNavigation(){
+  const cutoff=window.innerWidth<=950?140:150;
+  let current=sections[0].id;
+  sections.forEach(function(section){if(section.getBoundingClientRect().top<=cutoff)current=section.id});
+  links.forEach(function(a){const active=a.hash==='#'+current;a.classList.toggle('active',active);if(active)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current')});
+  mobileNav.value=current;
+  scrollQueued=false;
+}
+window.addEventListener('scroll',function(){if(!scrollQueued){scrollQueued=true;requestAnimationFrame(syncNavigation)}},{passive:true});
+window.addEventListener('resize',syncNavigation);
+function openQuestionFromHash(){
+  const id=location.hash.slice(1);
+  if(!id.startsWith('question-'))return;
+  const target=document.getElementById(id);
+  if(target){search.value='';category.value='all';filterQuestions();target.open=true;target.scrollIntoView({block:'start'})}
+}
+window.addEventListener('hashchange',openQuestionFromHash);
+const researchChapters=Array.from(document.querySelectorAll('#research .research-chapter'));
+function openResearchFromHash(){
+  const target=document.getElementById(location.hash.slice(1));
+  if(!target||!target.classList.contains('research-chapter'))return;
+  target.open=true;
+  requestAnimationFrame(function(){target.scrollIntoView({block:'start'});syncNavigation()});
+}
+document.querySelectorAll('[data-research-jump]').forEach(function(link){
+  link.addEventListener('click',function(event){
+    if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
+    const target=document.getElementById(link.hash.slice(1));
+    if(target)target.open=true;
+    if(location.hash===link.hash)openResearchFromHash();
+  });
+});
+window.addEventListener('hashchange',openResearchFromHash);
+researchChapters.forEach(function(chapter){chapter.addEventListener('toggle',syncNavigation)});
+openQuestionFromHash();openResearchFromHash();syncNavigation();
+let printState;
+let researchPrintState;
+window.addEventListener('beforeprint',function(){
+  printState=qaItems.map(function(item){return {open:item.open,hidden:item.hidden}});
+  researchPrintState=researchChapters.map(function(item){return item.open});
+  researchChapters.forEach(function(item){item.open=true});
+  qaItems.forEach(function(item){item.open=true;item.hidden=false});
+});
+window.addEventListener('afterprint',function(){
+  if(!printState)return;
+  qaItems.forEach(function(item,i){item.open=printState[i].open;item.hidden=printState[i].hidden});
+  researchChapters.forEach(function(item,i){item.open=researchPrintState[i]});
+  syncExpand();
+});
+})();
+</script>
+</body>
+</html>

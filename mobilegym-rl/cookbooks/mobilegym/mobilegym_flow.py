@@ -49,6 +49,8 @@ class RuntimeConfig:
     env_pool_size: int = 64
     env_isolation: str = "pages"
     env_num_browsers: int = 8
+    env_init_batch_size: int = 8
+    env_init_warmup: bool = True
     env_headless: bool = True
     # Default: no proxy (direct connection). This is usually fine. Even without
     # external network access training mostly still works (only env content that
@@ -301,6 +303,8 @@ class WorkerState:
                     delay_after_action=cfg.delay_after_action,
                     physical_size=PHYSICAL_SIZE,
                     verbose=cfg.agent_verbose,
+                    init_batch_size=cfg.env_init_batch_size,
+                    warmup=cfg.env_init_warmup,
                 )
                 await raw_pool.__aenter__()
                 self.pool = AsyncEnvPool(raw_pool)
@@ -430,6 +434,7 @@ def load_mobilegym_tasks(
     task_split: str | None = "train",
     sample_n: int = 1,
     seed: int = 42,
+    sample_templates: bool = False,
     max_tasks: int | None = None,
 ) -> list[dict[str, Any]]:
     registry = _state.get_task_registry()
@@ -438,12 +443,16 @@ def load_mobilegym_tasks(
         registry=registry,
         sample_n=sample_n,
         seed=seed,
+        sample_templates=sample_templates,
     )
 
     rows = [
         {
             "task_id": task.id,
             "task_seed": getattr(task, "_seed", None),
+            # The template choice is not encoded in task_id. Keep it in the
+            # row so rollout workers reconstruct the exact prompt variant.
+            "template_index": getattr(task, "_template_index", None),
             "suite": task.suite,
             "task_name": task.name,
             "data_source": task.suite or "mobilegym",
@@ -468,6 +477,7 @@ def load_mobilegym_dataset(
     task_split: str | None = "train",
     sample_n: int = 1,
     seed: int = 42,
+    sample_templates: bool = False,
     max_tasks: int | None = None,
     name: str = "mobilegym",
     split: str = "train",
@@ -478,6 +488,7 @@ def load_mobilegym_dataset(
             task_split=task_split,
             sample_n=sample_n,
             seed=seed,
+            sample_templates=sample_templates,
             max_tasks=max_tasks,
         ),
         name=name,
@@ -496,6 +507,9 @@ def load_task_by_id(task_data: dict[str, Any]):
 
     if match:
         task._instance_id = int(match.group("idx"))
+    template_index = task_data.get("template_index")
+    if template_index is not None:
+        task._template_index = int(template_index)
     return task
 
 

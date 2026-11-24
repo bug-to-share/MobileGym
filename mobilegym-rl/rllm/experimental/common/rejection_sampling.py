@@ -7,6 +7,8 @@ tracking episode-level correctness metrics while filtering based on reward varia
 
 from dataclasses import dataclass, field
 
+import numpy as np
+
 from rllm.agents.agent import Episode, TrajectoryGroup
 from rllm.experimental.common.config import RejectionSamplingConfig
 
@@ -24,6 +26,12 @@ class RejectionSamplingMetrics:
     groups_before_filter: int = 0
     groups_after_filter: int = 0
     groups_dropped_insufficient_trajs: int = 0
+    dynamic_candidate_groups: int = 0
+    dynamic_effective_groups: int = 0
+    dynamic_rounds: int = 0
+    dynamic_fallback: int = 0
+    dynamic_effective_used: int = 0
+    dynamic_ordinary_used: int = 0
 
     def reset(self):
         """Reset all metrics to zero."""
@@ -33,6 +41,12 @@ class RejectionSamplingMetrics:
         self.groups_before_filter = 0
         self.groups_after_filter = 0
         self.groups_dropped_insufficient_trajs = 0
+        self.dynamic_candidate_groups = 0
+        self.dynamic_effective_groups = 0
+        self.dynamic_rounds = 0
+        self.dynamic_fallback = 0
+        self.dynamic_effective_used = 0
+        self.dynamic_ordinary_used = 0
 
     def to_dict(self, prefix: str = "batch/") -> dict:
         """Convert metrics to a dictionary for logging."""
@@ -46,6 +60,12 @@ class RejectionSamplingMetrics:
             f"{prefix}groups_before_filter": self.groups_before_filter,
             f"{prefix}groups_after_filter": self.groups_after_filter,
             f"{prefix}groups_dropped_insufficient_trajs": self.groups_dropped_insufficient_trajs,
+            f"{prefix}dynamic_candidate_groups": self.dynamic_candidate_groups,
+            f"{prefix}dynamic_effective_groups": self.dynamic_effective_groups,
+            f"{prefix}dynamic_rounds": self.dynamic_rounds,
+            f"{prefix}dynamic_fallback": self.dynamic_fallback,
+            f"{prefix}dynamic_effective_used": self.dynamic_effective_used,
+            f"{prefix}dynamic_ordinary_used": self.dynamic_ordinary_used,
         }
 
 
@@ -74,8 +94,8 @@ def update_episode_metrics(
     """
     Update episode-level metrics (solve_none/all/partial).
 
-    Groups episodes by task_id (extracted from episode.id) and checks if
-    all/none/some episodes for each task are correct.
+    Groups episodes by task_id and checks whether each episode has a
+    positive trajectory-level reward.
 
     Args:
         episodes: List of episodes to analyze
@@ -92,12 +112,20 @@ def update_episode_metrics(
             episodes_by_task[task_id] = []
         episodes_by_task[task_id].append(episode)
 
-    # Check correctness for each task
+    # A positive trajectory reward represents a partial or complete solve.
+    # Keep this at trajectory level rather than using step-row rewards, since
+    # the episode reward is what rejection sampling uses for accumulation.
     for task_id, task_episodes in episodes_by_task.items():
-        correct_mask = [ep.is_correct for ep in task_episodes]
-        if all(correct_mask):
+        positive_reward_mask = [
+            any(
+                trajectory.reward is not None and float(trajectory.reward) > 0
+                for trajectory in episode.trajectories
+            )
+            for episode in task_episodes
+        ]
+        if all(positive_reward_mask):
             metrics.solve_all += 1
-        elif any(correct_mask):
+        elif any(positive_reward_mask):
             metrics.solve_partial += 1
         else:
             metrics.solve_none += 1
@@ -133,6 +161,14 @@ def filter_groups(
 
     metrics.groups_after_filter += len(filtered)
     return filtered, dropped
+
+
+def is_effective_reward_group(group: TrajectoryGroup, min_reward_range: float) -> bool:
+    """Return whether a complete group has non-trivial trajectory reward spread."""
+    rewards = [trajectory.reward for trajectory in group.trajectories]
+    if not rewards or any(reward is None or not np.isfinite(float(reward)) for reward in rewards):
+        return False
+    return float(np.ptp(np.asarray(rewards, dtype=float))) >= min_reward_range
 
 
 def filter_episodes(

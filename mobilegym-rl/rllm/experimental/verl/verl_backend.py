@@ -229,7 +229,14 @@ class VerlBackend(BackendProtocol[Iterable, DataProto], RayPPOTrainer):
         else:
             raise ValueError("No validation dataloader available. Please check the configuration.")
 
-    async def generate_episodes(self, batch: Any, agent_workflow_engine: UnifiedWorkflowEngine, is_validation: bool = False, **kwargs) -> list[Episode]:
+    async def generate_episodes(
+        self,
+        batch: Any,
+        agent_workflow_engine: UnifiedWorkflowEngine,
+        is_validation: bool = False,
+        sleep_after_generation: bool = True,
+        **kwargs,
+    ) -> list[Episode]:
         """Generate episodes using the workflow engine.
 
         For Verl backend, this function handles the following procedures:
@@ -262,7 +269,7 @@ class VerlBackend(BackendProtocol[Iterable, DataProto], RayPPOTrainer):
         # Step 3: sleep the replicas to free kv_cache before weight sync (if free_cache_engine is enabled)
         # Only sleep during training — validation doesn't update weights, so there's no wake_up call after it.
         # Sleeping after validation would leave replicas asleep, causing CUDA illegal memory access on the next generation.
-        if not is_validation:
+        if not is_validation and sleep_after_generation:
             await self.checkpoint_manager.sleep_replicas()
         return episodes
 

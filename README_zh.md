@@ -15,6 +15,8 @@
 
 [English](README.md) | **中文**
 
+**在线强化学习实验与简历展示** · [运行指南和实验结果](portfolio/README.md) · [下载交互 HTML](portfolio/index.html)
+
 <p align="center">
   <img src="assets/teaser.jpg" width="100%" alt="MobileGym 海报 —— 面向手机 GUI Agent 的可验证、高度并行的仿真平台：28 个 App、416 个参数化任务模板、代码级判题、并行采样、易于扩展、安全沙箱，+40.7 pt 仿真到真机迁移。"/>
 </p>

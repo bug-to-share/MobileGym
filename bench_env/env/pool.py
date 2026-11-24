@@ -16,6 +16,7 @@ from __future__ import annotations
 import asyncio
 import math
 import os
+import time
 from enum import Enum
 from typing import TYPE_CHECKING, Iterator
 
@@ -60,7 +61,11 @@ class EnvPool:
         physical_size: tuple[int, int] = (1080, 2400),
         device_scale_factor: float = 3,
         verbose: bool = True,
+        init_batch_size: int = 8,
+        warmup: bool = False,
     ):
+        if init_batch_size < 1:
+            raise ValueError("init_batch_size must be positive")
         self.url = url
         self.n = max(1, n)
         self.isolation = Isolation(isolation)
@@ -73,6 +78,8 @@ class EnvPool:
         self.physical_size = physical_size
         self.device_scale_factor = device_scale_factor
         self.verbose = verbose
+        self.init_batch_size = init_batch_size
+        self.warmup = warmup
         
         self._pw = None
         self._browsers: list = []
@@ -80,7 +87,11 @@ class EnvPool:
         self._envs: list[MobileGymEnv] = []
 
     async def __aenter__(self) -> "EnvPool":
-        await self._setup()
+        try:
+            await self._setup()
+        except BaseException:
+            await self._cleanup()
+            raise
         return self
 
     async def __aexit__(self, *args):
@@ -206,23 +217,36 @@ class EnvPool:
                     f"= {self.n} pages total"
                 )
 
-        # 分批启动环境,避免连接风暴。browsers iso 高并发时还要躲 inotify 上限:
-        # 每个 chromium 进程会占 ~2 个 inotify instances(IDB seed 解压、文件系统层),
-        # host 默认 fs.inotify.max_user_instances=128(无 sudo 改不了)。
-        # batch_size=8 + sleep=3s 让任意时刻 in-init chromium ≤ ceil(22/3)*8 ≈ 64,
-        # 远低于 128。详情见 bench_env/docs/KNOWN_ISSUES.md §3。
-        # contexts/pages iso 的 browser 进程数通常很少,无需 3s 长 sleep。
-        batch_size = 8
+        batch_size = self.init_batch_size
         default_batch_sleep_s = "3.0" if self.isolation == Isolation.BROWSERS and self.n >= 192 else "0.3"
         batch_sleep_s = float(os.environ.get("MOBILE_GYM_POOL_BATCH_SLEEP_S", default_batch_sleep_s))
         start_errors: list[Exception] = []
+        ready_count = 0
         for batch_start in range(0, len(self._envs), batch_size):
             batch = self._envs[batch_start:batch_start + batch_size]
+            started_at = time.monotonic()
             results = await asyncio.gather(
-                *[env.start() for env in batch],
+                *[self._start_env(env) for env in batch],
                 return_exceptions=True,
             )
-            start_errors.extend(r for r in results if isinstance(r, Exception))
+            cancellations = [result for result in results if isinstance(result, asyncio.CancelledError)]
+            if cancellations:
+                raise cancellations[0]
+            batch_errors = [result for result in results if isinstance(result, Exception)]
+            start_errors.extend(batch_errors)
+            ready_count += len(batch) - len(batch_errors)
+            if self.warmup:
+                batch_end = min(batch_start + batch_size, len(self._envs))
+                logger.info(
+                    "EnvPool initialization: %d/%d ready, batch_size=%d, elapsed=%.2fs, errors=%d",
+                    ready_count, len(self._envs), len(batch),
+                    time.monotonic() - started_at, len(batch_errors),
+                )
+                if batch_errors:
+                    raise RuntimeError(
+                        f"EnvPool initialization failed in batch {batch_start}:{batch_end}; "
+                        f"{len(batch_errors)}/{len(batch)} environments failed readiness/screenshot checks"
+                    ) from batch_errors[0]
             if batch_start + batch_size < len(self._envs):
                 await asyncio.sleep(batch_sleep_s)
         if start_errors:
@@ -230,6 +254,16 @@ class EnvPool:
                 f"EnvPool start errors: {len(start_errors)}/{len(self._envs)}. "
                 f"First error: {type(start_errors[0]).__name__}: {start_errors[0]}"
             )
+
+        if self.warmup:
+            logger.info("EnvPool: warmup completed for %d environments; pool ready", len(self._envs))
+
+    async def _start_env(self, env: MobileGymEnv) -> None:
+        """Finish cold-start readiness and a screenshot within the same startup wave."""
+        await env.start()
+        if self.warmup:
+            await env.wait_ready()
+            await env.get_observation()
 
     async def _cleanup(self):
         """清理资源"""

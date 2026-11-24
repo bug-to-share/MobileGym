@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import asdict, dataclass
 import json
+import os
 from pathlib import Path
 import threading
 
@@ -132,6 +133,27 @@ def mobilegym_evaluator(task: dict, episode: Episode) -> EvalOutput:
         else progress
     )
 
+    reward_mode = os.environ.get("MOBILEGYM_REWARD_MODE", "progress").strip().lower()
+    if reward_mode not in {"progress", "result_only"}:
+        raise ValueError(
+            "MOBILEGYM_REWARD_MODE must be 'progress' or 'result_only', "
+            f"got {reward_mode!r}"
+        )
+    false_complete_mode = os.environ.get(
+        "MOBILEGYM_FALSE_COMPLETE_MODE", "legacy"
+    ).strip().lower()
+    if false_complete_mode not in {"legacy", "zero"}:
+        raise ValueError(
+            "MOBILEGYM_FALSE_COMPLETE_MODE must be 'legacy' or 'zero', "
+            f"got {false_complete_mode!r}"
+        )
+
+    # In zero mode, a premature COMPLETE receives no partial-progress credit.
+    # This prevents GRPO from reinforcing a trajectory that stops early merely
+    # because it has a higher progress value than other failed rollouts.
+    if false_complete and false_complete_mode == "zero":
+        reward = 0.0
+
     # Penalize unclean completion: goal achieved but with side effects.
     penalties: dict[str, float] = {}
     if goal_success and not clean:
@@ -189,12 +211,19 @@ def mobilegym_evaluator(task: dict, episode: Episode) -> EvalOutput:
     # coefficient or a custom evaluator returns an out-of-range progress.
     reward = max(0.0, float(reward))
 
+    if reward_mode == "result_only":
+        # Binary outcomes are independent of the progress penalties.
+        reward = float(success and not has_error)
+        penalties.clear()
+
     termination_class = "INFRA_ERROR" if has_error else (stop_reason or "UNKNOWN")
     breakdown = {
         "raw_progress": progress,
         "wrong_answer_submitted": wrong_answer_submitted,
         "base_reward": progress_without_submitted_bonus(goal_checks, progress) if wrong_answer_submitted and goal_checks else progress,
         "penalties": penalties,
+        "mode": reward_mode,
+        "false_complete_mode": false_complete_mode,
         "final_reward": reward,
         "termination_class": termination_class,
         "repeated_action_count": repeated_actions,

@@ -31,6 +31,8 @@ from rllm.experimental.common.performance import simple_timer
 from rllm.experimental.common.rejection_sampling import (
     RejectionSamplingState,
     apply_rejection_sampling_and_filtering,
+    filter_episodes,
+    is_effective_reward_group,
 )
 from rllm.experimental.common.transform import (
     _default_traj_grouping_hook,
@@ -256,7 +258,10 @@ class UnifiedTrainer:
             raise ValueError("If `traj_group_adv_estimator_map` is given, the user must explicitly turn `rllm.algorithm.use_rllm` to True")
 
         if self.rllm_config.rejection_sample.multiplier != 1:
-            assert self.rllm_config.rejection_sample.enable is True, "rejection sampling is disabled, but rejection_sample.multiplier is not 1"
+            assert (
+                self.rllm_config.rejection_sample.enable
+                or self.rllm_config.rejection_sample.get("dynamic_sampling", False)
+            ), "rejection sampling and dynamic sampling are disabled, but rejection_sample.multiplier is not 1"
 
         # validate backend-specific configs
         self.backend.validate_config()
@@ -275,6 +280,11 @@ class UnifiedTrainer:
             min_partial_solve_tasks=self.rllm_config.rejection_sample.min_partial_solve_tasks,
             min_trajs_per_group=self.rllm_config.rejection_sample.min_trajs_per_group,
             filter_uniform_groups=self.rllm_config.rejection_sample.get("filter_uniform_groups", False),
+            dynamic_sampling=self.rllm_config.rejection_sample.get("dynamic_sampling", False),
+            dynamic_target_groups=self.rllm_config.rejection_sample.get("dynamic_target_groups", None),
+            dynamic_max_rounds=self.rllm_config.rejection_sample.get("dynamic_max_rounds", 2),
+            dynamic_min_reward_range=self.rllm_config.rejection_sample.get("dynamic_min_reward_range", 1e-6),
+            dynamic_fallback=self.rllm_config.rejection_sample.get("dynamic_fallback", "hybrid"),
         )
 
         # algorithm config (used for rLLM-native advantage computation)
@@ -381,12 +391,17 @@ class UnifiedTrainer:
             trainer_state.epoch = epoch
             await self.backend.on_epoch_start(trainer_state)
 
-            for batch in train_dataloader:
+            train_batch_iterator = iter(train_dataloader)
+            while True:
+                try:
+                    batch = next(train_batch_iterator)
+                except StopIteration:
+                    break
                 trainer_state.reset_batch()
 
                 await self.backend.on_batch_start(trainer_state)
                 with simple_timer("step", trainer_state.timing_dict):
-                    await self._train_batch_async(batch, trainer_state)
+                    await self._train_batch_async(batch, trainer_state, next_batch_fn=lambda: next(train_batch_iterator))
                 await self.backend.on_batch_end(trainer_state)
 
                 print_metrics_table(trainer_state.metrics, trainer_state.global_step)
@@ -414,33 +429,14 @@ class UnifiedTrainer:
         if self.rllm_config.trainer.test_freq > 0:
             await self._validate_async(trainer_state)
 
-    async def _train_batch_async(self, batch: Any, trainer_state: TrainerState) -> None:
+    async def _train_batch_async(self, batch: Any, trainer_state: TrainerState, next_batch_fn: Callable[[], Any] | None = None) -> None:
         """Train a batch (async implementation)."""
         self.agent_workflow_engine.set_training_step(trainer_state.global_step, mode="train", epoch=trainer_state.epoch)
 
-        # TODO(kylemontgomery1): episode generation should be backend-agnostic
-        # stage 1: generate episodes (async) and collect metrics (sync)
-        trainer_state.episodes = await self.backend.generate_episodes(batch, agent_workflow_engine=self.agent_workflow_engine, is_validation=False)
-        if not trainer_state.has_episodes:
-            return
-
-        workflow_metrics, termination_counts = self._collect_workflow_metrics_from_episodes(trainer_state.episodes)
-
-        # stage 2: transform episodes to trajectory groups (sync)
-        trajectory_groups, transform_metrics = transform_episodes_to_trajectory_groups(trainer_state.episodes, self.transform_config, self.cf_config, traj_grouping_hook=self.traj_grouping_hook)
-        trainer_state.trajectory_groups = trajectory_groups
-        trainer_state.metrics.update(transform_metrics)
-
-        # stage 3: apply rejection sampling (sync)
-        filtered_groups, filtered_episodes, rs_metrics = apply_rejection_sampling_and_filtering(
-            trainer_state.episodes,
-            trainer_state.trajectory_groups,
-            self.rs_config,
-            trainer_state.rs_state,
-        )
-        trainer_state.metrics.update(rs_metrics)
-        trainer_state.trajectory_groups = filtered_groups
-        trainer_state.episodes = filtered_episodes
+        if self.rs_config.dynamic_sampling:
+            await self._collect_dynamic_groups(batch, trainer_state, next_batch_fn)
+        else:
+            await self._rollout_and_filter_batch(batch, trainer_state)
         if not trainer_state.has_trajectory_groups:
             return
 
@@ -468,12 +464,125 @@ class UnifiedTrainer:
                 show_workflow_metadata=True,
             )
 
+    async def _rollout_and_filter_batch(self, batch: Any, trainer_state: TrainerState, sleep_after_generation: bool = True) -> None:
+        """Generate, transform, and apply the existing non-dynamic filters."""
+        trainer_state.episodes = await self.backend.generate_episodes(
+            batch,
+            agent_workflow_engine=self.agent_workflow_engine,
+            is_validation=False,
+            sleep_after_generation=sleep_after_generation,
+        )
+        if not trainer_state.has_episodes:
+            return
+
+        workflow_metrics, termination_counts = self._collect_workflow_metrics_from_episodes(trainer_state.episodes)
         for key, value in workflow_metrics.items():
             trainer_state.metrics[f"batch/{key}"] = np.mean(value)
-
         total_counts = max(sum(termination_counts.values()), 1)
-        for r in TerminationReason:
-            trainer_state.metrics[f"batch/termination_reason/{r.value}"] = termination_counts[r.value] / total_counts
+        for reason in TerminationReason:
+            trainer_state.metrics[f"batch/termination_reason/{reason.value}"] = termination_counts[reason.value] / total_counts
+        trajectory_groups, transform_metrics = transform_episodes_to_trajectory_groups(
+            trainer_state.episodes,
+            self.transform_config,
+            self.cf_config,
+            traj_grouping_hook=self.traj_grouping_hook,
+        )
+        trainer_state.trajectory_groups = trajectory_groups
+        trainer_state.metrics.update(transform_metrics)
+
+        filtered_groups, filtered_episodes, rs_metrics = apply_rejection_sampling_and_filtering(
+            trainer_state.episodes,
+            trainer_state.trajectory_groups,
+            self.rs_config,
+            trainer_state.rs_state,
+        )
+        trainer_state.metrics.update(rs_metrics)
+        trainer_state.trajectory_groups = filtered_groups
+        trainer_state.episodes = filtered_episodes
+
+    async def _collect_dynamic_groups(self, batch: Any, trainer_state: TrainerState, next_batch_fn: Callable[[], Any] | None) -> None:
+        """Collect a target number of reward-informative groups before updating."""
+        target = self.rs_config.dynamic_target_groups or int(self.config.data.train_batch_size)
+        valid_groups: list[TrajectoryGroup] = []
+        all_groups: list[TrajectoryGroup] = []
+        all_episodes: list[Episode] = []
+        rounds = 0
+        trainer_state.metrics["batch/dynamic_fallback"] = 0
+        trainer_state.metrics["batch/dynamic_effective_used"] = 0
+        trainer_state.metrics["batch/dynamic_ordinary_used"] = 0
+
+        while rounds < self.rs_config.dynamic_max_rounds and len(valid_groups) < target:
+            candidate_state = TrainerState(global_step=trainer_state.global_step, epoch=trainer_state.epoch)
+            candidate_state.rs_state = RejectionSamplingState()
+            await self._rollout_and_filter_batch(batch, candidate_state, sleep_after_generation=False)
+            candidate_groups = candidate_state.trajectory_groups or []
+            candidate_episodes = candidate_state.episodes or []
+            all_groups.extend(candidate_groups)
+            all_episodes.extend(candidate_episodes)
+            valid_groups.extend(
+                group for group in candidate_groups if is_effective_reward_group(group, self.rs_config.dynamic_min_reward_range)
+            )
+            trainer_state.metrics.update(candidate_state.metrics)
+            rounds += 1
+            print(
+                f"Dynamic sampling round {rounds}: "
+                f"candidate_groups={len(all_groups)}, "
+                f"effective_groups={min(len(valid_groups), target)}, "
+                f"target={target}, max_rounds={self.rs_config.dynamic_max_rounds}",
+                flush=True,
+            )
+
+            if len(valid_groups) >= target or next_batch_fn is None:
+                break
+            try:
+                batch = next_batch_fn()
+            except StopIteration:
+                break
+
+        trainer_state.metrics["batch/dynamic_candidate_groups"] = len(all_groups)
+        trainer_state.metrics["batch/dynamic_effective_groups"] = min(len(valid_groups), target)
+        trainer_state.metrics["batch/dynamic_rounds"] = rounds
+
+        # Match DAPO's generation/update boundary: keep vLLM awake while
+        # collecting candidate batches, then release its KV cache once.
+        await self.backend.checkpoint_manager.sleep_replicas()
+
+        if len(valid_groups) >= target:
+            selected_groups = valid_groups[:target]
+        else:
+            trainer_state.metrics["batch/dynamic_fallback"] = 1
+            if self.rs_config.dynamic_fallback == "best_effort":
+                selected_groups = valid_groups
+            elif self.rs_config.dynamic_fallback == "hybrid":
+                selected_ids = {id(group) for group in valid_groups}
+                ordinary_groups = [group for group in all_groups if id(group) not in selected_ids]
+                selected_groups = valid_groups[:target]
+                selected_groups.extend(ordinary_groups[: max(0, target - len(selected_groups))])
+            else:
+                selected_groups = all_groups[:target]
+
+        selected_ids = {id(group) for group in selected_groups}
+        valid_group_ids = {id(group) for group in valid_groups}
+        effective_used = sum(id(group) in valid_group_ids for group in selected_groups)
+        trainer_state.metrics["batch/dynamic_effective_used"] = effective_used
+        trainer_state.metrics["batch/dynamic_ordinary_used"] = len(selected_groups) - effective_used
+        print(
+            f"Dynamic sampling step={trainer_state.global_step} selected groups: effective={effective_used}, "
+            f"ordinary={len(selected_groups) - effective_used}, "
+            f"total={len(selected_groups)}, target={target}, "
+            f"candidate={len(all_groups)}, rounds={rounds}, "
+            f"fallback={self.rs_config.dynamic_fallback if len(valid_groups) < target else 'none'}",
+            flush=True,
+        )
+
+        if not selected_groups:
+            trainer_state.episodes = []
+            trainer_state.trajectory_groups = []
+            return
+
+        dropped_groups = [group for group in all_groups if id(group) not in selected_ids]
+        trainer_state.trajectory_groups = selected_groups
+        trainer_state.episodes = filter_episodes(all_episodes, dropped_groups)
 
     # =========================================================================
     # Fully-asynchronous training pipeline

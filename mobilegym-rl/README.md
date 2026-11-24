@@ -34,9 +34,11 @@ the model gateway so the whole stack is reproducible.
 `sys.path` injection by [`bootstrap.py`](./cookbooks/mobilegym/bootstrap.py) — it is **not** a
 pip-installed package, so its dependencies must be installed explicitly (handled by `install.sh`).
 
+[Experiment presets, results, and the interactive portfolio](../portfolio/README.md)
+
 ## Prerequisites
 
-- A CUDA GPU machine. Reference setup: **8 × RTX PRO 6000 Blackwell (sm_120, 96 GB)**; the canonical script uses 2 GPUs.
+- A CUDA GPU machine. Reference setup: **8 × RTX PRO 6000 Blackwell (sm_120, 96 GB)**; the experiment launcher defaults to six visible GPUs.
 - The MobileGym frontend built and served (see [Start the environment](#1-start-the-environment)).
 - A clean Python 3.12 environment (conda recommended).
 
@@ -98,8 +100,7 @@ bash cookbooks/mobilegym/train_qwen3_vl_4b_verl.sh
 ```
 
 Other env-var overrides: `CUDA_VISIBLE_DEVICES`, `EXPERIMENT_NAME`, `RUN_NAME`, `SPLIT`. The script
-logs to `[console,swanlab]`; set `SWANLAB_MODE=offline` for a first run if you don't have a swanlab
-account. Outputs:
+logs to `[console,tensorboard]`. Outputs:
 
 - Terminal log → `logs/mobilegym/<EXPERIMENT_NAME>/<RUN_NAME>/terminal.log`
 - Checkpoints → `checkpoints/mobilegym/<EXPERIMENT_NAME>/<RUN_NAME>/`

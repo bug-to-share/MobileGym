@@ -20,6 +20,7 @@ import argparse
 import asyncio
 import json
 import time
+from contextlib import asynccontextmanager
 from collections import OrderedDict
 from http.cookies import SimpleCookie
 from urllib.parse import urlparse
@@ -315,12 +316,18 @@ async def on_shutdown():
     _client = None
 
 
+@asynccontextmanager
+async def lifespan(_app):
+    yield
+    await on_shutdown()
+
+
 app = Starlette(
     routes=[
         Route("/api/gw/fetch", handle_fetch, methods=["POST"]),
         Route("/api/gw/proxy", handle_proxy, methods=["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS"]),
     ],
-    on_shutdown=[on_shutdown],
+    lifespan=lifespan,
 )
 
 

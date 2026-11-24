@@ -1,0 +1,600 @@
+{
+  "sources": [
+    {
+      "id": "MobileGym",
+      "level": "core",
+      "title": "MobileGym: A Verifiable and Highly Parallel Simulation Platform for Mobile GUI Agent Research",
+      "url": "https://arxiv.org/html/2605.26114v1",
+      "version": "arXiv v1",
+      "version_date": "2026-05-25",
+      "read_at_utc": "2026-11-14",
+      "read_scope": "HTML methods, state programmability, evaluation protocol and limitations passages",
+      "scope": "Browser-hosted controllable mobile simulation with structured-state judging and screenshot observations",
+      "category": [
+        "platform",
+        "simulation",
+        "evaluation"
+      ],
+      "limitations": [
+        "Paper-level snapshot/fork and real-device claims are not proof that the current local rollout path implements verified intermediate-state replay; author results are not the user results."
+      ],
+      "reproduced": false
+    },
+    {
+      "id": "AgentS2",
+      "level": "core",
+      "title": "Agent S2: A Compositional Generalist-Specialist Framework for Computer Use Agents",
+      "url": "https://arxiv.org/html/2504.00906v1",
+      "version": "arXiv v1",
+      "version_date": "2025-04-01",
+      "read_at_utc": "2026-11-14",
+      "read_scope": "HTML background, method, experimental setup and analysis",
+      "scope": "Mixture of Grounding and proactive hierarchical planning separate general reasoning from specialist execution",
+      "category": [
+        "agent_architecture",
+        "planning",
+        "grounding"
+      ],
+      "limitations": [
+        "Multi-model system and action/step budgets differ from a single 4B policy; do not transfer its headline success rates."
+      ],
+      "reproduced": false
+    },
+    {
+      "id": "OSGenesis",
+      "level": "core",
+      "title": "OS-Genesis: Automating GUI Agent Trajectory Construction via Reverse Task Synthesis",
+      "url": "https://aclanthology.org/2025.acl-long.277.pdf",
+      "version": "ACL 2025 published paper",
+      "version_date": "2025-07",
+      "read_at_utc": "2026-11-14",
+      "read_scope": "Published metadata and PDF method sections 3.1-3.3",
+      "scope": "Explore transitions, synthesize low/high-level task instructions retrospectively and filter trajectories with a trajectory reward model",
+      "category": [
+        "data_synthesis",
+        "trajectory_construction"
+      ],
+      "limitations": [
+        "Teacher/model-assisted construction and rich collection-time interfaces need accounting; generated instructions still need executable validation."
+      ],
+      "reproduced": false
+    },
+    {
+      "id": "OpenMobile2",
+      "level": "core",
+      "title": "OpenMobile-2: Building Versatile Mobile Agents with Scalable Environments and App-Native Tools",
+      "url": "https://arxiv.org/html/2610.14157v1",
+      "version": "arXiv v1",
+      "version_date": "2026-10-09",
+      "read_at_utc": "2026-11-14",
+      "read_scope": "HTML environment, data and hybrid interface; appendix A.1-A.4 training, reward, evaluation and overlap",
+      "scope": "Scalable simulator/emulator data, GUI/hybrid SFT, and hybrid RL with verifiers; GUI-only vs tool-assisted evaluation",
+      "category": [
+        "mobile_agent",
+        "hybrid_tools",
+        "post_training"
+      ],
+      "limitations": [
+        "Hybrid app-native actions change action space; reward includes tool bonus and relaxed verifier whereas strict evaluation differs. Never compare these scores directly with pure screenshot-coordinate policy scores."
+      ],
+      "reproduced": false
+    },
+    {
+      "id": "WMR1",
+      "level": "core",
+      "title": "WM-R1: Training GUI Agents to Reason and leverage World Models with Reinforcement Learning",
+      "url": "https://arxiv.org/html/2608.27508v1",
+      "version": "arXiv v1",
+      "version_date": "2026-08-27",
+      "read_at_utc": "2026-11-14",
+      "read_scope": "HTML methods, world-model configuration, evaluator/reward passages and limitations",
+      "scope": "World-model transitions and optional model calls during reasoning, coupled to GRPO and composite reward",
+      "category": [
+        "world_model",
+        "reinforcement_learning"
+      ],
+      "limitations": [
+        "Frozen Code2World generates rendered HTML and model judges reward; learned-transition error and judge error remain. Do not treat simulated transitions as exact business-state execution or claim zero total cost."
+      ],
+      "reproduced": false
+    },
+    {
+      "id": "PBRS",
+      "level": "core",
+      "title": "Policy Invariance Under Reward Transformations: Theory and Application to Reward Shaping",
+      "url": "https://people.eecs.berkeley.edu/~russell/papers/icml99-shaping.pdf",
+      "version": "ICML 1999",
+      "version_date": "1999",
+      "read_at_utc": "2026-11-14",
+      "read_scope": "Original PDF theorem and potential-shaping setup; source mirror used after Stanford timeout",
+      "scope": "Potential difference F(s,a,s_next)=gamma*Phi(s_next)-Phi(s) under specified MDP conditions",
+      "category": [
+        "theory",
+        "reward_shaping"
+      ],
+      "limitations": [
+        "Discount and terminal boundary conditions matter; statement does not make arbitrary process bonuses policy-invariant."
+      ],
+      "reproduced": false
+    },
+    {
+      "id": "androidworld",
+      "level": "core",
+      "title": "AndroidWorld: A Dynamic Benchmarking Environment for Autonomous Agents",
+      "url": "https://arxiv.org/html/2405.14573v5",
+      "version": "v5",
+      "version_date": "2025-04-06",
+      "read_at_utc": "2026-11-14",
+      "read_scope": "全文可访问；实际核读 §3.1–3.4、Appendix A 的相关段落，非逐页通读",
+      "scope": "固定 Android 13 / Pixel 6 emulator，真实 Android 应用；116 个可参数化任务，20 个应用。",
+      "category": [
+        "benchmark",
+        "evaluation"
+      ],
+      "limitations": [
+        "应用以开源和系统应用为主，固定版本、无登录与本地数据是复现条件；参数变化会影响结果。Android emulator 不等于物理真机。"
+      ],
+      "reproduced": false
+    },
+    {
+      "id": "osworld",
+      "level": "core",
+      "title": "OSWorld: Benchmarking Multimodal Agents for Open-Ended Tasks in Real Computer Environments",
+      "url": "https://arxiv.org/html/2404.07972v2",
+      "version": "v2",
+      "version_date": "2024-05-30",
+      "read_at_utc": "2026-11-14",
+      "read_scope": "全文可访问；实际核读 §2–3、§5.2 的相关段落，非逐页通读",
+      "scope": "虚拟机中的真实桌面 OS；主基准 369 个 Ubuntu 任务，另有 43 个 Windows 任务，不是 369 个任务均覆盖所有 OS。",
+      "category": [
+        "benchmark",
+        "evaluation"
+      ],
+      "limitations": [
+        "截图分辨率、历史长度、a11y/SoM、代码动作与步数预算改变难度和成本。"
+      ],
+      "reproduced": false
+    },
+    {
+      "id": "webarena",
+      "level": "core",
+      "title": "WebArena: A Realistic Web Environment for Building Autonomous Agents",
+      "url": "https://arxiv.org/html/2307.13854v4",
+      "version": "v4",
+      "version_date": "2024-04-16",
+      "read_at_utc": "2026-11-14",
+      "read_scope": "全文可访问；实际核读 §2–3，包括 Docker/reset 说明，非逐页通读",
+      "scope": "自托管网站，四类主要业务网站，另有地图/Wikipedia 等工具；241 个模板生成 812 个任务实例。",
+      "category": [
+        "benchmark",
+        "evaluation"
+      ],
+      "limitations": [
+        "有状态 oracle 不等于全是确定性规则；ID 动作与坐标动作不同，模板实例不等于独立技能。"
+      ],
+      "reproduced": false
+    },
+    {
+      "id": "visualwebarena",
+      "level": "core",
+      "title": "VisualWebArena: Evaluating Multimodal Agents on Realistic Visual Web Tasks",
+      "url": "https://arxiv.org/html/2401.13649v2",
+      "version": "v2",
+      "version_date": "2024-06-06",
+      "read_at_utc": "2026-11-14",
+      "read_scope": "全文可访问；实际核读 §3 的接口/评测，以及 ACL 官方元数据与论文首页，非逐页通读",
+      "scope": "910 个视觉任务，三个主要网站：Classifieds、Shopping、Reddit；25.2% 任务指令包含输入图片。",
+      "category": [
+        "benchmark",
+        "evaluation"
+      ],
+      "limitations": [
+        "图像输入不意味着 screenshot-only policy；SoM 降低定位难度且依赖提取器，视觉 judge 也需验证。"
+      ],
+      "reproduced": false
+    },
+    {
+      "id": "androidcontrol",
+      "level": "core",
+      "title": "On the Effects of Data Scale on UI Control Agents",
+      "url": "https://arxiv.org/html/2406.03679v6",
+      "version": "v6",
+      "version_date": "2024-11-13",
+      "read_at_utc": "2026-11-14",
+      "read_scope": "全文可访问；实际核读 §3–5 的数据划分、基线、指标与局限段落，非逐页通读",
+      "scope": "15,283 条演示、14,548 个唯一任务、833 个应用；高层目标与低层逐步指令。",
+      "category": [
+        "dataset",
+        "offline_evaluation"
+      ],
+      "limitations": [
+        "离线评测不奖励新有效路径或纠错；只微调 PaLM-2S，数据规模外推不是实际在线完成率。"
+      ],
+      "reproduced": false
+    },
+    {
+      "id": "screenspot_pro",
+      "level": "core",
+      "title": "ScreenSpot-Pro: GUI Grounding for Professional High-Resolution Computer Use",
+      "url": "https://arxiv.org/html/2504.07981v1",
+      "version": "v1",
+      "version_date": "2025-04-04",
+      "read_at_utc": "2026-11-14",
+      "read_scope": "全文可访问；实际核读 §3–4 相关段落及官方 evaluator 的 eval_sample_positive_gt/calc_metric_for_result_list",
+      "scope": "1,581 个指令/截图样本，23 个应用、三个 OS；面向高分辨率与小目标。",
+      "category": [
+        "benchmark",
+        "grounding"
+      ],
+      "limitations": [
+        "多轮裁剪增加推理预算；图标/文字、分辨率、语言版本和标注边界影响可比性。"
+      ],
+      "reproduced": false
+    },
+    {
+      "id": "osworld2",
+      "level": "core",
+      "title": "OSWorld 2.0: Benchmarking Computer Use Agents on Long-Horizon Real-World Tasks",
+      "url": "https://arxiv.org/html/2606.29537v2",
+      "version": "v2",
+      "version_date": "2026-07-13",
+      "read_at_utc": "2026-11-14",
+      "read_scope": "全文可访问；实际核读 §2.1–2.2、§3.1、§4.4，非逐页通读",
+      "scope": "108 个长工作流；真实桌面配自托管服务、任务状态、可配置用户回答和动态更新。",
+      "category": [
+        "benchmark",
+        "evaluation"
+      ],
+      "limitations": [
+        "终局 checkpoint 部分分不是时间逐步 PRM；受控服务仍不等于开放互联网，部分分与严格完成须区分。"
+      ],
+      "reproduced": false
+    },
+    {
+      "id": "SeeClick",
+      "level": "core",
+      "title": "SeeClick: Harnessing GUI Grounding for Advanced Visual GUI Agents",
+      "url": "https://arxiv.org/html/2401.10935v2",
+      "version": "v2",
+      "version_date": "2024-02-23",
+      "read_at_utc": "2026-11-14",
+      "read_scope": "3.1–3.3; 4; 5.2; appendix training/task definitions",
+      "scope": "grounding, offline step prediction, online MiniWob; distinguish benchmark-specific task success",
+      "category": [
+        "agent_method",
+        "supervised grounding continual pretraining and downstream adaptation"
+      ],
+      "limitations": [
+        "Grounding and offline step accuracy are distinct from complete online task success; MiniWob results do not establish broad mobile GUI generalization."
+      ],
+      "reproduced": false
+    },
+    {
+      "id": "UGround",
+      "level": "core",
+      "title": "Navigating the Digital World as Humans Do: Universal Visual Grounding for GUI Agents",
+      "url": "https://arxiv.org/html/2410.05243v3",
+      "version": "v3",
+      "version_date": "2025-06-17",
+      "read_at_utc": "2026-11-14",
+      "read_scope": "2.1–2.3; 3.1–3.4; appendix B/F",
+      "scope": "grounding, cached-state offline agent, live mobile/web agent",
+      "category": [
+        "agent_method",
+        "supervised visual grounding; separate planner in SeeAct-V"
+      ],
+      "limitations": [
+        "A modular planner/grounder system is not a single-policy ablation; cached-state and live-environment results have different scopes."
+      ],
+      "reproduced": false
+    },
+    {
+      "id": "ShowUI",
+      "level": "core",
+      "title": "ShowUI: One Vision-Language-Action Model for GUI Visual Agent",
+      "url": "https://arxiv.org/html/2411.17465v1",
+      "version": "v1",
+      "version_date": "2024-11-26",
+      "read_at_utc": "2026-11-14",
+      "read_scope": "2.1–2.3; 3.2–3.3; 5 limitation; appendix B",
+      "scope": "ScreenSpot grounding; AITW/Mind2Web step metrics; online MiniWob",
+      "category": [
+        "agent_method",
+        "offline instruction tuning and downstream supervised adaptation"
+      ],
+      "limitations": [
+        "Offline instruction tuning and supervised adaptation are not evidence of online RL; image-history settings and step/task metrics vary by dataset."
+      ],
+      "reproduced": false
+    },
+    {
+      "id": "UI-TARS",
+      "level": "core",
+      "title": "UI-TARS: Pioneering Automated GUI Interaction with Native Agents",
+      "url": "https://arxiv.org/html/2501.12326v1",
+      "version": "v1",
+      "version_date": "2025-01-21",
+      "read_at_utc": "2026-11-14",
+      "read_scope": "3 core capabilities; 4.2–4.6; 5.4; 2.3 future active/lifelong perspective",
+      "scope": "perception/grounding/offline step plus live OSWorld/AndroidWorld; separate 15/50 step budgets",
+      "category": [
+        "agent_method",
+        "continual pretraining, annealing/SFT, reflective correction SFT and Agent DPO"
+      ],
+      "limitations": [
+        "Reflective SFT and Agent DPO differ from online PPO/GRPO; online results require the stated model, action interface, and 15/50-step budgets."
+      ],
+      "reproduced": false
+    },
+    {
+      "id": "UI-TARS-2",
+      "level": "core",
+      "title": "UI-TARS-2 Technical Report: Advancing GUI Agent with Multi-Turn Reinforcement Learning",
+      "url": "https://arxiv.org/html/2509.02544v2",
+      "version": "v2",
+      "version_date": "2025-09-05",
+      "read_at_utc": "2026-11-14",
+      "read_scope": "2.1–2.5; 2.6; 3.1–3.3",
+      "scope": "online GUI/game; some benchmarks allow SDK/terminal; dagger in table 1 marks extended action space",
+      "category": [
+        "agent_method",
+        "CT/SFT/data iteration and multi-turn online PPO; critic/value pretraining"
+      ],
+      "limitations": [
+        "Some evaluations permit SDK/terminal or extended action spaces; do not compare those scores directly with pure screenshot-coordinate policies."
+      ],
+      "reproduced": false
+    },
+    {
+      "id": "InfiGUI-R1",
+      "level": "core",
+      "title": "InfiGUI-R1: Advancing Multimodal GUI Agents from Reactive Actors to Deliberative Reasoners",
+      "url": "https://arxiv.org/html/2504.14239v1",
+      "version": "v1",
+      "version_date": "2025-04-19",
+      "read_at_utc": "2026-11-14",
+      "read_scope": "3.1; 3.2.1–3.2.3; 4.1–4.3",
+      "scope": "ScreenSpot/ScreenSpot-Pro and AndroidControl; do not convert offline step correctness into closed-loop task success",
+      "category": [
+        "agent_method",
+        "spatial reasoning distillation/SFT then RLOO"
+      ],
+      "limitations": [
+        "Teacher-side accessibility information and annotated subgoals are training inputs; offline step correctness does not establish closed-loop long-horizon task success."
+      ],
+      "reproduced": false
+    },
+    {
+      "id": "GUI-R1",
+      "level": "core",
+      "title": "GUI-R1 : A Generalist R1-Style Vision-Language Action Model For GUI Agents",
+      "url": "https://arxiv.org/html/2504.10458v4",
+      "version": "v4",
+      "version_date": "2025-10-01",
+      "read_at_utc": "2026-11-14",
+      "read_scope": "3.1–3.3; 4.1–4.3",
+      "scope": "offline grounding/action type/step success metrics over eight datasets",
+      "category": [
+        "agent_method",
+        "GRPO on sampled action responses with ground-truth rule rewards; separate supervised baseline"
+      ],
+      "limitations": [
+        "Rule-reward optimization is evaluated mainly through offline grounding/action/step metrics; these are not end-to-end online task success."
+      ],
+      "reproduced": false
+    },
+    {
+      "id": "progrm",
+      "level": "core",
+      "title": "ProgRM: Build Better GUI Agents with Progress Rewards",
+      "url": "https://arxiv.org/html/2505.18121v1",
+      "version": "arXiv v1",
+      "version_date": "2025-05-23",
+      "read_at_utc": "2026-11-14",
+      "read_scope": "Sections 2.1–2.4; Sections 3.1–3.3 and Tables 1–3; Appendices A–D selected method/data passages; Appendix action prompts",
+      "scope": "Qwen2.5-7B, WikiHow GUI screen representation with element_id action interface; not established as pure screenshot coordinate control",
+      "category": [
+        "post_training",
+        "credit_assignment"
+      ],
+      "limitations": [
+        "Single app/task suite, 427 train / 150 test tasks.",
+        "Environment-derived labels outperform LCS labels.",
+        "Action matching depends on symbolic action/element representation; necessary waits and reversible paths complicate transfer.",
+        "Appendix B uses manual successful trajectories where exploration found none; automatic labels do not imply a wholly annotation-free pipeline."
+      ],
+      "reproduced": false
+    },
+    {
+      "id": "gui_shepherd",
+      "level": "core",
+      "title": "GUI-Shepherd: Reliable Process Reward and Verification for Long-Sequence GUI Tasks",
+      "url": "https://arxiv.org/html/2509.23738v1",
+      "version": "arXiv v1",
+      "version_date": "2025-09-28",
+      "read_at_utc": "2026-11-14",
+      "read_scope": "Section 3; Sections 4.1–4.3, Algorithms 1–2; Section 5 and Table 1; Appendix A.3 and online PPO details",
+      "scope": "Screenshot-conditioned GUI actions; UI-TARS-1.5-7B; AndroidWorld online and AndroidControl offline",
+      "category": [
+        "post_training",
+        "credit_assignment"
+      ],
+      "limitations": [
+        "52k human correctness labels and a separate reward service/value model are substantial costs.",
+        "Online PPO and inference verification are separate treatments.",
+        "Per-action human correctness is a different target from state progress or future success probability."
+      ],
+      "reproduced": false
+    },
+    {
+      "id": "guidnav",
+      "level": "core",
+      "title": "Guiding VLM Agents with Process Rewards at Inference Time for GUI Navigation",
+      "url": "https://arxiv.org/html/2504.16073v1",
+      "version": "arXiv v1",
+      "version_date": "2025-04-22",
+      "read_at_utc": "2026-11-14",
+      "read_scope": "Sections 3.1–3.3; Sections 4.2–4.3; Section 5, Tables 2–5",
+      "scope": "VLM + screenshot with Set-of-Marks; static AitW/GUI Odyssey/Mind2Web and dynamic AitW",
+      "category": [
+        "post_training",
+        "credit_assignment"
+      ],
+      "limitations": [
+        "Extra candidate/reward-model inference and SoM interface alter budget and observation contract.",
+        "71.6% uses retries and is not one-attempt policy pass@1.",
+        "Reported dynamic aggregate 58.1 is not reproduced by equal-weight mean of listed domain cells (~56.4), despite text describing 30 tasks/domain; retain as paper-reported rather than independently reconstructed."
+      ],
+      "reproduced": false
+    },
+    {
+      "id": "gigpo",
+      "level": "core",
+      "title": "Group-in-Group Policy Optimization for LLM Agent Training",
+      "url": "https://arxiv.org/html/2505.10978v3",
+      "version": "arXiv v3",
+      "version_date": "2025-10-28",
+      "read_at_utc": "2026-11-14",
+      "read_scope": "Sections 4.1–4.3, Equations 4–9; Sections 5.2, 5.5–5.6; Appendix E.3",
+      "scope": "Main: text ALFWorld, WebShop, search QA. Appendix E.3: RGB+instruction Sokoban and EZPoints with Qwen2.5-VL-3B.",
+      "category": [
+        "post_training",
+        "credit_assignment"
+      ],
+      "limitations": [
+        "Requires equivalent states and enough repeated states with informative return differences.",
+        "Memory/history and remaining horizon matter for a GUI agent; screen or route equality alone may be insufficient.",
+        "No additional LLM rollout cost is a paper setup property, not a guarantee for state reconstruction or MobileGym instrumentation.",
+        "Cannot say the paper only tests text; cannot say it has already verified mobile GUI."
+      ],
+      "reproduced": false
+    },
+    {
+      "id": "agentprm_xi",
+      "level": "core",
+      "title": "AgentPRM: Process Reward Models for LLM Agents via Step-Wise Promise and Progress",
+      "url": "https://arxiv.org/html/2511.08325v1",
+      "version": "arXiv v1",
+      "version_date": "2025-11-11",
+      "read_at_utc": "2026-11-14",
+      "read_scope": "Sections 3.2–3.3; Sections 4.1–4.2 and Tables 1, 3; Section 5.2; Appendix C",
+      "scope": "LLM agent tasks WebShop/BabyAI/TextCraft, plus math; not pure-vision mobile GUI",
+      "category": [
+        "post_training",
+        "credit_assignment"
+      ],
+      "limitations": [
+        "Appendix C does not use each step's PRM output as a dense PPO reward.",
+        "Q_t-Q_(t-1) interpretation uses sparse reward and deterministic transition assumptions in Section 3.2.2.",
+        "MC baseline labels whether any continuation succeeds, not the empirical mean success probability.",
+        "Do not conflate with Choudhury's 2025-02 paper Process Reward Models for LLM Agents: Practical Framework and Directions, arXiv:2502.10325."
+      ],
+      "reproduced": false
+    },
+    {
+      "id": "webrl",
+      "level": "core",
+      "title": "WebRL: Training LLM Web Agents via Self-Evolving Online Curriculum Reinforcement Learning",
+      "url": "https://arxiv.org/html/2411.02337v3",
+      "version": "arXiv v3",
+      "version_date": "2025-01-27",
+      "read_at_utc": "2026-11-14",
+      "read_scope": "Sections 2.1–2.2, Equations 1–6; Appendix B.1 observation/action contract",
+      "scope": "HTML text plus instruction/action history and element IDs, WebArena-Lite",
+      "category": [
+        "post_training",
+        "credit_assignment"
+      ],
+      "limitations": [
+        "HTML/element-ID state contract differs from screenshot-only GUI.",
+        "Task generation, ORM, replay, and optimizer changes are bundled; benefit is not attributable solely to reward density.",
+        "Synthetic tasks need solvability and train/heldout leakage checks."
+      ],
+      "reproduced": false
+    },
+    {
+      "id": "digirl",
+      "level": "core",
+      "title": "DigiRL: Training In-The-Wild Device-Control Agents with Autonomous Reinforcement Learning",
+      "url": "https://arxiv.org/html/2406.11896v1",
+      "version": "arXiv v1",
+      "version_date": "2024-06-14",
+      "read_at_utc": "2026-11-14",
+      "read_scope": "Sections 3–4.3; Section 5 setup and Table 1 vicinity",
+      "scope": "Last two screenshots, Android emulator, AutoUI-Base; AitW General/Web Shopping",
+      "category": [
+        "post_training",
+        "credit_assignment"
+      ],
+      "limitations": [
+        "Frozen image encoder and small MLP value heads differ from full 4B VLM RL.",
+        "Live ecosystem stochasticity and an imperfect VLM evaluator differ from deterministic MobileGym state judge.",
+        "A learned value estimator can assign step credit without a dense environment reward; this is not a PRM annotation pipeline."
+      ],
+      "reproduced": false
+    },
+    {
+      "id": "mobilerl",
+      "level": "core",
+      "title": "MobileRL: Online Agentic Reinforcement Learning for Mobile GUI Agents",
+      "url": "https://arxiv.org/html/2509.18119v2",
+      "version": "arXiv v2",
+      "version_date": "2025-10-24",
+      "read_at_utc": "2026-11-14",
+      "read_scope": "Sections 2.1–2.2; Sections 3.1–3.3, Tables 1–2 and Figure 3; Appendices C, D.5 evaluation details, E limitations",
+      "scope": "Screenshot + XML UI hierarchy, bounding-box actions; AndroidWorld/AndroidLab",
+      "category": [
+        "post_training",
+        "credit_assignment"
+      ],
+      "limitations": [
+        "XML-based grounding is explicitly acknowledged as a limitation.",
+        "SFT data and RL/data/model settings differ; headline gains cannot be assigned solely to AdaGRPO.",
+        "FCF eventually removes persistently failing tasks; this can sacrifice hard-task coverage.",
+        "Formal ICLR2026 PDF attempted but browser verification blocked; no claim to have read final publisher PDF."
+      ],
+      "reproduced": false
+    },
+    {
+      "id": "ui_r1_version_check",
+      "level": "supplementary",
+      "title": "UI-R1: Enhancing Efficient Action Prediction of GUI Agents by Reinforcement Learning",
+      "url": "https://arxiv.org/html/2503.21620v5",
+      "version": "arXiv v5 (2025-05-24), AAAI2026 publication metadata and PDF opening",
+      "version_date": "2025-05-24 (arXiv v5); 2026-03-14 (AAAI publication)",
+      "read_at_utc": "2026-11-14",
+      "read_scope": "arXiv Section3.2 reward and Section4 action metrics; official AAAI metadata/abstract/PDF opening, not a full final-version comparison",
+      "scope": "Rule-based action-type, coordinate-in-box, and output-format reward for single-step GRPO. Useful as a grounding calibration branch, not end-to-end temporal credit evidence.",
+      "category": [
+        "supplementary",
+        "single_step_rl",
+        "version_check"
+      ],
+      "limitations": [
+        "arXiv v5:136 selected examples, reported ScreenSpot gain22.1 and AndroidControl12.7. AAAI page:2K data, gains18.3 and10.9. Do not mix sample size or results across versions."
+      ],
+      "reproduced": false
+    }
+  ],
+  "workflow_sources": [
+    {
+      "id": "scientific_agent_skills",
+      "level": "workflow",
+      "title": "Scientific Agent Skills: A Library of Procedural Knowledge for Research Agents",
+      "url": "https://arxiv.org/abs/2609.00065",
+      "version": "arXiv v2",
+      "version_date": "2026-09-02",
+      "read_at_utc": "2026-11-14",
+      "read_scope": "Metadata and abstract; workflow attribution only",
+      "scope": "literature-review procedural workflow; not GUI method evidence",
+      "category": [
+        "workflow",
+        "software_provenance"
+      ],
+      "limitations": [
+        "Excluded from core/supplementary research counts and method-effectiveness evidence."
+      ],
+      "reproduced": false
+    }
+  ]
+}

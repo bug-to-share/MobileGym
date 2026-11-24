@@ -88,6 +88,25 @@ _PARAM_TASKS_PY = textwrap.dedent(
     '''
 )
 
+_TEMPLATE_TASKS_PY = textwrap.dedent(
+    '''
+    """Suite with multiple instruction templates."""
+    from bench_env.task.common_tasks import CriteriaTask
+
+
+    class TemplateTask(CriteriaTask):
+        apps = ["fake"]
+        templates = ["first {value}", "second {value}"]
+        scope = "S1"
+        objective = "operate"
+        composition = "atomic"
+        difficulty = "L1"
+        capabilities = ["query"]
+        parameters = {"value": {"type": "int", "min": 1, "max": 10}}
+        criteria = {"x": 1}
+    '''
+)
+
 
 @pytest.fixture()
 def synthetic_root(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
@@ -319,6 +338,32 @@ class TestLoading:
 
         assert len(tasks) == 1
         assert tasks[0]._seed is None
+
+    def test_sample_templates_selects_reproducible_variant(self, synthetic_root):
+        prefix, root = synthetic_root
+        _make_suite(root, "template_suite", tasks_py=_TEMPLATE_TASKS_PY)
+
+        reg = _registry_for(prefix, root)
+        first = load_tasks(
+            "template_suite",
+            registry=reg,
+            sample_n=8,
+            seed=123,
+            sample_templates=True,
+        )
+        second = load_tasks(
+            "template_suite",
+            registry=reg,
+            sample_n=8,
+            seed=123,
+            sample_templates=True,
+        )
+
+        assert [task._template_index for task in first] == [
+            task._template_index for task in second
+        ]
+        assert {task._template_index for task in first} == {0, 1}
+        assert all(task.description.startswith(("first ", "second ")) for task in first)
 
 
 class TestRealWorldSuiteStillLoads:

@@ -122,12 +122,19 @@ class RejectionSamplingConfig:
     # Minimum trajectories required per trajectory group (for "group" mode)
     min_trajs_per_group: int = 2
 
-    # For "episode" mode (verl compatibility): minimum number of tasks with partial solves before proceeding
+    # For "episode" mode: minimum number of tasks with positive-reward partial solves before proceeding
     min_partial_solve_tasks: int = 1
 
     # Filter out episode groups where all rollouts have the same is_correct (no gradient signal).
     # Applied at the accumulator level in async training, before groups enter the buffer.
     filter_uniform_groups: bool = False
+
+    # DAPO-style dynamic sampling for synchronous on-policy training.
+    dynamic_sampling: bool = False
+    dynamic_target_groups: int | None = None
+    dynamic_max_rounds: int = 2
+    dynamic_min_reward_range: float = 1e-6
+    dynamic_fallback: Literal["ordinary_batch", "best_effort", "hybrid"] = "hybrid"
 
 
 @dataclass

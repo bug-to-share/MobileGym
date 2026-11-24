@@ -96,6 +96,8 @@ def _build_runtime_config(config: DictConfig, pool_size: int) -> RuntimeConfig:
         env_pool_size=pool_size,
         env_isolation=str(config.get("env_isolation", defaults.env_isolation)),
         env_num_browsers=int(config.get("env_num_browsers", defaults.env_num_browsers)),
+        env_init_batch_size=int(config.get("env_init_batch_size", defaults.env_init_batch_size)),
+        env_init_warmup=bool(config.get("env_init_warmup", defaults.env_init_warmup)),
         env_headless=bool(config.get("env_headless", defaults.env_headless)),
         env_proxy=config.get("env_proxy", defaults.env_proxy),
         coord_space=str(config.get("coord_space", defaults.coord_space)),
@@ -163,6 +165,7 @@ def main(config: DictConfig):
     task_split = _normalize_optional_str(config.get("split", "train"))
     sample_n = int(config.get("sample_n", 1))
     task_seed = int(config.get("task_seed", 42))
+    sample_templates = bool(config.get("sample_templates", False))
     train_max_tasks = config.get("max_train_tasks", None)
     val_max_tasks = config.get("max_val_tasks", None)
 
@@ -171,6 +174,7 @@ def main(config: DictConfig):
         task_split=task_split,
         sample_n=sample_n,
         seed=task_seed,
+        sample_templates=sample_templates,
         max_tasks=train_max_tasks,
         name="mobilegym",
         split="train",
@@ -186,6 +190,7 @@ def main(config: DictConfig):
             task_split=val_task_split,
             sample_n=int(config.get("val_sample_n", sample_n)),
             seed=int(config.get("val_task_seed", task_seed + 1)),
+            sample_templates=bool(config.get("val_sample_templates", sample_templates)),
             max_tasks=val_max_tasks,
             name="mobilegym",
             split="val",
