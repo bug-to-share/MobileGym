@@ -127,11 +127,12 @@ def mobilegym_evaluator(task: dict, episode: Episode) -> EvalOutput:
     # Base reward: task progress (0.0 – 1.0).
     # For answer-sheet tasks, submitted=True is an action check that should
     # not provide extra reward when the submitted content is still incorrect.
-    reward = (
+    base_reward = (
         _progress_without_submitted_bonus(goal_checks, progress)
         if wrong_answer_submitted
         else progress
     )
+    reward = base_reward
 
     reward_mode = os.environ.get("MOBILEGYM_REWARD_MODE", "progress").strip().lower()
     if reward_mode not in {"progress", "result_only"}:
@@ -220,7 +221,7 @@ def mobilegym_evaluator(task: dict, episode: Episode) -> EvalOutput:
     breakdown = {
         "raw_progress": progress,
         "wrong_answer_submitted": wrong_answer_submitted,
-        "base_reward": progress_without_submitted_bonus(goal_checks, progress) if wrong_answer_submitted and goal_checks else progress,
+        "base_reward": base_reward,
         "penalties": penalties,
         "mode": reward_mode,
         "false_complete_mode": false_complete_mode,

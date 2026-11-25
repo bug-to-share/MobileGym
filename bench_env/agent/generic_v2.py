@@ -9,13 +9,22 @@ GenericAgentV2 - 使用 <think></think> <answer></answer> 格式的纯视觉 GUI
 
 from __future__ import annotations
 
+from collections import deque
+from hashlib import sha256
+from itertools import islice
 import json
+import os
 import re
 from typing import Any, ClassVar, Optional
 
 from bench_env.agent.base import BaseAgent, AgentConfig, ActionMapping, AgentStepRecord
 from bench_env.env.base import Action, ActionType, Observation
 from bench_env.llm import LLMClient
+
+
+def _screen_digest(obs: Observation) -> bytes | None:
+    screenshot = obs.get_screenshot_bytes()
+    return sha256(screenshot).digest() if screenshot else None
 
 
 class GenericAgentV2(BaseAgent):
@@ -115,9 +124,42 @@ class GenericAgentV2(BaseAgent):
 
     # ==================== 初始化 ====================
 
-    def __init__(self, llm: LLMClient, config: Optional[AgentConfig] = None):
+    def __init__(
+        self,
+        llm: LLMClient,
+        config: Optional[AgentConfig] = None,
+        *,
+        max_history_images: int | None = None,
+        image_selection_mode: str = "recent",
+        history_text_window: int | None = None,
+    ):
+        """Configure the screenshot cap (including the current frame) and text window.
+
+        Omitted sizes use MOBILEGYM_MAX_HISTORY_IMAGES (default 1) and
+        MOBILEGYM_HISTORY_TEXT_WINDOW (default unlimited). A text window of
+        zero summarizes all prior turns.
+        """
         super().__init__(config)
         self.llm = llm
+        if max_history_images is None:
+            max_history_images = int(os.getenv("MOBILEGYM_MAX_HISTORY_IMAGES", "1"))
+        if history_text_window is None:
+            env_window = os.getenv("MOBILEGYM_HISTORY_TEXT_WINDOW")
+            if env_window is not None:
+                history_text_window = int(env_window)
+        if not isinstance(max_history_images, int) or max_history_images < 1:
+            raise ValueError("max_history_images must be a positive integer")
+        if image_selection_mode not in {"recent", "keyframe"}:
+            raise ValueError("image_selection_mode must be 'recent' or 'keyframe'")
+        if history_text_window is not None and (
+            not isinstance(history_text_window, int) or history_text_window < 0
+        ):
+            raise ValueError("history_text_window must be a non-negative integer")
+        self.max_history_images = max_history_images
+        self.image_selection_mode = image_selection_mode
+        self.history_text_window = history_text_window
+        self._keyframes: deque[int] = deque(maxlen=max(2, max_history_images))
+        self._screen_digests: dict[int, bytes] = {}
 
         merged_args = dict(self.DEFAULT_MODEL_ARGS)
         merged_args.update(self.config.model_args or {})
@@ -130,6 +172,13 @@ class GenericAgentV2(BaseAgent):
     def reset(self, task: str) -> None:
         self._task = task
         self._history = []
+        self._keyframes.clear()
+        self._screen_digests.clear()
+
+    def reset_history(self) -> None:
+        super().reset_history()
+        self._keyframes.clear()
+        self._screen_digests.clear()
 
     # ==================== 响应解析 ====================
 
@@ -245,55 +294,118 @@ class GenericAgentV2(BaseAgent):
 
     # ==================== 消息构建 ====================
 
+    def _recent_image_indices(self, limit: int) -> set[int]:
+        available = (
+            i for i in range(len(self._history) - 1, -1, -1)
+            if (obs := self._history[i].observation) is not None
+            and (obs.screenshot_bytes or obs.screenshot_base64)
+        )
+        return set(islice(available, limit))
+
+    def _prompt_image_indices(self, current_digest: bytes | None) -> set[int]:
+        limit = self.max_history_images - 1
+        if not limit:
+            return set()
+        if self.image_selection_mode == "recent":
+            return self._recent_image_indices(limit)
+        indices = list(self._keyframes)
+        # The current frame represents the last run of identical screenshots.
+        if indices and self._screen_digests[indices[-1]] == current_digest:
+            indices.pop()
+        return set(indices[-limit:])
+
+    def _trajectory_summary(self, end: int, current_digest: bytes | None) -> str:
+        lines = [f"[任务]\n{self._task}", "[Trajectory summary]"]
+        for i in range(end):
+            record = self._history[i]
+            before = self._screen_digests.get(i)
+            after = self._screen_digests.get(i + 1) if i + 1 < len(self._history) else current_digest
+            if before is None or after is None:
+                outcome = "screen outcome unavailable"
+            else:
+                outcome = "screen changed" if after != before else "screen unchanged"
+            params = json.dumps(record.action.data, ensure_ascii=False, separators=(",", ":"))
+            if len(params) > 160:
+                params = params[:157] + "..."
+            lines.append(f"[Step {i + 1}] {record.action.action_type.value} {params} -> {outcome}")
+        return "\n".join(lines)
+
     def build_messages(self, obs: Observation) -> list[dict]:
-        """
-        构建发送给 LLM 的消息。
-        
-        使用完整多轮对话历史（类似 AutoGLMAgent）：
-        - 历史步骤：user（任务/步骤标记） + assistant（模型响应）
-        - 当前步骤：user（截图+提示）
-        
-        注意：不包含当前路由信息，作为纯视觉 GUI Agent。
-        """
+        """Build the visual prompt without exposing routes or simulator state."""
         messages: list[dict] = [
             {"role": "system", "content": self.SYSTEM_PROMPT}
         ]
+        compacted = 0
+        if self.history_text_window is not None:
+            compacted = max(0, len(self._history) - self.history_text_window)
+        current_digest = _screen_digest(obs) if compacted or self._keyframes else None
+        image_indices = self._prompt_image_indices(current_digest)
 
-        # 构建历史对话
-        for i, record in enumerate(self._history):
-            # 历史 user 消息（不含截图）
-            if i == 0:
-                user_text = f"[任务]\n{self._task}"
-            else:
-                user_text = f"[Step {i + 1}]"
-            
-            messages.append({
-                "role": "user",
-                "content": [{"type": "text", "text": user_text}],
-            })
-            
-            # 历史 assistant 响应
+        def image_part(observation: Observation) -> dict:
+            return {"type": "image_url", "image_url": {"url": observation.image_data_url}}
+
+        if compacted:
+            content = [{"type": "text", "text": self._trajectory_summary(compacted, current_digest)}]
+            for i in sorted(index for index in image_indices if index < compacted):
+                observation = self._history[i].observation
+                assert observation is not None
+                content.extend([{"type": "text", "text": f"[Step {i + 1}]"}, image_part(observation)])
+            messages.append({"role": "user", "content": content})
+
+        for i, record in enumerate(self._history[compacted:], start=compacted):
+            user_text = f"[任务]\n{self._task}" if i == 0 else f"[Step {i + 1}]"
+            content = [{"type": "text", "text": user_text}]
+            if i in image_indices and record.observation is not None:
+                content.insert(0, image_part(record.observation))
+            messages.append({"role": "user", "content": content})
             messages.append({
                 "role": "assistant",
                 "content": record.llm_response,
             })
 
-        # 当前步骤（带截图）
-        step_num = len(self._history) + 1
-        if len(self._history) == 0:
-            user_text = f"[任务]\n{self._task}"
-        else:
-            user_text = f"[Step {step_num}]"
-
+        user_text = f"[Step {len(self._history) + 1}]" if self._history else f"[任务]\n{self._task}"
         messages.append({
             "role": "user",
-            "content": [
-                {"type": "image_url", "image_url": {"url": obs.image_data_url}},
-                {"type": "text", "text": user_text},
-            ],
+            "content": [image_part(obs), {"type": "text", "text": user_text}],
         })
 
         return messages
+
+    def _evict_old_records(self, keep_recent: int) -> None:
+        if self.max_history_images == 1:
+            super()._evict_old_records(keep_recent)
+            return
+        retained = (
+            set(self._keyframes)
+            if self.image_selection_mode == "keyframe"
+            else self._recent_image_indices(max(keep_recent, self.max_history_images))
+        )
+        for i in range(max(0, len(self._history) - keep_recent)):
+            record = self._history[i]
+            if i not in retained:
+                record.observation = None
+            record.llm_prompt = []
+
+    def _record_step(
+        self, obs: Observation, action: Action, response: str, messages: list[dict]
+    ) -> None:
+        use_keyframes = self.image_selection_mode == "keyframe" and self.max_history_images > 1
+        digest = _screen_digest(obs) if use_keyframes or self.history_text_window is not None else None
+        index = len(self._history)
+        if digest is not None:
+            self._screen_digests[index] = digest
+            if use_keyframes and (
+                not self._keyframes or self._screen_digests[self._keyframes[-1]] != digest
+            ):
+                self._keyframes.append(index)
+        self._history.append(AgentStepRecord(
+            step_idx=obs.step_idx,
+            observation=obs,
+            action=action,
+            llm_response=response,
+            llm_prompt=messages,
+        ))
+        self._evict_old_records(keep_recent=2)
 
     # ==================== 核心逻辑 ====================
 
@@ -318,16 +430,7 @@ class GenericAgentV2(BaseAgent):
 
         action = self.parse_response(response.content)
 
-        self._history.append(AgentStepRecord(
-            step_idx=obs.step_idx,
-            observation=obs,
-            action=action,
-            llm_response=response.content,
-            llm_prompt=messages,
-        ))
-
-        # 内存瘦身：历史仅用文本，保留最近 2 条完整记录
-        self._evict_old_records(keep_recent=2)
+        self._record_step(obs, action, response.content, messages)
 
         if self.config.verbose:
             print(f"[GenericAgentV2] Action: {action.action_type}, Data: {action.data}")
